@@ -35,7 +35,7 @@ def render(step_max=None, scale=0.32, out="preview_full.png", head=None, head_su
     def S(v):
         return v * scale
 
-    d.text((S(60), S(30)), "成型不良　要因分析图", fill="#1e3a5f", font=font(34 * scale))
+    d.text((S(60), S(30)), f"{G.HEAD_TEXT}{G.HEAD_SUB}　要因分析图", fill="#1e3a5f", font=font(34 * scale))
 
     for p, s in zip(prims, steps):
         if step_max is not None and s > step_max:

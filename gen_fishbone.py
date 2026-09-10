@@ -1,35 +1,41 @@
 # -*- coding: utf-8 -*-
-"""标准鱼骨图生成器 v5 —— 按原图复原 + 优化
+"""标准鱼骨图生成器 v6 —— 小骨 / 小小骨一律「水平线」（与中骨平行）
 
-原图结构（像素级测量复原）：
-  · 脊骨水平，鱼头在右
-  · 4 根大骨与脊骨成 60°（原图手绘实测 59.5/63.5/72/60°，本版统一 60°）
-      材料(上左) · 设备(上右) · 人(下左) · 方法(下右)
-  · 中骨：水平线挂在大骨斜线上；同一大骨的中骨由内向外左右交错分布
-  · 小骨：垂直短刺连到中骨线，文字在中骨线上下成簇分布（原图画法）
-  · 小小骨：挂在父小骨上的嵌套支线
+绘图规格：
+  · 主骨（脊骨）水平，鱼头在右
+  · 大骨与主骨成 60°
+  · 中骨：水平线，与主骨平行；同一大骨的中骨由内向外左右交错分布
+  · 小骨：水平短线，与所属中骨平行；文字写在线的上方；线一端经收集线接到中骨
+  · 小小骨：水平短线，与所属中骨平行；从父小骨线末端向外延伸，并向中骨侧缩进一行
 
 坐标原点取脊骨，最后整体平移进画布。
 """
 import io, math
 
-# ---------------- 参数 ----------------
+# ---------------- 参数（可调） ----------------
 BONE_DEG = 60.0                  # 大骨与脊骨夹角（标准 60°）
 TAN = math.tan(math.radians(BONE_DEG))
 FONT, FONT_KID, FONT_G, FONT_CAT = 15, 13, 17, 30
-MAX_ROW_W = 640                  # 一行小骨的最大宽度，超出换行
-ROW_STEP = 34                    # 同一侧相邻两行行距
-KID_H = 24                       # 小小骨行距
-LINE_GAP = 34                    # 相邻中骨线最小净距
-LABEL_PAD = 26                   # 中骨名与内容间距
-START_V = 92                     # 最内侧中骨线距脊骨距离
-TAIL = 70                        # 大骨超出最外中骨长度
-GAP = 130                        # 左右两类内容之间的最小净距
-PAD = 60                         # 画布留白
+
+ROW_PITCH = 28                   # 小骨行距
+TOP_OFF = 34                     # 第一行小骨线距中骨线的距离
+COL_GAP = 22                     # 同半区相邻列的净距
+ROW_MAX = 2                      # 每列最多占用的「行单位」（小骨 1 + 每个小小骨 1）
+DIAG_CLR = 34                    # 内容与大骨斜线之间的净距
+LINE_L = 18                      # 小骨横线在文字两端的出头长度
+LINE_LK = 13                     # 小小骨横线出头长度
+KID_OFF = 7                      # 小小骨横线起点相对父小骨线末端的偏移
+LINE_GAP = 24                    # 相邻中骨线最小净距
+LABEL_PAD = 18                   # 中骨名与内容间距
+START_V = 84                     # 最内侧中骨线距脊骨距离
+TAIL = 52                        # 大骨超出最外中骨长度
+GAP = 100                        # 左右两类内容之间的最小净距
+PAD = 44                         # 画布留白
 
 # 鱼头文字（改这两行即可换案例名；HEAD_SUB 留空则鱼头变矮）
-HEAD_TEXT = "欠　料"
-HEAD_SUB = "（ 料 不 良 ）"
+HEAD_TEXT = "注塑件缺料"
+HEAD_SUB = "（短 射）"
+HEAD_W, HEAD_H = 356, 212
 
 # ---------------- 数据 ----------------
 # groups 自「脊骨侧」向「外侧」排列；side: L=向外侧延展 / R=向鱼头侧延展
@@ -49,13 +55,13 @@ CATS = [
                        ("坏", 0, []), ("发热器", 0, [("不能正常发热", 0)])]),
         ("模温机", "L", [("循环水不足", 0, []), ("温度异常", 0, []), ("发热异常", 0, []),
                        ("压力不足", 0, []), ("机水", 0, []), ("开关未开", 0, []), ("冷却系统异常", 0, [])]),
-        ("金型", "R", [("设计不适", 0, []), ("取数过多", 0, []), ("配件不良", 0, []), ("尺寸不良", 0, []),
-                      ("破损", 0, []), ("进胶口小", 0, []), ("进胶不平衡", 0, []), ("部品肉厚太薄", 0, []),
-                      ("堵塞", 0, []), ("清扫不及时", 1, []), ("槽深度不够", 0, []), ("位子不当", 0, []),
-                      ("温度低", 0, []), ("炭化物堵塞", 0, []), ("排气槽不良", 1, []), ("热流道不顺", 0, [])]),
+        ("模具空腔", "R", [("设计不适", 0, []), ("取数过多", 0, []), ("配件不良", 0, []), ("尺寸不良", 0, []),
+                        ("破损", 0, []), ("进胶口小", 0, []), ("进胶不平衡", 0, []), ("部品肉厚太薄", 0, []),
+                        ("堵塞", 0, []), ("清扫不及时", 1, []), ("槽深度不够", 0, []), ("位子不当", 0, []),
+                        ("温度低", 0, []), ("炭化物堵塞", 0, []), ("排气槽不良", 1, []), ("热流道不顺", 0, [])]),
         ("成形机", "L", [("螺杆磨损", 1, []), ("材质差", 0, []), ("时间长磨损", 0, []),
-                       ("使用大吨位机器", 0, []), ("合模力大", 0, []), ("时间长磨损", 0, []),
-                       ("料筒", 1, []), ("温控器坏", 0, [])]),
+                       ("使用大吨位机器", 0, []), ("合模力大", 0, []), ("料筒", 1, []),
+                       ("温控器坏", 0, [])]),
     ]),
     dict(name="人", side="bottom", cls="i", groups=[
         ("作业者", "L", [("作业手法错误", 0, []), ("工作马虎", 0, []),
@@ -69,11 +75,11 @@ CATS = [
     dict(name="方法", side="bottom", cls="s", groups=[
         ("检查", "R", [("出货检查", 0, []), ("未检查", 0, []), ("抽取数量不够", 0, []),
                       ("未全数检查", 0, []), ("漏检", 0, []), ("外观全检", 0, [])]),
-        ("金型维护", "L", [("未按计划进行", 0, []), ("未按时进行", 1, []), ("定期保养", 0, []),
+        ("模具维护", "L", [("未按计划进行", 0, []), ("未按时进行", 1, []), ("定期保养", 0, []),
                         ("方法错误", 0, []), ("日常保养", 0, []), ("项目不全方法不正确", 0, []),
                         ("保养位子不全", 0, []), ("配件装错", 0, []), ("修理", 0, []),
                         ("未按WGS作业", 1, [])]),
-        ("成形条件", "R", [("温度", 1, [("溶胶温度低", 0), ("热胶道温度低", 0), ("金型温度低", 0)]),
+        ("成形条件", "R", [("温度", 1, [("溶胶温度低", 0), ("热胶道温度低", 0), ("模温低", 0)]),
                         ("速度", 1, [("计量速度慢", 0), ("射出速度慢", 0)]),
                         ("时间", 1, [("射出时间短", 0), ("保压时间不够", 0)]),
                         ("压力", 1, [("背压力小", 0), ("射出压力小", 0), ("合模压力大", 0), ("保压力小", 0)]),
@@ -98,86 +104,81 @@ def esc(s):
     return s.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
 
 
-def chip_w(text, key, f=FONT):
-    return tw(("★" + text) if key else text, f) + 22
-
-
 def make_cells(items):
+    """每个小骨 = 一条水平线 + 文字；小小骨 = 从父线末端向外延伸的水平线"""
     out = []
     for text, key, kids in items:
-        own = chip_w(text, key)
-        kid_w = max([tw(k[0], FONT_KID) + 22 for k in kids] or [0])
-        adv = max(own, kid_w) + 20
-        tail = max(0.0, own / 2 + kid_w + 8 - adv)
-        out.append(dict(text=text, key=key, kids=kids, own=own, kid_w=kid_w, adv=adv, tail=tail))
+        label = ("★" + text) if key else text
+        seg = tw(label, FONT) + LINE_L * 2                    # 小骨横线长度
+        ks = [(k[0], tw(k[0], FONT_KID) + LINE_LK * 2) for k in kids]
+        kw = max([w for _, w in ks] or [0])
+        units = 1 + len(ks)                                   # 占用的行单位
+        slot = seg + (KID_OFF + kw if ks else 0)              # 该小骨独占的横向宽度
+        out.append(dict(text=text, key=key, label=label, kids=ks,
+                        seg=seg, kw=kw, units=units, slot=slot))
     return out
 
 
-def split_rows(cells):
-    """按宽度把一行小骨拆成多行"""
-    rows, cur, cw = [], [], 0.0
-    for c in cells:
-        w = c["adv"] + c["tail"]
-        if cur and cw + w > MAX_ROW_W:
-            rows.append(cur)
-            cur, cw = [], 0.0
-        cur.append(c)
-        cw += w
-    if cur:
-        rows.append(cur)
-    return rows
-
-
-def half_rows(cells):
-    """一侧小骨多行排布；逐项避开已占用的横向区间，保证短刺不穿文字"""
-    rows = split_rows(cells)
-    if not rows:
+def pack_half(cells):
+    """一侧的小骨按「列」堆叠：先定列数使各列尽量等高，再逐列向下排"""
+    if not cells:
         return [], 0
-    res, o, prev_nk = [], 0, 0
-    blocked = []                                    # 已放置文字的横向区间
-    for r, row in enumerate(rows):
-        o = 40 if r == 0 else o + KID_H * prev_nk + ROW_STEP
-        placed, x = [], 0.0
-        for c in row:
-            w = c["own"]
-            while True:                             # 起点若压住下方文字则右移
-                span = (x - 2, x + w + 2)
-                hit = next((b for b in blocked if span[0] < b[1] and b[0] < span[1]), None)
-                if hit is None:
-                    break
-                x = hit[1] + 8
-            placed.append(dict(c, x=x))
-            blocked.append((x - 4, x + w + 4))
-            x += c["adv"] + c["tail"]
-        res.append(dict(cells=placed, o=o, w=x, maxnk=max(len(c["kids"]) for c in row)))
-        prev_nk = res[-1]["maxnk"]
-    depth = res[-1]["o"] + KID_H * res[-1]["maxnk"] + 42
-    return res, depth
+    total = sum(c["units"] for c in cells)
+    ncol = max(1, math.ceil(total / ROW_MAX))
+    cap = math.ceil(total / ncol)                     # 每列行单位上限（均衡）
+    groups, cur, used = [], [], 0
+    for c in cells:
+        if cur and used + c["units"] > cap:
+            groups.append(cur)
+            cur, used = [], 0
+        cur.append(c)
+        used += c["units"]
+    if cur:
+        groups.append(cur)
+    cols = []
+    for g in groups:
+        rows, pos = 0, []
+        for c in g:
+            pos.append(rows)
+            rows += c["units"]
+        cols.append(dict(cells=g, pos=pos, w=max(c["slot"] for c in g), rows=rows))
+    return cols, max(c["rows"] for c in cols)
 
 
 def layout_block(gname, items, side):
     label_w = tw(gname, FONT_G) + 24
     cells = make_cells(items)
     na = (len(cells) + 1) // 2
-    up, up_d = half_rows(cells[:na])
-    dn, dn_d = half_rows(cells[na:])
-    items_w = max([r["w"] for r in up] + [r["w"] for r in dn] + [0]) + 16
-    # L 侧：向外半区被大骨斜线穿过 → 内容右边界让位
-    # R 侧：向内半区被大骨斜线穿过 → 内容左边界让位
+    up, up_r = pack_half(cells[:na])
+    dn, dn_r = pack_half(cells[na:])
+    ncol = max(len(up), len(dn))
+    colw, colx, x = [], [], 0.0
+    for i in range(ncol):
+        a = up[i]["w"] if i < len(up) else 0.0
+        b = dn[i]["w"] if i < len(dn) else 0.0
+        w = max(a, b)
+        colw.append(w)
+        colx.append(x)
+        x += w + COL_GAP
+    items_w = (x - COL_GAP if colw else 0.0) + 14
+    up_d = TOP_OFF + (up_r - 1) * ROW_PITCH + 22 if up_r else 0.0
+    dn_d = TOP_OFF + (dn_r - 1) * ROW_PITCH + 12 if dn_r else 0.0
+    # L 侧：向外半区被大骨斜线穿过 → 内容内侧让位
+    # R 侧：向内半区被大骨斜线穿过 → 内容内侧让位
     if side == "L":
-        head, tail_pad = 0.0, up_d / TAN + 30
+        head, tail_pad = 0.0, up_d / TAN + DIAG_CLR
     else:
-        head, tail_pad = dn_d / TAN + 30, 0.0
-    w = head + LABEL_PAD + items_w + LABEL_PAD + label_w + tail_pad
-    return dict(name=gname, side=side, label_w=label_w, head=head,
-                up=up, dn=dn, up_d=up_d, dn_d=dn_d, items_w=items_w, w=w)
+        head, tail_pad = dn_d / TAN + DIAG_CLR, 0.0
+    w = head + items_w + LABEL_PAD + label_w + tail_pad
+    return dict(name=gname, side=side, label_w=label_w, head=head, tail_pad=tail_pad,
+                up=up, dn=dn, up_r=up_r, dn_r=dn_r, up_d=up_d, dn_d=dn_d,
+                colx=colx, colw=colw, items_w=items_w, w=w)
 
 
 def plan_cat(cat, bx):
     blocks = []
     for gname, gside, items in cat["groups"]:
-        b = layout_block(gname, items, gside)
-        blocks.append(b)
+        blocks.append(layout_block(gname, items, gside))
     v = max(START_V, blocks[0]["dn_d"] + 46)
     for b in blocks:
         b["v"] = v
@@ -273,6 +274,7 @@ def plan_all():
         for b in bs:
             y, xa, xf, side = b["y"], b["xa"], b["xf"], b["side"]
             st[0] = b["_step"]
+            # ---- 中骨：水平线（与主骨平行）+ 外端名称色片 ----
             owner[0] = "LINE-" + cat["name"] + "/" + b["name"]
             line(xf, y, xa, y, 3.4, "#64748b", cap="butt")
             ad = 15 if side == "L" else -15
@@ -280,31 +282,40 @@ def plan_all():
             if side == "L":
                 rect(xf, y - 21, b["label_w"], 42, 18, tint, tcol)
                 text(xf + b["label_w"] / 2, y + 7, b["name"], FONT_G, tcol, weight="bold")
-                x0 = xf + b["label_w"] + LABEL_PAD
+                x_in, dirn = xa - b["tail_pad"], -1.0
             else:
                 rect(xf - b["label_w"], y - 21, b["label_w"], 42, 18, tint, tcol)
                 text(xf - b["label_w"] / 2, y + 7, b["name"], FONT_G, tcol, weight="bold")
-                x0 = xa + LABEL_PAD
-            for half, sgn2 in ((b["up"], 1), (b["dn"], -1)):
-                for row in half:
-                    for cix, c in enumerate(row["cells"]):
-                        owner[0] = f'{cat["name"]}/{b["name"]}#{cix}'
-                        tx = x0 + c["x"] + c["own"] / 2
-                        o = row["o"]
-                        line(tx, y, tx, y + sign * sgn2 * o, 2, "#94a3b8", cap="butt")
-                        label = ("★" + c["text"]) if c["key"] else c["text"]
-                        ty = y + sign * sgn2 * o
+                x_in, dirn = xa + b["head"], 1.0
+            # ---- 小骨 / 小小骨（一律水平线，与中骨平行）----
+            for cols, sgn2 in ((b["up"], 1.0), (b["dn"], -1.0)):
+                away = sign * sgn2                     # 行号增大方向的屏幕 y 系数
+                for i, col in enumerate(cols):
+                    x_col = x_in + dirn * b["colx"][i]
+                    deep = TOP_OFF + (col["rows"] - 1) * ROW_PITCH
+                    owner[0] = "COL-" + cat["name"] + "/" + b["name"] + "#" + str(i)
+                    line(x_col, y, x_col, y + away * deep, 1.8, "#cbd5e1", cap="butt")
+                    for c, r in zip(col["cells"], col["pos"]):
+                        yl = y + away * (TOP_OFF + r * ROW_PITCH)
+                        x_seg = x_col + dirn * c["seg"]
+                        owner[0] = f'{cat["name"]}/{b["name"]}#{i}-{r}'
                         if c["key"]:
-                            rect(tx - c["own"] / 2, ty - 21, c["own"], 28, 14, "url(#gKey)")
-                            text(tx, ty + 1, label, FONT, "#ffffff", weight="bold")
+                            line(x_col, yl, x_seg, yl, 3.2, "#e11d48", cap="butt")
                         else:
-                            text(tx, ty, label, FONT, "#2f4256")
-                        for j, (kt, _k) in enumerate(c["kids"]):
-                            cy = ty + sign * sgn2 * (36 + KID_H * j)
-                            kw = tw(kt, FONT_KID) + 22
-                            line(tx, cy, tx + kw, cy, 1.6, "#94a3b8", cap="butt")
-                            text(tx + 11, cy + (-6 if sign * sgn2 < 0 else 15), kt,
-                                 FONT_KID, "#4a5c72", anchor="start")
+                            line(x_col, yl, x_seg, yl, 2.2, "#94a3b8", cap="butt")
+                        text(x_col + dirn * 8, yl - 5, c["label"], FONT,
+                             "#be123c" if c["key"] else "#2f4256",
+                             anchor="start" if dirn > 0 else "end",
+                             weight="bold" if c["key"] else "normal")
+                        if c["kids"]:
+                            x_j = x_col + dirn * (c["seg"] + KID_OFF)
+                            ky_last = y + away * (TOP_OFF + (r + len(c["kids"])) * ROW_PITCH)
+                            line(x_j, yl, x_j, ky_last, 1.4, "#cbd5e1", cap="butt")
+                            for j, (kt, kw) in enumerate(c["kids"]):
+                                ky = y + away * (TOP_OFF + (r + j + 1) * ROW_PITCH)
+                                line(x_j, ky, x_j + dirn * kw, ky, 1.6, "#94a3b8", cap="butt")
+                                text(x_j + dirn * 7, ky - 4, kt, FONT_KID, "#4a5c72",
+                                     anchor="start" if dirn > 0 else "end")
 
     xs, ys = [], []
     for p in prims:
@@ -324,14 +335,14 @@ def plan_all():
     tri([(maxx + 120, 0), (maxx + 74, -27), (maxx + 74, 27)], "#3f5061")
     hx = maxx + 120
     if HEAD_SUB:
-        rect(hx + 22, -108, 296, 216, 46, "url(#gHead)")
-        text(hx + 170, 8, HEAD_TEXT, 50, "#ffffff", weight="bold")
-        text(hx + 170, 56, HEAD_SUB, 22, "#ffffff")
+        rect(hx + 26, -HEAD_H / 2, HEAD_W, HEAD_H, 46, "url(#gHead)")
+        text(hx + 26 + HEAD_W / 2, 6, HEAD_TEXT, 46, "#ffffff", weight="bold")
+        text(hx + 26 + HEAD_W / 2, 56, HEAD_SUB, 22, "#ffffff")
     else:
-        rect(hx + 22, -66, 296, 132, 40, "url(#gHead)")
-        text(hx + 170, 20, HEAD_TEXT, 50, "#ffffff", weight="bold")
+        rect(hx + 26, -66, HEAD_W, 132, 40, "url(#gHead)")
+        text(hx + 26 + HEAD_W / 2, 18, HEAD_TEXT, 46, "#ffffff", weight="bold")
 
-    full_minx, full_maxx = minx, hx + 340
+    full_minx, full_maxx = minx, hx + 26 + HEAD_W + 26
     dx, dy = PAD - full_minx, PAD - miny + 96
     W = int(math.ceil(full_maxx - full_minx + PAD * 2))
     H = int(math.ceil(maxy - miny + PAD * 2 + 96))
@@ -343,7 +354,7 @@ def plan_all():
 
 
 def check():
-    """碰撞自查：文字互压 / 小骨短刺穿透他人文字"""
+    """碰撞自查：文字互压 / 线段穿透他人文字 / 大骨穿透文字"""
     prims, stats, size, diag = plan_all()
     texts, segs, bad = diag["texts"], diag["segs"], []
     for i in range(len(texts)):
@@ -352,31 +363,38 @@ def check():
             b = texts[j]
             if a[0] < b[2] and b[0] < a[2] and a[1] < b[3] and b[1] < a[3]:
                 bad.append(f'文字互压: 「{a[4]}」 × 「{b[4]}」')
+
     def hit(t, x1, y1, x2, y2):
-        """线段是否穿过文字框（轴对齐线段）"""
+        """任意线段是否与文字框相交（Liang-Barsky 裁剪）"""
         bx0, by0, bx1, by1 = t[0], t[1], t[2], t[3]
-        if abs(y1 - y2) < 0.5:                        # 水平线
-            if not (by0 < y1 < by1):
-                return False
-            return max(x1, x2) > bx0 and min(x1, x2) < bx1
-        if abs(x1 - x2) < 0.5:                        # 竖线
-            if not (bx0 < x1 < bx1):
-                return False
-            return max(y1, y2) > by0 and min(y1, y2) < by1
-        return False
+        dx, dy = x2 - x1, y2 - y1
+        t0, t1 = 0.0, 1.0
+        for p, q in ((-dx, x1 - bx0), (dx, bx1 - x1),
+                     (-dy, y1 - by0), (dy, by1 - y1)):
+            if abs(p) < 1e-9:
+                if q < 0:
+                    return False
+                continue
+            r = q / p
+            if p < 0:
+                if r > t1:
+                    return False
+                t0 = max(t0, r)
+            else:
+                if r < t0:
+                    return False
+                t1 = min(t1, r)
+        return t0 < t1
 
     for (x1, y1, x2, y2, own) in segs:
         for t in texts:
-            if t[5] == own or str(own).startswith("BONE-") and t[5] is None:
+            if own is not None and t[5] == own:
                 continue
-            if str(own).startswith(("BONE-", "SPINE")) and t[5] is not None:
-                if hit(t, x1, y1, x2, y2):
-                    bad.append(f'大骨穿透:「{t[4]}」 by {own}')
-                continue
-            if str(own).startswith("LINE-"):
+            if t[5] is None:
                 continue
             if hit(t, x1, y1, x2, y2):
-                bad.append(f'线段穿透:「{t[4]}」 (owner={own})')
+                kind = "大骨" if str(own).startswith(("BONE-", "SPINE")) else "线段"
+                bad.append(f'{kind}穿透:「{t[4]}」 (owner={own})')
     print(f"自查: {len(texts)} 文字块 / {len(segs)} 线段 → 问题 {len(bad)} 处")
     for s in bad[:40]:
         print("   -", s)
@@ -400,9 +418,9 @@ def build_svg():
     dx, dy = diag["dx"], diag["dy"]
     o.write(f'<g transform="translate({dx:.0f},{dy:.0f})">\n')
     o.write(f'<text x="{PAD}" y="{-dy + 54:.0f}" font-size="31" font-weight="bold" fill="#1e3a5f">'
-            f'欠料（料不良）要因分析图</text>\n')
+            f'{esc(HEAD_TEXT)}{esc(HEAD_SUB)} 要因分析图</text>\n')
     o.write(f'<text x="{PAD}" y="{-dy + 88:.0f}" font-size="16" fill="#7b8ba1">'
-            f'标准鱼骨图 ｜ 大骨与脊骨成 {BONE_DEG:.0f}° ｜ 大骨 → 中骨(水平线) → 小骨(短刺) → 小小骨 ｜ '
+            f'标准鱼骨图 ｜ 大骨与主骨成 {BONE_DEG:.0f}° ｜ 中骨／小骨／小小骨 均为水平线（与主骨平行） ｜ '
             f'★=重点要因（待真因验证）</text>\n')
     for p in prims:
         if p[0] == "line":

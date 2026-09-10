@@ -15,8 +15,8 @@ sys.path.insert(0, BASE)
 
 import gen_fishbone as G                                       # noqa: E402
 
-TITLE_MAIN = "欠料（料不良）要因分析图"
-SUB = (f"标准鱼骨图 ｜ 大骨与脊骨成 {G.BONE_DEG:.0f}° ｜ 大骨 → 中骨(水平线) → 小骨(短刺) → 小小骨 ｜ "
+TITLE_MAIN = "注塑件缺料（短射）要因分析图"
+SUB = (f"标准鱼骨图 ｜ 大骨与主骨成 {G.BONE_DEG:.0f}° ｜ 中骨／小骨／小小骨 均为水平线（与主骨平行） ｜ "
        f"★=重点要因（待真因验证）")
 
 

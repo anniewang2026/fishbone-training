@@ -15,8 +15,8 @@ sys.path.insert(0, BASE)
 import gen_fishbone as G                                       # noqa: E402
 
 # ---- 案例名（改这里换鱼头） ----
-G.HEAD_TEXT = "成型不良"
-G.HEAD_SUB = ""
+G.HEAD_TEXT = "注塑件缺料"
+G.HEAD_SUB = "（短 射）"
 
 OUT = os.path.join(BASE, "鱼骨图绘制演示.html")
 
@@ -33,8 +33,8 @@ def build():
     total = diag["total_steps"]                                # 实际 21
 
     # ---------- 步骤说明 ----------
-    labels = {0: "① 先画主骨（脊骨）：一条水平线，右端是鱼头「成型不良」",
-              total: "✅ 完成：4 根大骨 · 16 根中骨 · 103 条小骨 · 18 条小小骨；粉红★=重点要因（待真因验证）"}
+    labels = {0: "① 先画主骨（脊骨）：一条水平线，右端是鱼头「注塑件缺料（短射）」",
+              total: "✅ 完成：4 根大骨 · 16 根中骨 · 102 条小骨 · 18 条小小骨；粉红★=重点要因（待真因验证）"}
     jumps = {0: "主骨"}
     n = 1
     for cat in G.CATS:
@@ -98,9 +98,9 @@ def build():
     o.append(f'<rect id="bg" x="0" y="0" width="{W}" height="{H}" fill="#f8fbfd"/>')
     o.append(f'<g transform="translate({dx:.0f},{dy:.0f})">')
     o.append(f'<text class="static" x="{G.PAD}" y="{-dy + 54:.0f}" font-size="34" font-weight="bold" '
-             f'fill="#1e3a5f">成型不良　要因分析图</text>')
+             f'fill="#1e3a5f">{esc(G.HEAD_TEXT)}{esc(G.HEAD_SUB)}　要因分析图</text>')
     o.append(f'<text class="static" x="{G.PAD}" y="{-dy + 92:.0f}" font-size="17" fill="#7b8ba1">'
-             f'绘制演示 ｜ 大骨与脊骨成 {G.BONE_DEG:.0f}° ｜ 大骨 → 中骨(水平线，与主骨平行) → 小骨(短刺) → 小小骨 ｜ '
+             f'绘制演示 ｜ 大骨与主骨成 {G.BONE_DEG:.0f}° ｜ 中骨／小骨／小小骨 均为水平线（与主骨平行） ｜ '
              f'★=重点要因</text>')
 
     idx_in_step = {}
@@ -146,7 +146,7 @@ TEMPLATE = r"""<!DOCTYPE html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>鱼骨图绘制演示 · 成型不良要因分析</title>
+<title>鱼骨图绘制演示 · 注塑件缺料（短射）要因分析</title>
 <style>
   :root{
     --ink:#1e3a5f; --ink2:#4a5c72; --muted:#7b8ba1; --line:#dbe6ef;
@@ -258,7 +258,7 @@ TEMPLATE = r"""<!DOCTYPE html>
 </head>
 <body>
 <header>
-  <div class="brand"><span class="dot"></span><div><b>鱼骨图绘制演示</b><small>成型不良要因分析 · __STATS__</small></div></div>
+  <div class="brand"><span class="dot"></span><div><b>鱼骨图绘制演示</b><small>注塑件缺料（短射）要因分析 · __STATS__</small></div></div>
   <div class="cap"><span class="num" id="capnum">STEP 0</span><span class="txt" id="captxt">点右下角「开始演示」</span></div>
   <a id="rawimg" href="__RAWIMG__" target="_blank" rel="noopener">🖼 原图对照</a>
 </header>
@@ -268,7 +268,7 @@ TEMPLATE = r"""<!DOCTYPE html>
     __SVG__
     <div id="start">
       <h2>鱼骨图是怎么一步步画出来的</h2>
-      <p>主骨 → 大骨（60°）→ 中骨（与主骨平行）→ 小骨 → 小小骨，共 __TOTAL__ 步</p>
+      <p>主骨 → 大骨（60°）→ 中骨 → 小骨 → 小小骨（后三级均为水平线，与主骨平行），共 __TOTAL__ 步</p>
       <button class="gobtn" id="biggo">▶ 开始演示</button>
     </div>
   </div>
