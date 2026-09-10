@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>鱼骨图绘制演示 · 成型不良要因分析</title>
+<style>
+  :root{
+    --ink:#1e3a5f; --ink2:#4a5c72; --muted:#7b8ba1; --line:#dbe6ef;
+    --bg:#eef4f9; --panel:#ffffff; --accent:#0ea5e9; --accent2:#14b8a6;
+    --shadow:0 8px 26px -14px rgba(30,58,95,.35), 0 2px 6px -2px rgba(30,58,95,.10);
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;height:100%}
+  body{
+    background:radial-gradient(1200px 700px at 15% -10%, #e6f4fb 0%, transparent 60%),
+               radial-gradient(1000px 620px at 100% 110%, #e9f8f4 0%, transparent 58%), var(--bg);
+    color:var(--ink); font-family:"Microsoft YaHei","PingFang SC",system-ui,sans-serif;
+    display:flex; flex-direction:column; height:100vh; overflow:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  /* ---------- 顶栏 ---------- */
+  header{
+    flex:0 0 auto; padding:14px 22px 12px; display:flex; align-items:center; gap:16px;
+    background:rgba(255,255,255,.86); backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line); box-shadow:0 2px 10px -8px rgba(30,58,95,.4);
+  }
+  .brand{display:flex;align-items:center;gap:11px;flex:0 0 auto}
+  .brand .dot{width:12px;height:12px;border-radius:4px;background:linear-gradient(135deg,var(--accent),var(--accent2));box-shadow:0 0 0 4px rgba(14,165,233,.14)}
+  .brand b{font-size:17px;letter-spacing:.3px}
+  .brand small{color:var(--muted);font-size:12.5px;display:block;margin-top:1px}
+  .cap{
+    flex:1 1 auto; min-width:0; display:flex; align-items:center; gap:12px;
+    background:#f3f8fc; border:1px solid #e3edf5; border-radius:14px;
+    padding:9px 16px; overflow:hidden;
+  }
+  .cap .num{
+    flex:0 0 auto; font-size:12px; font-weight:700; color:#fff; background:linear-gradient(135deg,var(--accent),var(--accent2));
+    border-radius:9px; padding:4px 9px; letter-spacing:.5px;
+  }
+  .cap .txt{font-size:16.5px; font-weight:600; color:#24476e; white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+  #rawimg{
+    flex:0 0 auto; text-decoration:none; font-size:13px; color:var(--ink2);
+    border:1px solid var(--line); background:#fff; border-radius:11px; padding:8px 13px; font-weight:600;
+    box-shadow:var(--shadow); transition:.18s;
+  }
+  #rawimg:hover{border-color:#bcd6e8; transform:translateY(-1px)}
+
+  /* ---------- 画布 ---------- */
+  #stage{flex:1 1 auto; position:relative; min-height:0; padding:14px 18px 6px}
+  #figwrap{
+    position:absolute; inset:14px 18px 6px; border-radius:20px; background:#f8fbfd;
+    border:1px solid #e4eef6; box-shadow:inset 0 1px 0 #fff, 0 14px 34px -24px rgba(30,58,95,.5);
+    overflow:hidden;
+  }
+  #fig{width:100%;height:100%;display:block}
+  #start{
+    position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center;
+    gap:16px; background:rgba(248,251,253,.92); backdrop-filter:blur(2px); z-index:5; transition:opacity .35s;
+  }
+  #start h2{margin:0;font-size:26px;letter-spacing:1px}
+  #start p{margin:0;color:var(--muted);font-size:14.5px}
+  #start.gone{opacity:0;pointer-events:none}
+  .gobtn{
+    border:none; cursor:pointer; font-family:inherit; font-weight:700; font-size:16px; color:#fff;
+    background:linear-gradient(135deg,var(--accent),var(--accent2));
+    border-radius:14px; padding:13px 34px; box-shadow:0 12px 26px -12px rgba(14,165,233,.85); transition:.18s;
+  }
+  .gobtn:hover{transform:translateY(-2px); box-shadow:0 16px 30px -12px rgba(14,165,233,.95)}
+
+  /* ---------- 底栏 ---------- */
+  footer{
+    flex:0 0 auto; padding:10px 22px 14px; background:rgba(255,255,255,.86); backdrop-filter:blur(10px);
+    border-top:1px solid var(--line); display:flex; flex-direction:column; gap:9px;
+  }
+  .row{display:flex; align-items:center; gap:10px; flex-wrap:wrap}
+  button.ctl{
+    font-family:inherit; cursor:pointer; border:1px solid var(--line); background:#fff; color:#24476e;
+    border-radius:11px; padding:8px 13px; font-size:13.5px; font-weight:600; box-shadow:var(--shadow); transition:.16s;
+  }
+  button.ctl:hover{border-color:#bcd6e8; transform:translateY(-1px)}
+  button.ctl:disabled{opacity:.38; cursor:not-allowed; transform:none}
+  button.ctl.main{background:linear-gradient(135deg,var(--accent),var(--accent2)); color:#fff; border-color:transparent; padding:9px 22px}
+  .chip{
+    font-family:inherit; cursor:pointer; border:1px dashed #c6dbea; background:#f7fbfe; color:#3f6a92;
+    border-radius:20px; padding:6px 14px; font-size:13px; font-weight:600; transition:.16s;
+  }
+  .chip:hover{background:#eaf5fc; border-color:#9fc9e2}
+  .chip.now{background:linear-gradient(135deg,#e0f2fe,#ccfbf1); border-style:solid; border-color:#8fd0ea; color:#155e75}
+  .sep{width:1px;height:22px;background:var(--line);margin:0 3px}
+  .lab{font-size:12.5px;color:var(--muted);font-weight:600}
+  select.ctl{padding:8px 10px; border-radius:11px; border:1px solid var(--line); background:#fff;
+             font-family:inherit; font-size:13.5px; color:#24476e; font-weight:600; box-shadow:var(--shadow); cursor:pointer}
+  .switch{display:flex;align-items:center;gap:7px;font-size:13px;color:var(--ink2);font-weight:600;cursor:pointer;user-select:none}
+  .switch input{width:16px;height:16px;accent-color:#0ea5e9;cursor:pointer}
+  #bar{flex:1 1 240px; height:7px; border-radius:6px; background:#e5eef5; overflow:hidden; min-width:160px}
+  #bar i{display:block; height:100%; width:0; border-radius:6px; background:linear-gradient(90deg,var(--accent),var(--accent2)); transition:width .4s cubic-bezier(.4,0,.2,1)}
+  .stat{font-size:12.5px;color:var(--muted)}
+
+  /* ---------- 图元动画 ---------- */
+  #fig .ln,#fig .ar,#fig .ch,#fig .tx{transition:opacity .42s ease, transform .42s cubic-bezier(.34,1.3,.5,1), stroke-dashoffset .62s cubic-bezier(.4,0,.2,1)}
+  #fig .ar,#fig .ch{transform-box:fill-box; transform-origin:center; opacity:0; transform:scale(.55)}
+  #fig .tx{opacity:0; transform:translateY(7px)}
+  #fig .ln{opacity:0}
+  #fig .ln.on{opacity:1; stroke-dashoffset:0 !important}
+  #fig .ar.on,#fig .ch.on{opacity:1; transform:scale(1)}
+  #fig .tx.on{opacity:1; transform:translateY(0)}
+  #fig .ch.on.key{animation:pop .5s cubic-bezier(.34,1.4,.5,1)}
+  @keyframes pop{0%{transform:scale(.55)}60%{transform:scale(1.1)}100%{transform:scale(1)}}
+  #fig.finish .ch.key{animation:glow 1.5s ease-in-out infinite alternate}
+  @keyframes glow{from{filter:drop-shadow(0 0 0 rgba(225,29,72,0))}to{filter:drop-shadow(0 0 10px rgba(225,29,72,.75))}}
+  #fig .static{opacity:1}
+</style>
+</head>
+<body>
+<header>
+  <div class="brand"><span class="dot"></span><div><b>鱼骨图绘制演示</b><small>成型不良要因分析 · 103 条小骨 · 20 条重点 · 18 条小小骨</small></div></div>
+  <div class="cap"><span class="num" id="capnum">STEP 0</span><span class="txt" id="captxt">点右下角「开始演示」</span></div>
+  <a id="rawimg" href="fishbone-source.jpg" target="_blank" rel="noopener">🖼 原图对照</a>
+</header>
+
+<div id="stage">
+  <div id="figwrap">
+    <svg id="fig" viewBox="0 0 4320 2696" xmlns="http://www.w3.org/2000/svg" font-family="Microsoft YaHei,PingFang SC,sans-serif" preserveAspectRatio="xMidYMid meet">
+<defs><linearGradient id="gB" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7dd3fc"/><stop offset="1" stop-color="#0ea5e9"/></linearGradient><linearGradient id="gT" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5eead4"/><stop offset="1" stop-color="#14b8a6"/></linearGradient><linearGradient id="gI" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#a5b4fc"/><stop offset="1" stop-color="#6366f1"/></linearGradient><linearGradient id="gS" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#94a3b8"/><stop offset="1" stop-color="#475569"/></linearGradient><linearGradient id="gHead" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#38bdf8"/><stop offset="1" stop-color="#14b8a6"/></linearGradient><linearGradient id="gKey" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fb7185"/><stop offset="1" stop-color="#e11d48"/></linearGradient></defs>
+<rect id="bg" x="0" y="0" width="4320" height="2696" fill="#f8fbfd"/>
+<g transform="translate(814,1377)">
+<text class="static" x="60" y="-1323" font-size="34" font-weight="bold" fill="#1e3a5f">成型不良　要因分析图</text>
+<text class="static" x="60" y="-1285" font-size="17" fill="#7b8ba1">绘制演示 ｜ 大骨与脊骨成 60° ｜ 大骨 → 中骨(水平线，与主骨平行) → 小骨(短刺) → 小小骨 ｜ ★=重点要因</text>
+<line class="ln" data-step="1" data-i="0" x1="0" y1="0" x2="-580" y2="-1004" stroke="#3f5061" stroke-width="7" stroke-linecap="round"/>
+<polygon class="ar" data-step="1" data-i="1" points="0,0 -42,-40 -14,-56" fill="#3f5061"/>
+<rect class="ch" data-step="1" data-i="2" x="-695" y="-1105" width="152" height="66" rx="22" fill="url(#gB)"/>
+<text class="tx" data-step="1" data-i="3" x="-619" y="-1061" font-size="30" fill="#ffffff" text-anchor="middle" font-weight="bold">材料</text>
+<line class="ln" data-step="2" data-i="0" x1="-695" y1="-128" x2="-74" y2="-128" stroke="#64748b" stroke-width="3.4" stroke-linecap="butt"/>
+<polygon class="ar" data-step="2" data-i="1" points="-74,-128 -89,-136 -89,-120" fill="#64748b"/>
+<rect class="ch" data-step="2" data-i="2" x="-695" y="-149" width="92" height="42" rx="18" fill="#e0f2fe" stroke="#fff" stroke-opacity=".65"/>
+<text class="tx" data-step="2" data-i="3" x="-649" y="-121" font-size="17" fill="#0369a1" text-anchor="middle" font-weight="bold">材料干燥</text>
+<line class="ln" data-step="2" data-i="4" x1="-521" y1="-128" x2="-521" y2="-168" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<text class="tx" data-step="2" data-i="5" x="-521" y="-168" font-size="15" fill="#2f4256" text-anchor="middle" font-weight="normal">干燥时间不足</text>
+<line class="ln" data-step="2" data-i="6" x1="-521" y1="-204" x2="-434" y2="-204" stroke="#94a3b8" stroke-width="1.6" stroke-linecap="butt"/>
+<text class="tx" data-step="2" data-i="7" x="-510" y="-210" font-size="13" fill="#4a5c72" text-anchor="start" font-weight="normal">定时器异常</text>
+<line class="ln" data-step="2" data-i="8" x1="-378" y1="-128" x2="-378" y2="-168" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<text class="tx" data-step="2" data-i="9" x="-378" y="-168" font-size="15" fill="#2f4256" text-anchor="middle" font-weight="normal">加料不及时</text>
+<line class="ln" data-step="2" data-i="10" x1="-268" y1="-128" x2="-268" y2="-168" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<text class="tx" data-step="2" data-i="11" x="-268" y="-168" font-size="15" fill="#2f4256" text-anchor="middle" font-weight="normal">设备异常</text>
+<line class="ln" data-step="2" data-i="12" x1="-536" y1="-128" x2="-536" y2="-88" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<text class="tx" data-step="2" data-i="13" x="-536" y="-88" font-size="15" fill="#2f4256" text-anchor="middle" font-weight="normal">设定错误</text>
+<line class="ln" data-step="2" data-i="14" x1="-415" y1="-128" x2="-415" y2="-88" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<rect class="ch" data-step="2" data-i="15" x="-475" y="-109" width="120" height="28" rx="14" fill="url(#gKey)"/>
+<text class="tx" data-step="2" data-i="16" x="-415" y="-87" font-size="15" fill="#ffffff" text-anchor="middle" font-weight="bold">★干燥温度偏低</text>
+<line class="ln" data-step="3" data-i="0" x1="404" y1="-350" x2="-202" y2="-350" stroke="#64748b" stroke-width="3.4" stroke-linecap="butt"/>
+<polygon class="ar" data-step="3" data-i="1" points="-202,-350 -187,-358 -187,-342" fill="#64748b"/>
+<rect class="ch" data-step="3" data-i="2" x="329" y="-371" width="75" height="42" rx="18" fill="#e0f2fe" stroke="#fff" stroke-opacity=".65"/>
+<text class="tx" data-step="3" data-i="3" x="367" y="-343" font-size="17" fill="#0369a1" text-anchor="middle" font-weight="bold">混合材</text>
+<line class="ln" data-step="3" data-i="4" x1="-143" y1="-350" x2="-143" y2="-390" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<text class="tx" data-step="3" data-i="5" x="-143" y="-390" font-size="15" fill="#2f4256" text-anchor="middle" font-weight="normal">粉尘多</text>
+<line class="ln" data-step="3" data-i="6" x1="-48" y1="-350" x2="-48" y2="-390" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<text class="tx" data-step="3" data-i="7" x="-48" y="-390" font-size="15" fill="#2f4256" text-anchor="middle" font-weight="normal">混入杂物</text>
+<line class="ln" data-step="3" data-i="8" x1="50" y1="-350" x2="50" y2="-390" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<rect class="ch" data-step="3" data-i="9" x="13" y="-411" width="75" height="28" rx="14" fill="url(#gKey)"/>
+<text class="tx" data-step="3" data-i="10" x="50" y="-389" font-size="15" fill="#ffffff" text-anchor="middle" font-weight="bold">★未筛选</text>
+<line class="ln" data-step="3" data-i="11" x1="149" y1="-350" x2="149" y2="-390" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<text class="tx" data-step="3" data-i="12" x="149" y="-390" font-size="15" fill="#2f4256" text-anchor="middle" font-weight="normal">不同材料</text>
+<line class="ln" data-step="3" data-i="13" x1="-124" y1="-350" x2="-124" y2="-310" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<rect class="ch" data-step="3" data-i="14" x="-176" y="-331" width="105" height="28" rx="14" fill="url(#gKey)"/>
+<text class="tx" data-step="3" data-i="15" x="-124" y="-309" font-size="15" fill="#ffffff" text-anchor="middle" font-weight="bold">★粉碎机异常</text>
+<line class="ln" data-step="3" data-i="16" x1="-18" y1="-350" x2="-18" y2="-310" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<text class="tx" data-step="3" data-i="17" x="-18" y="-310" font-size="15" fill="#2f4256" text-anchor="middle" font-weight="normal">水口长</text>
+<line class="ln" data-step="3" data-i="18" x1="96" y1="-350" x2="96" y2="-310" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<rect class="ch" data-step="3" data-i="19" x="36" y="-331" width="120" height="28" rx="14" fill="url(#gKey)"/>
+<text class="tx" data-step="3" data-i="20" x="96" y="-309" font-size="15" fill="#ffffff" text-anchor="middle" font-weight="bold">★刀片筛网磨损</text>
+<line class="ln" data-step="4" data-i="0" x1="-754" y1="-548" x2="-316" y2="-548" stroke="#64748b" stroke-width="3.4" stroke-linecap="butt"/>
+<polygon class="ar" data-step="4" data-i="1" points="-316,-548 -331,-556 -331,-540" fill="#64748b"/>
+<rect class="ch" data-step="4" data-i="2" x="-754" y="-569" width="58" height="42" rx="18" fill="#e0f2fe" stroke="#fff" stroke-opacity=".65"/>
+<text class="tx" data-step="4" data-i="3" x="-725" y="-541" font-size="17" fill="#0369a1" text-anchor="middle" font-weight="bold">性能</text>
+<line class="ln" data-step="4" data-i="4" x1="-629" y1="-548" x2="-629" y2="-588" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<text class="tx" data-step="4" data-i="5" x="-629" y="-588" font-size="15" fill="#2f4256" text-anchor="middle" font-weight="normal">流动性差</text>
+<line class="ln" data-step="4" data-i="6" x1="-512" y1="-548" x2="-512" y2="-588" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<text class="tx" data-step="4" data-i="7" x="-512" y="-588" font-size="15" fill="#2f4256" text-anchor="middle" font-weight="normal">制剂添加过多</text>
+<line class="ln" data-step="4" data-i="8" x1="-636" y1="-548" x2="-636" y2="-508" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<text class="tx" data-step="4" data-i="9" x="-636" y="-508" font-size="15" fill="#2f4256" text-anchor="middle" font-weight="normal">未密封</text>
+<line class="ln" data-step="4" data-i="10" x1="-557" y1="-548" x2="-557" y2="-508" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<text class="tx" data-step="4" data-i="11" x="-557" y="-508" font-size="15" fill="#2f4256" text-anchor="middle" font-weight="normal">氧化</text>
+<line class="ln" data-step="5" data-i="0" x1="83" y1="-746" x2="-431" y2="-746" stroke="#64748b" stroke-width="3.4" stroke-linecap="butt"/>
+<polygon class="ar" data-step="5" data-i="1" points="-431,-746 -416,-754 -416,-738" fill="#64748b"/>
+<rect class="ch" data-step="5" data-i="2" x="25" y="-767" width="58" height="42" rx="18" fill="#e0f2fe" stroke="#fff" stroke-opacity=".65"/>
+<text class="tx" data-step="5" data-i="3" x="54" y="-739" font-size="17" fill="#0369a1" text-anchor="middle" font-weight="bold">材质</text>
+<line class="ln" data-step="5" data-i="4" x1="-379" y1="-746" x2="-379" y2="-786" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<text class="tx" data-step="5" data-i="5" x="-379" y="-786" font-size="15" fill="#2f4256" text-anchor="middle" font-weight="normal">吸水</text>
+<line class="ln" data-step="5" data-i="6" x1="-379" y1="-822" x2="-292" y2="-822" stroke="#94a3b8" stroke-width="1.6" stroke-linecap="butt"/>
+<text class="tx" data-step="5" data-i="7" x="-368" y="-828" font-size="13" fill="#4a5c72" text-anchor="start" font-weight="normal">长时间外露</text>
+<line class="ln" data-step="5" data-i="8" x1="-258" y1="-746" x2="-258" y2="-786" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<text class="tx" data-step="5" data-i="9" x="-258" y="-786" font-size="15" fill="#2f4256" text-anchor="middle" font-weight="normal">分解</text>
+<line class="ln" data-step="5" data-i="10" x1="-163" y1="-746" x2="-163" y2="-786" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<text class="tx" data-step="5" data-i="11" x="-163" y="-786" font-size="15" fill="#2f4256" text-anchor="middle" font-weight="normal">搅拌时间短</text>
+<line class="ln" data-step="5" data-i="12" x1="-356" y1="-746" x2="-356" y2="-706" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<text class="tx" data-step="5" data-i="13" x="-356" y="-706" font-size="15" fill="#2f4256" text-anchor="middle" font-weight="normal">混合机异常</text>
+<line class="ln" data-step="5" data-i="14" x1="-232" y1="-746" x2="-232" y2="-706" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<text class="tx" data-step="5" data-i="15" x="-232" y="-706" font-size="15" fill="#2f4256" text-anchor="middle" font-weight="normal">混合比例异常</text>
+<line class="ln" data-step="6" data-i="0" x1="2267" y1="0" x2="1621" y2="-1120" stroke="#3f5061" stroke-width="7" stroke-linecap="round"/>
+<polygon class="ar" data-step="6" data-i="1" points="2267,0 2225,-40 2253,-56" fill="#3f5061"/>
+<rect class="ch" data-step="6" data-i="2" x="1505" y="-1221" width="152" height="66" rx="22" fill="url(#gT)"/>
+<text class="tx" data-step="6" data-i="3" x="1581" y="-1177" font-size="30" fill="#ffffff" text-anchor="middle" font-weight="bold">设备</text>
+<line class="ln" data-step="7" data-i="0" x1="2895" y1="-152" x2="2179" y2="-152" stroke="#64748b" stroke-width="3.4" stroke-linecap="butt"/>
+<polygon class="ar" data-step="7" data-i="1" points="2179,-152 2194,-160 2194,-144" fill="#64748b"/>
+<rect class="ch" data-step="7" data-i="2" x="2820" y="-173" width="75" height="42" rx="18" fill="#ccfbf1" stroke="#fff" stroke-opacity=".65"/>
+<text class="tx" data-step="7" data-i="3" x="2858" y="-145" font-size="17" fill="#0f766e" text-anchor="middle" font-weight="bold">干燥机</text>
+<line class="ln" data-step="7" data-i="4" x1="2239" y1="-152" x2="2239" y2="-192" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<text class="tx" data-step="7" data-i="5" x="2239" y="-192" font-size="15" fill="#2f4256" text-anchor="middle" font-weight="normal">干燥剂</text>
+<line class="ln" data-step="7" data-i="6" x1="2239" y1="-228" x2="2313" y2="-228" stroke="#94a3b8" stroke-width="1.6" stroke-linecap="butt"/>
+<text class="tx" data-step="7" data-i="7" x="2250" y="-234" font-size="13" fill="#4a5c72" text-anchor="start" font-weight="normal">过期失效</text>
+<line class="ln" data-step="7" data-i="8" x1="2239" y1="-252" x2="2313" y2="-252" stroke="#94a3b8" stroke-width="1.6" stroke-linecap="butt"/>
+<text class="tx" data-step="7" data-i="9" x="2250" y="-258" font-size="13" fill="#4a5c72" text-anchor="start" font-weight="normal">设定错误</text>
+<line class="ln" data-step="7" data-i="10" x1="2362" y1="-152" x2="2362" y2="-192" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<text class="tx" data-step="7" data-i="11" x="2362" y="-192" font-size="15" fill="#2f4256" text-anchor="middle" font-weight="normal">温度异常</text>
+<line class="ln" data-step="7" data-i="12" x1="2464" y1="-152" x2="2464" y2="-192" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<text class="tx" data-step="7" data-i="13" x="2464" y="-192" font-size="15" fill="#2f4256" text-anchor="middle" font-weight="normal">温控失效</text>
+<line class="ln" data-step="7" data-i="14" x1="2596" y1="-152" x2="2596" y2="-192" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<text class="tx" data-step="7" data-i="15" x="2596" y="-192" font-size="15" fill="#2f4256" text-anchor="middle" font-weight="normal">过滤网未定期清扫</text>
+<line class="ln" data-step="7" data-i="16" x1="2254" y1="-152" x2="2254" y2="-112" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<text class="tx" data-step="7" data-i="17" x="2254" y="-112" font-size="15" fill="#2f4256" text-anchor="middle" font-weight="normal">过滤网堵塞</text>
+<line class="ln" data-step="7" data-i="18" x1="2341" y1="-152" x2="2341" y2="-112" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<text class="tx" data-step="7" data-i="19" x="2341" y="-112" font-size="15" fill="#2f4256" text-anchor="middle" font-weight="normal">坏</text>
+<line class="ln" data-step="7" data-i="20" x1="2413" y1="-152" x2="2413" y2="-112" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<text class="tx" data-step="7" data-i="21" x="2413" y="-112" font-size="15" fill="#2f4256" text-anchor="middle" font-weight="normal">发热器</text>
+<line class="ln" data-step="7" data-i="22" x1="2413" y1="-76" x2="2513" y2="-76" stroke="#94a3b8" stroke-width="1.6" stroke-linecap="butt"/>
+<text class="tx" data-step="7" data-i="23" x="2424" y="-61" font-size="13" fill="#4a5c72" text-anchor="start" font-weight="normal">不能正常发热</text>
+<line class="ln" data-step="8" data-i="0" x1="1380" y1="-422" x2="2023" y2="-422" stroke="#64748b" stroke-width="3.4" stroke-linecap="butt"/>
+<polygon class="ar" data-step="8" data-i="1" points="2023,-422 2008,-430 2008,-414" fill="#64748b"/>
+<rect class="ch" data-step="8" data-i="2" x="1380" y="-443" width="75" height="42" rx="18" fill="#ccfbf1" stroke="#fff" stroke-opacity=".65"/>
+<text class="tx" data-step="8" data-i="3" x="1418" y="-415" font-size="17" fill="#0f766e" text-anchor="middle" font-weight="bold">模温机</text>
+<line class="ln" data-step="8" data-i="4" x1="1530" y1="-422" x2="1530" y2="-462" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<text class="tx" data-step="8" data-i="5" x="1530" y="-462" font-size="15" fill="#2f4256" text-anchor="middle" font-weight="normal">循环水不足</text>
+<line class="ln" data-step="8" data-i="6" x1="1639" y1="-422" x2="1639" y2="-462" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<text class="tx" data-step="8" data-i="7" x="1639" y="-462" font-size="15" fill="#2f4256" text-anchor="middle" font-weight="normal">温度异常</text>
+<line class="ln" data-step="8" data-i="8" x1="1741" y1="-422" x2="1741" y2="-462" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<text class="tx" data-step="8" data-i="9" x="1741" y="-462" font-size="15" fill="#2f4256" text-anchor="middle" font-weight="normal">发热异常</text>
+<line class="ln" data-step="8" data-i="10" x1="1843" y1="-422" x2="1843" y2="-462" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<text class="tx" data-step="8" data-i="11" x="1843" y="-462" font-size="15" fill="#2f4256" text-anchor="middle" font-weight="normal">压力不足</text>
+<line class="ln" data-step="8" data-i="12" x1="1507" y1="-422" x2="1507" y2="-382" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<text class="tx" data-step="8" data-i="13" x="1507" y="-382" font-size="15" fill="#2f4256" text-anchor="middle" font-weight="normal">机水</text>
+<line class="ln" data-step="8" data-i="14" x1="1594" y1="-422" x2="1594" y2="-382" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<text class="tx" data-step="8" data-i="15" x="1594" y="-382" font-size="15" fill="#2f4256" text-anchor="middle" font-weight="normal">开关未开</text>
+<line class="ln" data-step="8" data-i="16" x1="1711" y1="-422" x2="1711" y2="-382" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<text class="tx" data-step="8" data-i="17" x="1711" y="-382" font-size="15" fill="#2f4256" text-anchor="middle" font-weight="normal">冷却系统异常</text>
+<line class="ln" data-step="9" data-i="0" x1="2986" y1="-620" x2="1909" y2="-620" stroke="#64748b" stroke-width="3.4" stroke-linecap="butt"/>
+<polygon class="ar" data-step="9" data-i="1" points="1909,-620 1924,-628 1924,-612" fill="#64748b"/>
+<rect class="ch" data-step="9" data-i="2" x="2928" y="-641" width="58" height="42" rx="18" fill="#ccfbf1" stroke="#fff" stroke-opacity=".65"/>
+<text class="tx" data-step="9" data-i="3" x="2957" y="-613" font-size="17" fill="#0f766e" text-anchor="middle" font-weight="bold">金型</text>
+<line class="ln" data-step="9" data-i="4" x1="1976" y1="-620" x2="1976" y2="-660" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<text class="tx" data-step="9" data-i="5" x="1976" y="-660" font-size="15" fill="#2f4256" text-anchor="middle" font-weight="normal">设计不适</text>
+<line class="ln" data-step="9" data-i="6" x1="2078" y1="-620" x2="2078" y2="-660" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<text class="tx" data-step="9" data-i="7" x="2078" y="-660" font-size="15" fill="#2f4256" text-anchor="middle" font-weight="normal">取数过多</text>
+<line class="ln" data-step="9" data-i="8" x1="2180" y1="-620" x2="2180" y2="-660" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<text class="tx" data-step="9" data-i="9" x="2180" y="-660" font-size="15" fill="#2f4256" text-anchor="middle" font-weight="normal">配件不良</text>
+<line class="ln" data-step="9" data-i="10" x1="2282" y1="-620" x2="2282" y2="-660" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<text class="tx" data-step="9" data-i="11" x="2282" y="-660" font-size="15" fill="#2f4256" text-anchor="middle" font-weight="normal">尺寸不良</text>
+<line class="ln" data-step="9" data-i="12" x1="2369" y1="-620" x2="2369" y2="-660" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<text class="tx" data-step="9" data-i="13" x="2369" y="-660" font-size="15" fill="#2f4256" text-anchor="middle" font-weight="normal">破损</text>
+<line class="ln" data-step="9" data-i="14" x1="2456" y1="-620" x2="2456" y2="-660" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<text class="tx" data-step="9" data-i="15" x="2456" y="-660" font-size="15" fill="#2f4256" text-anchor="middle" font-weight="normal">进胶口小</text>
+<line class="ln" data-step="9" data-i="16" x1="2558" y1="-620" x2="2558" y2="-694" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<text class="tx" data-step="9" data-i="17" x="2558" y="-694" font-size="15" fill="#2f4256" text-anchor="middle" font-weight="normal">进胶不平衡</text>
+<line class="ln" data-step="9" data-i="18" x1="2682" y1="-620" x2="2682" y2="-694" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<text class="tx" data-step="9" data-i="19" x="2682" y="-694" font-size="15" fill="#2f4256" text-anchor="middle" font-weight="normal">部品肉厚太薄</text>
+<line class="ln" data-step="9" data-i="20" x1="1961" y1="-620" x2="1961" y2="-580" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<text class="tx" data-step="9" data-i="21" x="1961" y="-580" font-size="15" fill="#2f4256" text-anchor="middle" font-weight="normal">堵塞</text>
+<line class="ln" data-step="9" data-i="22" x1="2060" y1="-620" x2="2060" y2="-580" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<rect class="ch" data-step="9" data-i="23" x="2007" y="-601" width="105" height="28" rx="14" fill="url(#gKey)"/>
+<text class="tx" data-step="9" data-i="24" x="2060" y="-579" font-size="15" fill="#ffffff" text-anchor="middle" font-weight="bold">★清扫不及时</text>
+<line class="ln" data-step="9" data-i="25" x1="2180" y1="-620" x2="2180" y2="-580" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<text class="tx" data-step="9" data-i="26" x="2180" y="-580" font-size="15" fill="#2f4256" text-anchor="middle" font-weight="normal">槽深度不够</text>
+<line class="ln" data-step="9" data-i="27" x1="2290" y1="-620" x2="2290" y2="-580" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<text class="tx" data-step="9" data-i="28" x="2290" y="-580" font-size="15" fill="#2f4256" text-anchor="middle" font-weight="normal">位子不当</text>
+<line class="ln" data-step="9" data-i="29" x1="2384" y1="-620" x2="2384" y2="-580" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<text class="tx" data-step="9" data-i="30" x="2384" y="-580" font-size="15" fill="#2f4256" text-anchor="middle" font-weight="normal">温度低</text>
+<line class="ln" data-step="9" data-i="31" x1="2486" y1="-620" x2="2486" y2="-580" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<text class="tx" data-step="9" data-i="32" x="2486" y="-580" font-size="15" fill="#2f4256" text-anchor="middle" font-weight="normal">炭化物堵塞</text>
+<line class="ln" data-step="9" data-i="33" x1="2599" y1="-620" x2="2599" y2="-546" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<rect class="ch" data-step="9" data-i="34" x="2547" y="-567" width="105" height="28" rx="14" fill="url(#gKey)"/>
+<text class="tx" data-step="9" data-i="35" x="2599" y="-545" font-size="15" fill="#ffffff" text-anchor="middle" font-weight="bold">★排气槽不良</text>
+<line class="ln" data-step="9" data-i="36" x1="2720" y1="-620" x2="2720" y2="-546" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<text class="tx" data-step="9" data-i="37" x="2720" y="-546" font-size="15" fill="#2f4256" text-anchor="middle" font-weight="normal">热流道不顺</text>
+<line class="ln" data-step="10" data-i="0" x1="1074" y1="-886" x2="1756" y2="-886" stroke="#64748b" stroke-width="3.4" stroke-linecap="butt"/>
+<polygon class="ar" data-step="10" data-i="1" points="1756,-886 1741,-894 1741,-878" fill="#64748b"/>
+<rect class="ch" data-step="10" data-i="2" x="1074" y="-907" width="75" height="42" rx="18" fill="#ccfbf1" stroke="#fff" stroke-opacity=".65"/>
+<text class="tx" data-step="10" data-i="3" x="1112" y="-879" font-size="17" fill="#0f766e" text-anchor="middle" font-weight="bold">成形机</text>
+<line class="ln" data-step="10" data-i="4" x1="1220" y1="-886" x2="1220" y2="-926" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<rect class="ch" data-step="10" data-i="5" x="1175" y="-947" width="90" height="28" rx="14" fill="url(#gKey)"/>
+<text class="tx" data-step="10" data-i="6" x="1220" y="-925" font-size="15" fill="#ffffff" text-anchor="middle" font-weight="bold">★螺杆磨损</text>
+<line class="ln" data-step="10" data-i="7" x1="1319" y1="-886" x2="1319" y2="-926" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<text class="tx" data-step="10" data-i="8" x="1319" y="-926" font-size="15" fill="#2f4256" text-anchor="middle" font-weight="normal">材质差</text>
+<line class="ln" data-step="10" data-i="9" x1="1421" y1="-886" x2="1421" y2="-926" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<text class="tx" data-step="10" data-i="10" x="1421" y="-926" font-size="15" fill="#2f4256" text-anchor="middle" font-weight="normal">时间长磨损</text>
+<line class="ln" data-step="10" data-i="11" x1="1553" y1="-886" x2="1553" y2="-926" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<text class="tx" data-step="10" data-i="12" x="1553" y="-926" font-size="15" fill="#2f4256" text-anchor="middle" font-weight="normal">使用大吨位机器</text>
+<line class="ln" data-step="10" data-i="13" x1="1216" y1="-886" x2="1216" y2="-846" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<text class="tx" data-step="10" data-i="14" x="1216" y="-846" font-size="15" fill="#2f4256" text-anchor="middle" font-weight="normal">合模力大</text>
+<line class="ln" data-step="10" data-i="15" x1="1326" y1="-886" x2="1326" y2="-846" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<text class="tx" data-step="10" data-i="16" x="1326" y="-846" font-size="15" fill="#2f4256" text-anchor="middle" font-weight="normal">时间长磨损</text>
+<line class="ln" data-step="10" data-i="17" x1="1424" y1="-886" x2="1424" y2="-846" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<rect class="ch" data-step="10" data-i="18" x="1394" y="-867" width="60" height="28" rx="14" fill="url(#gKey)"/>
+<text class="tx" data-step="10" data-i="19" x="1424" y="-845" font-size="15" fill="#ffffff" text-anchor="middle" font-weight="bold">★料筒</text>
+<line class="ln" data-step="10" data-i="20" x1="1515" y1="-886" x2="1515" y2="-846" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<text class="tx" data-step="10" data-i="21" x="1515" y="-846" font-size="15" fill="#2f4256" text-anchor="middle" font-weight="normal">温控器坏</text>
+<line class="ln" data-step="11" data-i="0" x1="0" y1="0" x2="-552" y2="956" stroke="#3f5061" stroke-width="7" stroke-linecap="round"/>
+<polygon class="ar" data-step="11" data-i="1" points="0,0 -14,56 -42,40" fill="#3f5061"/>
+<rect class="ch" data-step="11" data-i="2" x="-667" y="991" width="152" height="66" rx="22" fill="url(#gI)"/>
+<text class="tx" data-step="11" data-i="3" x="-591" y="1035" font-size="30" fill="#ffffff" text-anchor="middle" font-weight="bold">人</text>
+<line class="ln" data-step="12" data-i="0" x1="-573" y1="128" x2="-74" y2="128" stroke="#64748b" stroke-width="3.4" stroke-linecap="butt"/>
+<polygon class="ar" data-step="12" data-i="1" points="-74,128 -89,120 -89,136" fill="#64748b"/>
+<rect class="ch" data-step="12" data-i="2" x="-573" y="107" width="75" height="42" rx="18" fill="#e0e7ff" stroke="#fff" stroke-opacity=".65"/>
+<text class="tx" data-step="12" data-i="3" x="-536" y="135" font-size="17" fill="#4338ca" text-anchor="middle" font-weight="bold">作业者</text>
+<line class="ln" data-step="12" data-i="4" x1="-416" y1="128" x2="-416" y2="168" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<text class="tx" data-step="12" data-i="5" x="-416" y="168" font-size="15" fill="#2f4256" text-anchor="middle" font-weight="normal">作业手法错误</text>
+<line class="ln" data-step="12" data-i="6" x1="-299" y1="128" x2="-299" y2="168" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<text class="tx" data-step="12" data-i="7" x="-299" y="168" font-size="15" fill="#2f4256" text-anchor="middle" font-weight="normal">工作马虎</text>
+<line class="ln" data-step="12" data-i="8" x1="-409" y1="128" x2="-409" y2="88" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<text class="tx" data-step="12" data-i="9" x="-409" y="88" font-size="15" fill="#2f4256" text-anchor="middle" font-weight="normal">不良位置不明确</text>
+<line class="ln" data-step="12" data-i="10" x1="-269" y1="128" x2="-269" y2="88" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<text class="tx" data-step="12" data-i="11" x="-269" y="88" font-size="15" fill="#2f4256" text-anchor="middle" font-weight="normal">品质观念不强</text>
+<line class="ln" data-step="13" data-i="0" x1="651" y1="326" x2="-188" y2="326" stroke="#64748b" stroke-width="3.4" stroke-linecap="butt"/>
+<polygon class="ar" data-step="13" data-i="1" points="-188,326 -173,318 -173,334" fill="#64748b"/>
+<rect class="ch" data-step="13" data-i="2" x="542" y="305" width="109" height="42" rx="18" fill="#e0e7ff" stroke="#fff" stroke-opacity=".65"/>
+<text class="tx" data-step="13" data-i="3" x="596" y="333" font-size="17" fill="#4338ca" text-anchor="middle" font-weight="bold">成型技术员</text>
+<line class="ln" data-step="13" data-i="4" x1="-121" y1="326" x2="-121" y2="366" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<text class="tx" data-step="13" data-i="5" x="-121" y="366" font-size="15" fill="#2f4256" text-anchor="middle" font-weight="normal">技术缺乏</text>
+<line class="ln" data-step="13" data-i="6" x1="-19" y1="326" x2="-19" y2="366" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<text class="tx" data-step="13" data-i="7" x="-19" y="366" font-size="15" fill="#2f4256" text-anchor="middle" font-weight="normal">操作失误</text>
+<line class="ln" data-step="13" data-i="8" x1="90" y1="326" x2="90" y2="366" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<text class="tx" data-step="13" data-i="9" x="90" y="366" font-size="15" fill="#2f4256" text-anchor="middle" font-weight="normal">未打开升水</text>
+<line class="ln" data-step="13" data-i="10" x1="-87" y1="326" x2="-87" y2="286" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<rect class="ch" data-step="13" data-i="11" x="-162" y="265" width="150" height="28" rx="14" fill="url(#gKey)"/>
+<text class="tx" data-step="13" data-i="12" x="-87" y="287" font-size="15" fill="#ffffff" text-anchor="middle" font-weight="bold">★未废弃开机不良品</text>
+<line class="ln" data-step="13" data-i="13" x1="105" y1="326" x2="105" y2="286" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<rect class="ch" data-step="13" data-i="14" x="8" y="265" width="195" height="28" rx="14" fill="url(#gKey)"/>
+<text class="tx" data-step="13" data-i="15" x="105" y="287" font-size="15" fill="#ffffff" text-anchor="middle" font-weight="bold">★未对量产前部品进行确认</text>
+<line class="ln" data-step="13" data-i="16" x1="312" y1="326" x2="312" y2="286" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<rect class="ch" data-step="13" data-i="17" x="222" y="265" width="180" height="28" rx="14" fill="url(#gKey)"/>
+<text class="tx" data-step="13" data-i="18" x="312" y="287" font-size="15" fill="#ffffff" text-anchor="middle" font-weight="bold">★未按照规定清扫排气槽</text>
+<line class="ln" data-step="14" data-i="0" x1="-630" y1="524" x2="-303" y2="524" stroke="#64748b" stroke-width="3.4" stroke-linecap="butt"/>
+<polygon class="ar" data-step="14" data-i="1" points="-303,524 -318,516 -318,532" fill="#64748b"/>
+<rect class="ch" data-step="14" data-i="2" x="-630" y="503" width="51" height="42" rx="18" fill="#e0e7ff" stroke="#fff" stroke-opacity=".65"/>
+<text class="tx" data-step="14" data-i="3" x="-605" y="531" font-size="17" fill="#4338ca" text-anchor="middle" font-weight="bold">PQC</text>
+<line class="ln" data-step="14" data-i="4" x1="-498" y1="524" x2="-498" y2="564" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<text class="tx" data-step="14" data-i="5" x="-498" y="564" font-size="15" fill="#2f4256" text-anchor="middle" font-weight="normal">未按标准作业</text>
+<line class="ln" data-step="14" data-i="6" x1="-498" y1="524" x2="-498" y2="484" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<text class="tx" data-step="14" data-i="7" x="-498" y="484" font-size="15" fill="#2f4256" text-anchor="middle" font-weight="normal">抽取数量不够</text>
+<line class="ln" data-step="15" data-i="0" x1="-61" y1="722" x2="-417" y2="722" stroke="#64748b" stroke-width="3.4" stroke-linecap="butt"/>
+<polygon class="ar" data-step="15" data-i="1" points="-417,722 -402,714 -402,730" fill="#64748b"/>
+<rect class="ch" data-step="15" data-i="2" x="-170" y="701" width="109" height="42" rx="18" fill="#e0e7ff" stroke="#fff" stroke-opacity=".65"/>
+<text class="tx" data-step="15" data-i="3" x="-115" y="729" font-size="17" fill="#4338ca" text-anchor="middle" font-weight="bold">修模技术员</text>
+<line class="ln" data-step="15" data-i="4" x1="-350" y1="722" x2="-350" y2="762" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<text class="tx" data-step="15" data-i="5" x="-350" y="762" font-size="15" fill="#2f4256" text-anchor="middle" font-weight="normal">配件装错</text>
+<line class="ln" data-step="15" data-i="6" x1="-350" y1="722" x2="-350" y2="682" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<text class="tx" data-step="15" data-i="7" x="-350" y="682" font-size="15" fill="#2f4256" text-anchor="middle" font-weight="normal">经验不足</text>
+<line class="ln" data-step="16" data-i="0" x1="2267" y1="0" x2="1599" y2="1158" stroke="#3f5061" stroke-width="7" stroke-linecap="round"/>
+<polygon class="ar" data-step="16" data-i="1" points="2267,0 2253,56 2225,40" fill="#3f5061"/>
+<rect class="ch" data-step="16" data-i="2" x="1483" y="1193" width="152" height="66" rx="22" fill="url(#gS)"/>
+<text class="tx" data-step="16" data-i="3" x="1559" y="1237" font-size="30" fill="#ffffff" text-anchor="middle" font-weight="bold">方法</text>
+<line class="ln" data-step="17" data-i="0" x1="2718" y1="128" x2="2193" y2="128" stroke="#64748b" stroke-width="3.4" stroke-linecap="butt"/>
+<polygon class="ar" data-step="17" data-i="1" points="2193,128 2208,120 2208,136" fill="#64748b"/>
+<rect class="ch" data-step="17" data-i="2" x="2660" y="107" width="58" height="42" rx="18" fill="#e2e8f0" stroke="#fff" stroke-opacity=".65"/>
+<text class="tx" data-step="17" data-i="3" x="2689" y="135" font-size="17" fill="#334155" text-anchor="middle" font-weight="bold">检查</text>
+<line class="ln" data-step="17" data-i="4" x1="2260" y1="128" x2="2260" y2="168" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<text class="tx" data-step="17" data-i="5" x="2260" y="168" font-size="15" fill="#2f4256" text-anchor="middle" font-weight="normal">出货检查</text>
+<line class="ln" data-step="17" data-i="6" x1="2355" y1="128" x2="2355" y2="168" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<text class="tx" data-step="17" data-i="7" x="2355" y="168" font-size="15" fill="#2f4256" text-anchor="middle" font-weight="normal">未检查</text>
+<line class="ln" data-step="17" data-i="8" x1="2464" y1="128" x2="2464" y2="168" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<text class="tx" data-step="17" data-i="9" x="2464" y="168" font-size="15" fill="#2f4256" text-anchor="middle" font-weight="normal">抽取数量不够</text>
+<line class="ln" data-step="17" data-i="10" x1="2268" y1="128" x2="2268" y2="88" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<text class="tx" data-step="17" data-i="11" x="2268" y="88" font-size="15" fill="#2f4256" text-anchor="middle" font-weight="normal">未全数检查</text>
+<line class="ln" data-step="17" data-i="12" x1="2362" y1="128" x2="2362" y2="88" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<text class="tx" data-step="17" data-i="13" x="2362" y="88" font-size="15" fill="#2f4256" text-anchor="middle" font-weight="normal">漏检</text>
+<line class="ln" data-step="17" data-i="14" x1="2449" y1="128" x2="2449" y2="88" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<text class="tx" data-step="17" data-i="15" x="2449" y="88" font-size="15" fill="#2f4256" text-anchor="middle" font-weight="normal">外观全检</text>
+<line class="ln" data-step="18" data-i="0" x1="1225" y1="326" x2="2079" y2="326" stroke="#64748b" stroke-width="3.4" stroke-linecap="butt"/>
+<polygon class="ar" data-step="18" data-i="1" points="2079,326 2064,318 2064,334" fill="#64748b"/>
+<rect class="ch" data-step="18" data-i="2" x="1225" y="305" width="92" height="42" rx="18" fill="#e2e8f0" stroke="#fff" stroke-opacity=".65"/>
+<text class="tx" data-step="18" data-i="3" x="1271" y="333" font-size="17" fill="#334155" text-anchor="middle" font-weight="bold">金型维护</text>
+<line class="ln" data-step="18" data-i="4" x1="1399" y1="326" x2="1399" y2="366" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<text class="tx" data-step="18" data-i="5" x="1399" y="366" font-size="15" fill="#2f4256" text-anchor="middle" font-weight="normal">未按计划进行</text>
+<line class="ln" data-step="18" data-i="6" x1="1528" y1="326" x2="1528" y2="366" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<rect class="ch" data-step="18" data-i="7" x="1475" y="345" width="105" height="28" rx="14" fill="url(#gKey)"/>
+<text class="tx" data-step="18" data-i="8" x="1528" y="367" font-size="15" fill="#ffffff" text-anchor="middle" font-weight="bold">★未按时进行</text>
+<line class="ln" data-step="18" data-i="9" x1="1641" y1="326" x2="1641" y2="366" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<text class="tx" data-step="18" data-i="10" x="1641" y="366" font-size="15" fill="#2f4256" text-anchor="middle" font-weight="normal">定期保养</text>
+<line class="ln" data-step="18" data-i="11" x1="1743" y1="326" x2="1743" y2="366" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<text class="tx" data-step="18" data-i="12" x="1743" y="366" font-size="15" fill="#2f4256" text-anchor="middle" font-weight="normal">方法错误</text>
+<line class="ln" data-step="18" data-i="13" x1="1845" y1="326" x2="1845" y2="366" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<text class="tx" data-step="18" data-i="14" x="1845" y="366" font-size="15" fill="#2f4256" text-anchor="middle" font-weight="normal">日常保养</text>
+<line class="ln" data-step="18" data-i="15" x1="1422" y1="326" x2="1422" y2="286" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<text class="tx" data-step="18" data-i="16" x="1422" y="286" font-size="15" fill="#2f4256" text-anchor="middle" font-weight="normal">项目不全方法不正确</text>
+<line class="ln" data-step="18" data-i="17" x1="1576" y1="326" x2="1576" y2="286" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<text class="tx" data-step="18" data-i="18" x="1576" y="286" font-size="15" fill="#2f4256" text-anchor="middle" font-weight="normal">保养位子不全</text>
+<line class="ln" data-step="18" data-i="19" x1="1693" y1="326" x2="1693" y2="286" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<text class="tx" data-step="18" data-i="20" x="1693" y="286" font-size="15" fill="#2f4256" text-anchor="middle" font-weight="normal">配件装错</text>
+<line class="ln" data-step="18" data-i="21" x1="1780" y1="326" x2="1780" y2="286" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<text class="tx" data-step="18" data-i="22" x="1780" y="286" font-size="15" fill="#2f4256" text-anchor="middle" font-weight="normal">修理</text>
+<line class="ln" data-step="18" data-i="23" x1="1883" y1="326" x2="1883" y2="286" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<rect class="ch" data-step="18" data-i="24" x="1826" y="265" width="113" height="28" rx="14" fill="url(#gKey)"/>
+<text class="tx" data-step="18" data-i="25" x="1883" y="287" font-size="15" fill="#ffffff" text-anchor="middle" font-weight="bold">★未按WGS作业</text>
+<line class="ln" data-step="19" data-i="0" x1="2658" y1="524" x2="1965" y2="524" stroke="#64748b" stroke-width="3.4" stroke-linecap="butt"/>
+<polygon class="ar" data-step="19" data-i="1" points="1965,524 1980,516 1980,532" fill="#64748b"/>
+<rect class="ch" data-step="19" data-i="2" x="2566" y="503" width="92" height="42" rx="18" fill="#e2e8f0" stroke="#fff" stroke-opacity=".65"/>
+<text class="tx" data-step="19" data-i="3" x="2612" y="531" font-size="17" fill="#334155" text-anchor="middle" font-weight="bold">成形条件</text>
+<line class="ln" data-step="19" data-i="4" x1="2021" y1="524" x2="2021" y2="564" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<rect class="ch" data-step="19" data-i="5" x="1991" y="543" width="60" height="28" rx="14" fill="url(#gKey)"/>
+<text class="tx" data-step="19" data-i="6" x="2021" y="565" font-size="15" fill="#ffffff" text-anchor="middle" font-weight="bold">★温度</text>
+<line class="ln" data-step="19" data-i="7" x1="2021" y1="600" x2="2108" y2="600" stroke="#94a3b8" stroke-width="1.6" stroke-linecap="butt"/>
+<text class="tx" data-step="19" data-i="8" x="2032" y="615" font-size="13" fill="#4a5c72" text-anchor="start" font-weight="normal">溶胶温度低</text>
+<line class="ln" data-step="19" data-i="9" x1="2021" y1="624" x2="2121" y2="624" stroke="#94a3b8" stroke-width="1.6" stroke-linecap="butt"/>
+<text class="tx" data-step="19" data-i="10" x="2032" y="639" font-size="13" fill="#4a5c72" text-anchor="start" font-weight="normal">热胶道温度低</text>
+<line class="ln" data-step="19" data-i="11" x1="2021" y1="648" x2="2108" y2="648" stroke="#94a3b8" stroke-width="1.6" stroke-linecap="butt"/>
+<text class="tx" data-step="19" data-i="12" x="2032" y="663" font-size="13" fill="#4a5c72" text-anchor="start" font-weight="normal">金型温度低</text>
+<line class="ln" data-step="19" data-i="13" x1="2158" y1="524" x2="2158" y2="564" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<rect class="ch" data-step="19" data-i="14" x="2129" y="543" width="60" height="28" rx="14" fill="url(#gKey)"/>
+<text class="tx" data-step="19" data-i="15" x="2158" y="565" font-size="15" fill="#ffffff" text-anchor="middle" font-weight="bold">★速度</text>
+<line class="ln" data-step="19" data-i="16" x1="2158" y1="600" x2="2245" y2="600" stroke="#94a3b8" stroke-width="1.6" stroke-linecap="butt"/>
+<text class="tx" data-step="19" data-i="17" x="2169" y="615" font-size="13" fill="#4a5c72" text-anchor="start" font-weight="normal">计量速度慢</text>
+<line class="ln" data-step="19" data-i="18" x1="2158" y1="624" x2="2245" y2="624" stroke="#94a3b8" stroke-width="1.6" stroke-linecap="butt"/>
+<text class="tx" data-step="19" data-i="19" x="2169" y="639" font-size="13" fill="#4a5c72" text-anchor="start" font-weight="normal">射出速度慢</text>
+<line class="ln" data-step="19" data-i="20" x1="2283" y1="524" x2="2283" y2="564" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<rect class="ch" data-step="19" data-i="21" x="2253" y="543" width="60" height="28" rx="14" fill="url(#gKey)"/>
+<text class="tx" data-step="19" data-i="22" x="2283" y="565" font-size="15" fill="#ffffff" text-anchor="middle" font-weight="bold">★时间</text>
+<line class="ln" data-step="19" data-i="23" x1="2283" y1="600" x2="2370" y2="600" stroke="#94a3b8" stroke-width="1.6" stroke-linecap="butt"/>
+<text class="tx" data-step="19" data-i="24" x="2294" y="615" font-size="13" fill="#4a5c72" text-anchor="start" font-weight="normal">射出时间短</text>
+<line class="ln" data-step="19" data-i="25" x1="2283" y1="624" x2="2383" y2="624" stroke="#94a3b8" stroke-width="1.6" stroke-linecap="butt"/>
+<text class="tx" data-step="19" data-i="26" x="2294" y="639" font-size="13" fill="#4a5c72" text-anchor="start" font-weight="normal">保压时间不够</text>
+<line class="ln" data-step="19" data-i="27" x1="2021" y1="524" x2="2021" y2="484" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<rect class="ch" data-step="19" data-i="28" x="1991" y="463" width="60" height="28" rx="14" fill="url(#gKey)"/>
+<text class="tx" data-step="19" data-i="29" x="2021" y="485" font-size="15" fill="#ffffff" text-anchor="middle" font-weight="bold">★压力</text>
+<line class="ln" data-step="19" data-i="30" x1="2021" y1="448" x2="2095" y2="448" stroke="#94a3b8" stroke-width="1.6" stroke-linecap="butt"/>
+<text class="tx" data-step="19" data-i="31" x="2032" y="442" font-size="13" fill="#4a5c72" text-anchor="start" font-weight="normal">背压力小</text>
+<line class="ln" data-step="19" data-i="32" x1="2021" y1="424" x2="2108" y2="424" stroke="#94a3b8" stroke-width="1.6" stroke-linecap="butt"/>
+<text class="tx" data-step="19" data-i="33" x="2032" y="418" font-size="13" fill="#4a5c72" text-anchor="start" font-weight="normal">射出压力小</text>
+<line class="ln" data-step="19" data-i="34" x1="2021" y1="400" x2="2108" y2="400" stroke="#94a3b8" stroke-width="1.6" stroke-linecap="butt"/>
+<text class="tx" data-step="19" data-i="35" x="2032" y="394" font-size="13" fill="#4a5c72" text-anchor="start" font-weight="normal">合模压力大</text>
+<line class="ln" data-step="19" data-i="36" x1="2021" y1="376" x2="2095" y2="376" stroke="#94a3b8" stroke-width="1.6" stroke-linecap="butt"/>
+<text class="tx" data-step="19" data-i="37" x="2032" y="370" font-size="13" fill="#4a5c72" text-anchor="start" font-weight="normal">保压力小</text>
+<line class="ln" data-step="19" data-i="38" x1="2145" y1="524" x2="2145" y2="484" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<rect class="ch" data-step="19" data-i="39" x="2116" y="463" width="60" height="28" rx="14" fill="url(#gKey)"/>
+<text class="tx" data-step="19" data-i="40" x="2145" y="485" font-size="15" fill="#ffffff" text-anchor="middle" font-weight="bold">★位置</text>
+<line class="ln" data-step="19" data-i="41" x1="2145" y1="448" x2="2232" y2="448" stroke="#94a3b8" stroke-width="1.6" stroke-linecap="butt"/>
+<text class="tx" data-step="19" data-i="42" x="2156" y="442" font-size="13" fill="#4a5c72" text-anchor="start" font-weight="normal">计量位置小</text>
+<line class="ln" data-step="19" data-i="43" x1="2145" y1="424" x2="2258" y2="424" stroke="#94a3b8" stroke-width="1.6" stroke-linecap="butt"/>
+<text class="tx" data-step="19" data-i="44" x="2156" y="418" font-size="13" fill="#4a5c72" text-anchor="start" font-weight="normal">保压切换位置大</text>
+<line class="ln" data-step="20" data-i="0" x1="781" y1="890" x2="1753" y2="890" stroke="#64748b" stroke-width="3.4" stroke-linecap="butt"/>
+<polygon class="ar" data-step="20" data-i="1" points="1753,890 1738,882 1738,898" fill="#64748b"/>
+<rect class="ch" data-step="20" data-i="2" x="781" y="869" width="58" height="42" rx="18" fill="#e2e8f0" stroke="#fff" stroke-opacity=".65"/>
+<text class="tx" data-step="20" data-i="3" x="810" y="897" font-size="17" fill="#334155" text-anchor="middle" font-weight="bold">操作</text>
+<line class="ln" data-step="20" data-i="4" x1="958" y1="890" x2="958" y2="930" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<text class="tx" data-step="20" data-i="5" x="958" y="930" font-size="15" fill="#2f4256" text-anchor="middle" font-weight="normal">开机生产部品未确认品质</text>
+<line class="ln" data-step="20" data-i="6" x1="1146" y1="890" x2="1146" y2="930" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<rect class="ch" data-step="20" data-i="7" x="1072" y="909" width="150" height="28" rx="14" fill="url(#gKey)"/>
+<text class="tx" data-step="20" data-i="8" x="1146" y="931" font-size="15" fill="#ffffff" text-anchor="middle" font-weight="bold">★未按规定废弃数量</text>
+<line class="ln" data-step="20" data-i="9" x1="1290" y1="890" x2="1290" y2="930" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<text class="tx" data-step="20" data-i="10" x="1290" y="930" font-size="15" fill="#2f4256" text-anchor="middle" font-weight="normal">未定期清洗</text>
+<line class="ln" data-step="20" data-i="11" x1="1414" y1="890" x2="1414" y2="964" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<text class="tx" data-step="20" data-i="12" x="1414" y="964" font-size="15" fill="#2f4256" text-anchor="middle" font-weight="normal">料筒热流道清洗</text>
+<line class="ln" data-step="20" data-i="13" x1="1546" y1="890" x2="1546" y2="964" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<text class="tx" data-step="20" data-i="14" x="1546" y="964" font-size="15" fill="#2f4256" text-anchor="middle" font-weight="normal">未清洗干净</text>
+<line class="ln" data-step="20" data-i="15" x1="932" y1="890" x2="932" y2="850" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<rect class="ch" data-step="20" data-i="16" x="865" y="829" width="135" height="28" rx="14" fill="url(#gKey)"/>
+<text class="tx" data-step="20" data-i="17" x="932" y="851" font-size="15" fill="#ffffff" text-anchor="middle" font-weight="bold">★未废弃异常部品</text>
+<line class="ln" data-step="20" data-i="18" x1="1053" y1="890" x2="1053" y2="850" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<text class="tx" data-step="20" data-i="19" x="1053" y="850" font-size="15" fill="#2f4256" text-anchor="middle" font-weight="normal">未确认</text>
+<line class="ln" data-step="20" data-i="20" x1="1155" y1="890" x2="1155" y2="850" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<text class="tx" data-step="20" data-i="21" x="1155" y="850" font-size="15" fill="#2f4256" text-anchor="middle" font-weight="normal">未按下料槽</text>
+<line class="ln" data-step="20" data-i="22" x1="1264" y1="890" x2="1264" y2="850" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<text class="tx" data-step="20" data-i="23" x="1264" y="850" font-size="15" fill="#2f4256" text-anchor="middle" font-weight="normal">异常处理</text>
+<line class="ln" data-step="0" data-i="0" x1="-738" y1="0" x2="3060" y2="0" stroke="#3f5061" stroke-width="9" stroke-linecap="round"/>
+<polygon class="ar" data-step="0" data-i="1" points="3106,0 3060,-27 3060,27" fill="#3f5061"/>
+<rect class="ch" data-step="0" data-i="2" x="3128" y="-66" width="296" height="132" rx="40" fill="url(#gHead)"/>
+<text class="tx" data-step="0" data-i="3" x="3276" y="20" font-size="50" fill="#ffffff" text-anchor="middle" font-weight="bold">成型不良</text>
+</g></svg>
+    <div id="start">
+      <h2>鱼骨图是怎么一步步画出来的</h2>
+      <p>主骨 → 大骨（60°）→ 中骨（与主骨平行）→ 小骨 → 小小骨，共 21 步</p>
+      <button class="gobtn" id="biggo">▶ 开始演示</button>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="row" id="jumprow"></div>
+  <div class="row">
+    <button class="ctl main" id="play">▶ 播放</button>
+    <button class="ctl" id="prev">⏮ 上一步</button>
+    <button class="ctl" id="next">⏭ 下一步</button>
+    <button class="ctl" id="reset">↺ 重播</button>
+    <span class="sep"></span>
+    <span class="lab">速度</span>
+    <select class="ctl" id="speed">
+      <option value="0.5">0.5×</option>
+      <option value="1" selected>1×</option>
+      <option value="1.6">1.6×</option>
+      <option value="2.4">2.4×</option>
+    </select>
+    <label class="switch"><input type="checkbox" id="follow" checked>镜头跟随</label>
+    <span class="sep"></span>
+    <div id="bar"><i></i></div>
+    <span class="stat" id="stepnum">0 / 21</span>
+  </div>
+</footer>
+
+<script>
+const BOXES = [[6, 1241, 4301, 272], [49, 202, 835, 1245], [49, 1084, 761, 282], [542, 896, 746, 248], [0, 704, 567, 241], [313, 466, 653, 281], [2249, 86, 902, 1361], [2923, 1036, 856, 355], [2124, 830, 783, 241], [2653, 598, 1217, 310], [1818, 360, 821, 248], [77, 1307, 807, 1197], [170, 1380, 639, 241], [556, 1572, 979, 247], [113, 1776, 468, 241], [327, 1974, 496, 241], [2227, 1307, 924, 1389], [2937, 1380, 664, 241], [1969, 1572, 994, 248], [2708, 1664, 833, 451], [1524, 2136, 1113, 281], [0, 0, 4320, 2696]];
+const LABELS = ['① 先画主骨（脊骨）：一条水平线，右端是鱼头「成型不良」', '画「材料」大骨：与主骨成 60° 的斜线', '材料 · 中骨「材料干燥」（挂在斜线外侧）→ 逐条挂上 5 条小骨', '材料 · 中骨「混合材」（挂在斜线内侧）→ 逐条挂上 7 条小骨', '材料 · 中骨「性能」（挂在斜线外侧）→ 逐条挂上 4 条小骨', '材料 · 中骨「材质」（挂在斜线内侧）→ 逐条挂上 5 条小骨', '画「设备」大骨：与主骨成 60° 的斜线', '设备 · 中骨「干燥机」（挂在斜线内侧）→ 逐条挂上 7 条小骨', '设备 · 中骨「模温机」（挂在斜线外侧）→ 逐条挂上 7 条小骨', '设备 · 中骨「金型」（挂在斜线内侧）→ 逐条挂上 16 条小骨', '设备 · 中骨「成形机」（挂在斜线外侧）→ 逐条挂上 8 条小骨', '画「人」大骨：与主骨成 60° 的斜线', '人 · 中骨「作业者」（挂在斜线外侧）→ 逐条挂上 4 条小骨', '人 · 中骨「成型技术员」（挂在斜线内侧）→ 逐条挂上 6 条小骨', '人 · 中骨「PQC」（挂在斜线外侧）→ 逐条挂上 2 条小骨', '人 · 中骨「修模技术员」（挂在斜线内侧）→ 逐条挂上 2 条小骨', '画「方法」大骨：与主骨成 60° 的斜线', '方法 · 中骨「检查」（挂在斜线内侧）→ 逐条挂上 6 条小骨', '方法 · 中骨「金型维护」（挂在斜线外侧）→ 逐条挂上 10 条小骨', '方法 · 中骨「成形条件」（挂在斜线内侧）→ 逐条挂上 5 条小骨', '方法 · 中骨「操作」（挂在斜线外侧）→ 逐条挂上 9 条小骨', '✅ 完成：4 根大骨 · 16 根中骨 · 103 条小骨 · 18 条小小骨；粉红★=重点要因（待真因验证）'];
+const TOTAL = 21;
+const JUMPS = [[0, '主骨'], [1, '材料'], [6, '设备'], [11, '人'], [16, '方法']];
+const W = 4320, H = 2696;
+
+const svg = document.getElementById('fig');
+const els = [...svg.querySelectorAll('[data-step]')];
+const byStep = {};
+els.forEach(el => { const s = +el.dataset.step; (byStep[s] ||= []).push(el); });
+
+// 线段：设成「一笔画」效果
+const LENS = new Map();
+els.forEach(el => {
+  if (el.tagName === 'line') {
+    let L = 100;
+    try { L = el.getTotalLength(); } catch (e) {}
+    LENS.set(el, L);
+    el.style.strokeDasharray = L;
+    el.style.strokeDashoffset = L;
+  }
+});
+
+const STEP_MS = 1150, BONE_MS = 950, SPINE_MS = 1300, END_MS = 1700;
+let cur = -1, playing = false, timer = null, speed = 1, follow = true;
+
+function durOf(k){ return (k === 0 ? SPINE_MS : k === TOTAL ? END_MS : (LABELS[k].startsWith('画「') ? BONE_MS : STEP_MS)) / speed; }
+
+function show(el, on, delay){
+  el.style.transitionDelay = (on ? delay : 0) + 'ms';
+  if (on) {
+    if (el.tagName === 'line') el.style.strokeDashoffset = 0;
+    el.classList.add('on');
+  } else {
+    if (el.tagName === 'line') { const L = LENS.get(el) || 100; el.style.strokeDashoffset = L; }
+    el.classList.remove('on');
+  }
+}
+
+function render(k, animate){
+  for (let s = 0; s <= TOTAL; s++){
+    const list = byStep[s] || [];
+    const on = s <= k;
+    const stagger = (animate && s === k) ? 55 : 0;
+    const instant = (s < k);
+    list.forEach((el, i) => show(el, on, instant ? 0 : i * stagger));
+  }
+  svg.classList.toggle('finish', k >= TOTAL);
+  document.getElementById('captxt').textContent = LABELS[k] || '';
+  document.getElementById('capnum').textContent = k >= TOTAL ? 'DONE' : 'STEP ' + k;
+  document.getElementById('stepnum').textContent = k + ' / ' + TOTAL;
+  document.querySelector('#bar i').style.width = (k / TOTAL * 100) + '%';
+  document.querySelectorAll('.chip').forEach(c => {
+    const s = +c.dataset.step;
+    const nx = JUMPS.find(j => j[0] > s);
+    c.classList.toggle('now', k >= s && (!nx || k < nx[0]));
+  });
+  document.getElementById('prev').disabled = k <= 0;
+  document.getElementById('next').disabled = k >= TOTAL;
+  if (follow) focus(k, animate);
+}
+
+// ---- 镜头跟随 ----
+let box = [0,0,W,H], anim = null;
+function focus(k, animate){
+  const b = BOXES[k] || [0,0,W,H];
+  // 保持宽高比，避免拉伸
+  const ar = W / H, bar = b[2] / b[3];
+  let x=b[0], y=b[1], w=b[2], h=b[3];
+  if (bar > ar) { const nh = w / ar; y -= (nh - h) / 2; h = nh; }
+  else { const nw = h * ar; x -= (nw - w) / 2; w = nw; }
+  const target = [x, y, w, h];
+  if (!animate) { box = target; svg.setAttribute('viewBox', box.join(' ')); return; }
+  if (anim) cancelAnimationFrame(anim);
+  const from = box.slice(), t0 = performance.now(), D = 620;
+  (function step(t){
+    const p = Math.min(1, (t - t0) / D), e = p < .5 ? 2*p*p : 1 - Math.pow(-2*p+2,2)/2;
+    box = from.map((v, i) => v + (target[i] - v) * e);
+    svg.setAttribute('viewBox', box.join(' '));
+    if (p < 1) anim = requestAnimationFrame(step);
+  })(t0);
+}
+
+// ---- 控制 ----
+function goto(k, animate = true){ cur = Math.max(0, Math.min(TOTAL, k)); render(cur, animate); }
+function stop(){ playing = false; clearTimeout(timer); document.getElementById('play').textContent = '▶ 播放'; }
+function tick(){
+  if (cur >= TOTAL) { stop(); return; }
+  goto(cur + 1, true);
+  timer = setTimeout(tick, durOf(cur));
+}
+function play(){
+  if (playing) { stop(); return; }
+  if (cur >= TOTAL) goto(0, false);
+  playing = true; document.getElementById('play').textContent = '⏸ 暂停';
+  document.getElementById('start').classList.add('gone');
+  timer = setTimeout(tick, 260);
+}
+
+document.getElementById('play').onclick = play;
+document.getElementById('biggo').onclick = play;
+document.getElementById('next').onclick = () => { stop(); goto(cur + 1); };
+document.getElementById('prev').onclick = () => { stop(); goto(cur - 1); };
+document.getElementById('reset').onclick = () => { stop(); goto(0, false); };
+document.getElementById('speed').onchange = e => speed = +e.target.value;
+document.getElementById('follow').onchange = e => { follow = e.target.checked; if (follow) focus(cur, true); };
+window.addEventListener('keydown', e => {
+  if (e.key === ' ' || e.key === 'ArrowRight') { e.preventDefault(); stop(); goto(cur + 1); }
+  if (e.key === 'ArrowLeft') { stop(); goto(cur - 1); }
+  if (e.key === 'Enter') play();
+});
+
+// 跳转按钮
+const jr = document.getElementById('jumprow');
+jr.insertAdjacentHTML('beforeend', '<span class="lab">跳到：</span>');
+JUMPS.forEach(([k, name]) => {
+  const b = document.createElement('button');
+  b.className = 'chip'; b.dataset.step = k; b.textContent = name;
+  b.onclick = () => { stop(); goto(k); };
+  jr.appendChild(b);
+});
+
+// 支持用 #step=8 直接跳到第 8 步（便于截图/分享某个阶段）
+const m = /step=(\d+)/.exec(location.hash);
+const init = m ? Math.max(0, Math.min(TOTAL, +m[1])) : 0;
+if (init > 0) document.getElementById('start').classList.add('gone');
+goto(init, false);
+</script>
+</body>
+</html>

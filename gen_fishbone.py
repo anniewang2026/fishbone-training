@@ -27,6 +27,10 @@ TAIL = 70                        # 大骨超出最外中骨长度
 GAP = 130                        # 左右两类内容之间的最小净距
 PAD = 60                         # 画布留白
 
+# 鱼头文字（改这两行即可换案例名；HEAD_SUB 留空则鱼头变矮）
+HEAD_TEXT = "欠　料"
+HEAD_SUB = "（ 料 不 良 ）"
+
 # ---------------- 数据 ----------------
 # groups 自「脊骨侧」向「外侧」排列；side: L=向外侧延展 / R=向鱼头侧延展
 CATS = [
@@ -200,38 +204,48 @@ def plan_all():
             off_r = max(off_r, (ref[lc][3] + GAP) - ref[rc][2])
     bx = {c["name"]: (0.0 if c["name"] in lefts else off_r) for c in CATS}
 
-    prims, texts, segs = [], [], []
+    prims, texts, segs, steps = [], [], [], []
     stats = dict(items=0, keys=0, kids=0)
     diag = dict(cats=[])
     detail = []
     owner = [None]
+    st = [0]                                        # 当前绘制步骤（给动画演示用）
 
     def line(x1, y1, x2, y2, w, c, cap="round"):
         prims.append(("line", x1, y1, x2, y2, w, c, cap))
+        steps.append(st[0])
         segs.append((x1, y1, x2, y2, owner[0]))
 
     def tri(pts, fill):
         prims.append(("poly", pts, fill))
+        steps.append(st[0])
 
     def text(x, y, s, f, c, anchor="middle", weight="normal"):
         prims.append(("text", x, y, s, f, c, anchor, weight))
+        steps.append(st[0])
         w = tw(s, f)
         x0 = x - (w / 2 if anchor == "middle" else (0 if anchor == "start" else w))
         texts.append((x0 - 3, y - f, x0 + w + 3, y + f * 0.35, s, owner[0]))
 
     def rect(x, y, w, h, rx, fill, stroke=None):
         prims.append(("rect", x, y, w, h, rx, fill, stroke))
+        steps.append(st[0])
 
+    nstep = 1                                       # 0 号步骤留给「主骨+鱼头」
     for cat in CATS:
         bs, V = plan_cat(cat, bx[cat["name"]])
         sign = -1 if cat["side"] == "top" else 1
         b0 = bx[cat["name"]]
         tip = (b0 - V / TAN, sign * V)
+        bone_step = nstep                            # 一根大骨 = 一个步骤
+        nstep += 1
         for b in bs:
             b["y"] = sign * b["v"]
             b["xa"] = b0 - b["v"] / TAN
             b["xf"] = b["xa"] - b["w"] if b["side"] == "L" else b["xa"] + b["w"]
-        detail.append((cat, bs, tip, sign, V))
+            b["_step"] = nstep                       # 一根中骨 + 它的小骨 = 一个步骤
+            nstep += 1
+        detail.append((cat, bs, tip, sign, V, bone_step))
         stats["items"] += sum(len(it) for _, _, it in cat["groups"])
         stats["keys"] += sum(k for _, _, it in cat["groups"] for _, k, _ in it)
         stats["kids"] += sum(len(kd) for _, _, it in cat["groups"] for _, _, kd in it)
@@ -239,11 +253,13 @@ def plan_all():
         for b in bs:
             diag["cats"].append(f'    {b["name"]:<6}{b["side"]} v={b["v"]:>4.0f} 宽={b["w"]:>4.0f} '
                                 f'上{b["up_d"]:>4.0f}/下{b["dn_d"]:>4.0f}')
+    total_steps = nstep                              # 最后一步 = 收尾（高亮★）
 
-    for cat, bs, tip, sign, V in detail:
+    for cat, bs, tip, sign, V, bone_step in detail:
         b0 = bx[cat["name"]]
         tint, tcol = TINT[cat["cls"]]
         gid = GRAD[cat["cls"]]
+        st[0] = bone_step
         owner[0] = "BONE-" + cat["name"]
         line(b0, 0, tip[0], tip[1], 7, "#3f5061")
         ux, uy = (b0 - tip[0]) / V, (0 - tip[1]) / V
@@ -256,6 +272,7 @@ def plan_all():
 
         for b in bs:
             y, xa, xf, side = b["y"], b["xa"], b["xf"], b["side"]
+            st[0] = b["_step"]
             owner[0] = "LINE-" + cat["name"] + "/" + b["name"]
             line(xf, y, xa, y, 3.4, "#64748b", cap="butt")
             ad = 15 if side == "L" else -15
@@ -301,13 +318,18 @@ def plan_all():
         xs += [t[0], t[2]]; ys += [t[1], t[3]]
     minx, maxx, miny, maxy = min(xs), max(xs), min(ys), max(ys)
 
+    st[0] = 0                                       # 步骤 0：主骨 + 鱼头
     owner[0] = "SPINE"
     line(minx + 16, 0, maxx + 74, 0, 9, "#3f5061")
     tri([(maxx + 120, 0), (maxx + 74, -27), (maxx + 74, 27)], "#3f5061")
     hx = maxx + 120
-    rect(hx + 22, -108, 296, 216, 46, "url(#gHead)")
-    text(hx + 170, 8, "欠　料", 50, "#ffffff", weight="bold")
-    text(hx + 170, 56, "（ 料 不 良 ）", 22, "#ffffff")
+    if HEAD_SUB:
+        rect(hx + 22, -108, 296, 216, 46, "url(#gHead)")
+        text(hx + 170, 8, HEAD_TEXT, 50, "#ffffff", weight="bold")
+        text(hx + 170, 56, HEAD_SUB, 22, "#ffffff")
+    else:
+        rect(hx + 22, -66, 296, 132, 40, "url(#gHead)")
+        text(hx + 170, 20, HEAD_TEXT, 50, "#ffffff", weight="bold")
 
     full_minx, full_maxx = minx, hx + 340
     dx, dy = PAD - full_minx, PAD - miny + 96
@@ -315,6 +337,8 @@ def plan_all():
     H = int(math.ceil(maxy - miny + PAD * 2 + 96))
     diag["dx"], diag["dy"] = dx, dy
     diag["texts"], diag["segs"] = texts, segs
+    diag["steps"] = steps
+    diag["total_steps"] = total_steps
     return prims, stats, (W, H), diag
 
 
