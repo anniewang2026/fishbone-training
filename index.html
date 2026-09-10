@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>要因图（鱼骨图）制作培训 · 班组长版</title>
+<style>
+:root{
+  --ink:#1e3a5f; --body:#46586e; --muted:#7b8ba1;
+  --sky:#38bdf8; --sky-d:#0284c7; --teal:#2dd4bf; --teal-d:#0d9488;
+  --indigo:#818cf8; --indigo-d:#4f46e5; --slate:#64748b;
+  --card-grad:linear-gradient(145deg,#ffffff 0%,#eef6fb 100%);
+  --bg-grad:linear-gradient(135deg,#f0f6fa 0%,#e8f4fb 45%,#e6faf6 100%);
+  --shadow-out:10px 10px 22px rgba(30,90,140,.12), inset 5px 5px 10px rgba(255,255,255,.9), inset -3px -3px 6px rgba(30,90,140,.06);
+  --shadow-out-sm:6px 6px 12px rgba(30,90,140,.10), inset 3px 3px 6px rgba(255,255,255,.85), inset -2px -2px 4px rgba(30,90,140,.05);
+  --shadow-in:inset 4px 4px 8px rgba(30,90,140,.12), inset -4px -4px 8px rgba(255,255,255,.9);
+  --spring:cubic-bezier(.34,1.56,.64,1);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
+body{font-family:"Microsoft YaHei","PingFang SC","Segoe UI",system-ui,sans-serif;background:var(--bg-grad);color:var(--body);line-height:1.75;font-size:16px}
+.wrap{max-width:1120px;margin:0 auto;padding:0 22px}
+h1,h2,h3,h4{color:var(--ink);line-height:1.4}
+p{word-break:break-word}
+
+/* ---------- nav ---------- */
+nav{position:sticky;top:0;z-index:50;background:rgba(240,246,250,.88);backdrop-filter:blur(10px);padding:12px 0;border-bottom:1px solid rgba(120,160,200,.18)}
+.navbar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:space-between}
+.brand{font-weight:800;color:var(--ink);font-size:18px;display:flex;align-items:center;gap:8px}
+.brand .fish{width:38px;height:38px;border-radius:50%;background:linear-gradient(145deg,#7dd3fc,#2dd4bf);display:flex;align-items:center;justify-content:center;font-size:20px;box-shadow:var(--shadow-out-sm)}
+.navlinks{display:flex;gap:8px;flex-wrap:wrap}
+.navlinks a{display:inline-block;padding:7px 16px;border-radius:999px;background:var(--card-grad);color:var(--body);text-decoration:none;font-size:14px;font-weight:600;box-shadow:var(--shadow-out-sm);transition:transform .3s var(--spring),box-shadow .3s}
+.navlinks a:hover{transform:translateY(-2px)}
+.navlinks a:active{transform:scale(1.05,.9);box-shadow:var(--shadow-in)}
+
+/* ---------- hero ---------- */
+.hero{padding:72px 0 56px;text-align:center}
+.hero .tag{display:inline-block;padding:8px 22px;border-radius:999px;background:linear-gradient(145deg,#ccfbf1,#bae6fd);color:#0f766e;font-weight:700;font-size:14px;box-shadow:var(--shadow-out-sm);margin-bottom:22px}
+.hero h1{font-size:clamp(30px,5vw,50px);font-weight:800;letter-spacing:1px}
+.hero h1 .hl{background:linear-gradient(145deg,#0ea5e9,#14b8a6);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.hero .sub{max-width:640px;margin:18px auto 30px;font-size:17px;color:var(--muted)}
+.hero .chips{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:34px}
+.chip{padding:8px 18px;border-radius:999px;background:var(--card-grad);box-shadow:var(--shadow-out-sm);font-size:14px;font-weight:600;color:var(--body)}
+.btn{display:inline-block;padding:14px 38px;border-radius:999px;border:none;cursor:pointer;font-size:17px;font-weight:800;color:#fff;text-decoration:none;background:linear-gradient(180deg,#4cc3f7,#0ea5e9);box-shadow:8px 8px 16px rgba(14,120,180,.25),inset 4px 4px 8px rgba(255,255,255,.45),inset -2px -2px 4px rgba(0,60,110,.15);transition:all .3s var(--spring)}
+.btn:hover{transform:translateY(-3px);box-shadow:12px 14px 26px rgba(14,120,180,.3),inset 4px 4px 8px rgba(255,255,255,.45),inset -2px -2px 4px rgba(0,60,110,.15)}
+.btn:active{transform:scale(1.05,.9);box-shadow:2px 2px 6px rgba(14,120,180,.15),inset 8px 8px 16px rgba(0,60,110,.25),inset -4px -4px 8px rgba(255,255,255,.4)}
+.btn.teal{background:linear-gradient(180deg,#43d6c3,#0d9488);box-shadow:8px 8px 16px rgba(13,148,136,.25),inset 4px 4px 8px rgba(255,255,255,.45),inset -2px -2px 4px rgba(0,90,80,.18)}
+.btn.sm{padding:9px 22px;font-size:14px}
+
+/* ---------- section ---------- */
+section{padding:56px 0}
+.sec-head{text-align:center;margin-bottom:36px}
+.sec-head .no{display:inline-flex;align-items:center;justify-content:center;width:54px;height:54px;border-radius:20px;background:linear-gradient(145deg,#7dd3fc,#38bdf8);color:#fff;font-weight:800;font-size:22px;box-shadow:var(--shadow-out-sm);margin-bottom:14px}
+.sec-head h2{font-size:clamp(24px,3.4vw,34px);font-weight:800}
+.sec-head .desc{color:var(--muted);margin-top:8px;max-width:620px;margin-left:auto;margin-right:auto}
+.card{background:var(--card-grad);border-radius:28px;box-shadow:var(--shadow-out);padding:28px 30px}
+.grid{display:grid;gap:20px}
+.g2{grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+.g3{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+.g6{grid-template-columns:repeat(auto-fit,minmax(160px,1fr))}
+
+/* mini cards */
+.mini{background:var(--card-grad);border-radius:24px;box-shadow:var(--shadow-out-sm);padding:22px 24px;transition:transform .3s var(--spring),box-shadow .3s}
+.mini:hover{transform:translateY(-4px)}
+.mini h4{font-size:17px;margin-bottom:8px;display:flex;align-items:center;gap:8px}
+.mini p{font-size:14.5px}
+.ico{display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:14px;font-size:20px;flex:none}
+.ico.b{background:linear-gradient(145deg,#bae6fd,#7dd3fc)}
+.ico.t{background:linear-gradient(145deg,#99f6e4,#5eead4)}
+.ico.i{background:linear-gradient(145deg,#c7d2fe,#a5b4fc)}
+.ico.s{background:linear-gradient(145deg,#e2e8f0,#cbd5e1)}
+
+/* type cards */
+.type-card{position:relative;overflow:hidden}
+.type-card .fish-dir{font-size:30px;margin-bottom:10px}
+.badge{display:inline-block;padding:3px 14px;border-radius:999px;font-size:12.5px;font-weight:700;margin-bottom:10px}
+.badge.b{background:#e0f2fe;color:#0369a1}.badge.t{background:#ccfbf1;color:#0f766e}.badge.i{background:#e0e7ff;color:#4338ca}.badge.s{background:#e2e8f0;color:#334155}
+.hl-b{color:#0284c7;font-weight:700}.hl-t{color:#0d9488;font-weight:700}.hl-i{color:#4f46e5;font-weight:700}
+
+/* steps */
+.step{display:flex;gap:20px;align-items:flex-start;background:var(--card-grad);border-radius:28px;box-shadow:var(--shadow-out);padding:26px 28px}
+.step .num{flex:none;width:52px;height:52px;border-radius:18px;display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:800;color:#fff;background:linear-gradient(145deg,#38bdf8,#0ea5e9);box-shadow:var(--shadow-out-sm)}
+.step:nth-child(2) .num{background:linear-gradient(145deg,#2dd4bf,#0d9488)}
+.step:nth-child(3) .num{background:linear-gradient(145deg,#818cf8,#6366f1)}
+.step:nth-child(4) .num{background:linear-gradient(145deg,#38bdf8,#0284c7)}
+.step:nth-child(5) .num{background:linear-gradient(145deg,#2dd4bf,#14b8a6)}
+.step:nth-child(6) .num{background:linear-gradient(145deg,#94a3b8,#64748b)}
+.step h3{font-size:19px;margin-bottom:6px}
+.step .say{font-size:15px;margin-bottom:10px}
+.eg{background:rgba(186,230,253,.4);border-radius:16px;box-shadow:var(--shadow-in);padding:12px 18px;font-size:14px}
+.eg b{color:#0369a1}
+.x-ok{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px;font-size:13.5px}
+.x-ok span{padding:4px 12px;border-radius:999px}
+.x-ok .no{background:#fee2e2;color:#b91c1c;text-decoration:line-through}
+.x-ok .yes{background:#dcfce7;color:#15803d}
+
+/* flow (fishbone->fmea) */
+.flow{display:flex;align-items:stretch;gap:0;flex-wrap:wrap;justify-content:center}
+.flow .node{flex:1;min-width:230px;max-width:330px;background:var(--card-grad);border-radius:24px;box-shadow:var(--shadow-out-sm);padding:22px;text-align:center;position:relative;margin:8px}
+.flow .node h4{font-size:17px;margin-bottom:6px}
+.flow .node p{font-size:13.5px}
+.flow .arrow{align-self:center;font-size:26px;color:#94a3b8;font-weight:800;padding:0 2px}
+.src{font-size:13px;color:var(--muted);text-align:center;margin-top:18px}
+
+/* 5M1E */
+.m-tile{text-align:center;padding:24px 14px}
+.m-tile .letter{display:inline-flex;align-items:center;justify-content:center;width:56px;height:56px;border-radius:20px;font-size:24px;font-weight:800;color:#fff;margin-bottom:10px;box-shadow:var(--shadow-out-sm)}
+.m-tile h4{font-size:16.5px;margin-bottom:4px}
+.m-tile p{font-size:13px}
+
+/* fishbone viewer */
+.fb-card{background:var(--card-grad);border-radius:32px;box-shadow:var(--shadow-out);padding:26px 24px}
+.fb-scroll{overflow:auto;border-radius:22px;box-shadow:var(--shadow-in);background:linear-gradient(135deg,#f6fafd,#eef8f6);padding:10px}
+.fb-scroll svg{display:block;min-width:1100px;width:100%;height:auto}
+.fb-tip{text-align:center;font-size:13.5px;color:var(--muted);margin-top:14px}
+.legend{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;margin-top:14px;font-size:13.5px}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.star{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:8px;background:linear-gradient(145deg,#60a5fa,#3b82f6);color:#fff;font-size:12px;font-weight:800}
+.norm{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:8px;background:#fff;border:1.5px solid #cbd5e1}
+
+/* category detail cards */
+.cat-head{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+.cat-ico{padding:8px 22px;border-radius:999px;color:#fff;font-weight:800;font-size:17px;box-shadow:var(--shadow-out-sm)}
+.grp{margin-bottom:12px}
+.grp .gname{font-weight:800;color:var(--ink);font-size:14.5px;margin-bottom:6px}
+.tags{display:flex;flex-wrap:wrap;gap:8px}
+.tag-item{padding:5px 14px;border-radius:999px;background:#fff;border:1.5px solid #d7e3ee;color:var(--body);font-size:13.5px}
+.tag-item.key{background:linear-gradient(145deg,#93c5fd,#60a5fa);border-color:#60a5fa;color:#fff;font-weight:700}
+.ci-b{background:linear-gradient(145deg,#38bdf8,#0284c7)}.ci-t{background:linear-gradient(145deg,#2dd4bf,#0d9488)}.ci-i{background:linear-gradient(145deg,#818cf8,#4f46e5)}.ci-s{background:linear-gradient(145deg,#94a3b8,#475569)}
+
+/* mistakes */
+.err{background:var(--card-grad);border-radius:24px;box-shadow:var(--shadow-out-sm);padding:22px 24px}
+.err .et{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.err .et .x{flex:none;width:34px;height:34px;border-radius:12px;background:linear-gradient(145deg,#fca5a5,#f87171);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:17px}
+.err h4{font-size:16px}
+.err p{font-size:14px}
+.err .fix{margin-top:10px;padding:10px 16px;border-radius:14px;background:rgba(153,246,228,.4);box-shadow:var(--shadow-in);font-size:13.5px}
+.err .fix b{color:#0f766e}
+
+/* checklist */
+.ck-card{background:var(--card-grad);border-radius:32px;box-shadow:var(--shadow-out);padding:34px 34px;max-width:760px;margin:0 auto}
+.progress-wrap{height:26px;border-radius:999px;box-shadow:var(--shadow-in);background:#e3edf5;overflow:hidden;margin:18px 0 24px}
+.progress{height:100%;width:0;border-radius:999px;background:linear-gradient(90deg,#38bdf8,#2dd4bf);transition:width .5s var(--spring)}
+.ck-item{display:flex;align-items:flex-start;gap:14px;padding:13px 16px;border-radius:18px;cursor:pointer;transition:background .2s;margin-bottom:6px}
+.ck-item:hover{background:rgba(186,230,253,.25)}
+.ck-box{flex:none;width:26px;height:26px;border-radius:10px;background:#fff;box-shadow:var(--shadow-out-sm);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;transition:all .3s var(--spring);margin-top:2px}
+.ck-item.done .ck-box{background:linear-gradient(145deg,#2dd4bf,#0d9488);box-shadow:var(--shadow-in)}
+.ck-item.done span{text-decoration:line-through;color:var(--muted)}
+.ck-count{text-align:center;font-weight:800;color:var(--ink);font-size:17px}
+.ck-actions{text-align:center;margin-top:22px}
+
+/* summary */
+.sum{background:linear-gradient(145deg,#e0f2fe,#ccfbf1);border-radius:28px;box-shadow:var(--shadow-out);padding:30px 34px}
+.sum li{margin:8px 0 8px 20px;font-size:15.5px}
+
+footer{padding:44px 0 60px;text-align:center;color:var(--muted);font-size:13.5px}
+footer .line{width:80px;height:6px;border-radius:999px;background:linear-gradient(90deg,#7dd3fc,#5eead4);margin:0 auto 18px}
+
+details{margin-top:18px;background:rgba(226,232,240,.5);border-radius:18px;padding:14px 20px;font-size:13.5px}
+details summary{cursor:pointer;font-weight:700;color:var(--ink)}
+details li{margin:6px 0 6px 20px}
+@media (max-width:640px){
+  .card{padding:22px 18px}.step{flex-direction:column;gap:12px}
+  .ck-card{padding:24px 18px}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap navbar">
+    <div class="brand"><span class="fish">🐟</span>要因图制作培训</div>
+    <div class="navlinks">
+      <a href="#s1">认识要因图</a>
+      <a href="#s2">两种视角与FMEA</a>
+      <a href="#s3">分类框架</a>
+      <a href="#s4">六步画法</a>
+      <a href="#s5">实战案例</a>
+      <a href="#s6">常见错误</a>
+      <a href="#s7">自查清单</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <span class="tag">🏭 班组长 / 储备干部 · 质量工具系列课</span>
+    <h1>要因图（鱼骨图）<span class="hl">制作培训</span></h1>
+    <p class="sub">一条鱼，把问题的原因一根一根找出来、圈出来、管起来——从画图到 FMEA 风险升级，一次讲透。</p>
+    <div class="chips">
+      <span class="chip">⏱ 30分钟学完</span>
+      <span class="chip">🧩 QC七大手法之一</span>
+      <span class="chip">📌 真实案例：LED封装欠料分析</span>
+    </div>
+    <a class="btn" href="#s1">开始学习 ↓</a>
+  </div>
+</header>
+
+<!-- ============ S1 认识要因图 ============ -->
+<section id="s1">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="no">01</div>
+      <h2>认识要因图：它到底是什么</h2>
+      <p class="desc">先把名字和长相搞清楚，后面画图就不迷糊。</p>
+    </div>
+    <div class="card" style="margin-bottom:20px">
+      <h3 style="margin-bottom:10px">💡 一句大白话</h3>
+      <p>把一个问题写在<b>鱼头</b>上，把可能导致这个问题的原因像<b>鱼刺</b>一样一根根画出来——这张图就是<b class="hl-b">要因图</b>。因为长得像鱼骨头，所以也叫<b class="hl-t">鱼骨图</b>；因为日本品质大师<b>石川馨</b>发明了它，又叫<b class="hl-i">石川图</b>；教科书上还叫<b>因果图</b>。四个名字，同一张图。</p>
+    </div>
+    <div class="grid g3">
+      <div class="mini type-card">
+        <div class="fish-dir">🐟⬅</div>
+        <span class="badge s">整理问题型</span>
+        <h4>梳理结构用</h4>
+        <p>各要素之间不是因果关系，而是构成关系。用来把复杂问题<b>分门别类整理清楚</b>，类似思维导图。</p>
+      </div>
+      <div class="mini type-card">
+        <div class="fish-dir">🐟➡（鱼头在右）</div>
+        <span class="badge b">原因型 · 最常用</span>
+        <h4>找原因用</h4>
+        <p>鱼头在右，写"<b>为什么……</b>"。比如"为什么欠料？"。我们这次案例用的就是这种。</p>
+      </div>
+      <div class="mini type-card">
+        <div class="fish-dir">⬅🐠（鱼头在左）</div>
+        <span class="badge t">对策型</span>
+        <h4>想办法用</h4>
+        <p>鱼头在左，写"<b>如何提高/改善……</b>"。把对策当"鱼刺"来梳理，用于改善方案策划。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ S2 两种视角 + FMEA ============ -->
+<section id="s2" style="background:rgba(255,255,255,.35)">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="no" style="background:linear-gradient(145deg,#5eead4,#14b8a6)">02</div>
+      <h2>换个角度看「要因」：从找原因到管重点</h2>
+      <p class="desc">要因图不只是"出了问题才用"——换个视角，它就是你的管控清单，还是 FMEA 的官方输入。</p>
+    </div>
+    <div class="grid g2" style="margin-bottom:26px">
+      <div class="mini">
+        <h4><span class="ico b">🔍</span>视角一：事后找原因（救火）</h4>
+        <p>问题已经发生了，鱼头写<b>问题</b>，要因是"嫌疑犯"——先列全，再圈重点，最后用数据"定罪"。这是最经典的用法。</p>
+      </div>
+      <div class="mini">
+        <h4><span class="ico t">🛡️</span>视角二：事前做管控（防火）</h4>
+        <p>把鱼头换成<b>要保住的好结果</b>（如"欠料率为零"），要因就变成"<b class="hl-t">管住它、结果就稳了</b>"的控制点。<b>管住要因 = 管住结果</b>，这张图就成了你班组的日常管控清单。</p>
+      </div>
+    </div>
+    <div class="flow">
+      <div class="node">
+        <h4>🐟 鱼骨图</h4>
+        <span class="badge b">找全</span>
+        <p>用头脑风暴把可能原因<b>一网打尽</b>，圈出重点要因（候选嫌疑犯）。</p>
+      </div>
+      <div class="arrow">➜</div>
+      <div class="node">
+        <h4>🧮 FMEA</h4>
+        <span class="badge t">排优先级</span>
+        <p>给每个要因评 <b>S 严重度 / O 频度 / D 探测度</b>，高风险项优先整改——把"猜"升级成"算"。</p>
+      </div>
+      <div class="arrow">➜</div>
+      <div class="node">
+        <h4>📋 控制计划 CP</h4>
+        <span class="badge i">落地盯住</span>
+        <p>高风险要因落成日常管控：<b>测什么、怎么测、多久测一次、异常了怎么办</b>。</p>
+      </div>
+    </div>
+    <p class="src">📖 依据：AIAG &amp; VDA《FMEA手册》（第五版）七步法第4步「失效分析」明确推荐用<b>鱼骨图（4M/5M1E）</b>识别过程失效原因；高风险项经第5步风险分析后转入<b>控制计划</b>落地执行（IATF 16949 第 8.5.1.1 条）。</p>
+  </div>
+</section>
+
+<!-- ============ S3 分类框架 ============ -->
+<section id="s3">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="no" style="background:linear-gradient(145deg,#a5b4fc,#6366f1)">03</div>
+      <h2>大骨怎么分：5M1E 框架</h2>
+      <p class="desc">大骨就是"从哪几个大方向找原因"。现场问题首选 5M1E，别自己乱编方向。</p>
+    </div>
+    <div class="grid g6" style="margin-bottom:22px">
+      <div class="mini m-tile"><span class="letter" style="background:linear-gradient(145deg,#818cf8,#6366f1)">人</span><h4>Manpower</h4><p>技能、手法、马虎、培训、品质意识</p></div>
+      <div class="mini m-tile"><span class="letter" style="background:linear-gradient(145deg,#38bdf8,#0284c7)">机</span><h4>Machine</h4><p>设备精度、模具状态、维护保养、故障</p></div>
+      <div class="mini m-tile"><span class="letter" style="background:linear-gradient(145deg,#2dd4bf,#0d9488)">料</span><h4>Material</h4><p>原材料质量、批次差异、来料检验、储存</p></div>
+      <div class="mini m-tile"><span class="letter" style="background:linear-gradient(145deg,#94a3b8,#475569)">法</span><h4>Method</h4><p>工艺参数、操作规程、SOP、检验方法</p></div>
+      <div class="mini m-tile"><span class="letter" style="background:linear-gradient(145deg,#7dd3fc,#0ea5e9)">环</span><h4>Environment</h4><p>温湿度、洁净度、静电、现场环境</p></div>
+      <div class="mini m-tile"><span class="letter" style="background:linear-gradient(145deg,#5eead4,#14b8a6)">测</span><h4>Measurement</h4><p>量具精度、检测标准、校验、判定方法</p></div>
+    </div>
+    <div class="card">
+      <p>📌 <b>选类别的规矩</b>：<b>现场作业问题</b>用「人机料法环（测）」；<b>管理类问题</b>（如离职率高、交付延误）换用「人·事·时·地·物」。类别只是提示思考方向的<b>脚手架</b>——某根大骨实在找不出原因，可以删掉；某条原因放不进任何大骨，可以为它单开一根。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ S4 六步画法 ============ -->
+<section id="s4" style="background:rgba(255,255,255,.35)">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="no" style="background:linear-gradient(145deg,#7dd3fc,#0284c7)">04</div>
+      <h2>绘制六步法（重点）</h2>
+      <p class="desc">跟着做，一张规范的要因图就出来了。每一步都配了欠料案例的示例。</p>
+    </div>
+    <div class="grid" style="gap:16px">
+      <div class="step">
+        <div class="num">1</div>
+        <div>
+          <h3>定鱼头：把问题说具体</h3>
+          <p class="say">鱼头是整张图最重要的一个格子。问题写得越具体，原因找得越准。<b>要有数据、有时间、有对象。</b></p>
+          <div class="x-ok"><span class="no">品质很差</span><span class="no">欠料太多</span><span class="yes">3月LED封装线欠料不良率从2%升到8%</span></div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="num">2</div>
+        <div>
+          <h3>画主骨：一条横线指鱼头</h3>
+          <p class="say">白板/大白纸中间画一条粗横线，右端箭头指向鱼头。这就是"鱼脊梁骨"。</p>
+          <div class="eg">📝 案例写法：鱼头框里写「<b>欠料（料不良）</b>」，主骨横穿图中央。</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="num">3</div>
+        <div>
+          <h3>画大骨：4~6根，约60°斜角</h3>
+          <p class="say">按 5M1E 画出大方向骨。<b>大骨必须用中性词</b>——只说方向，不说好坏。</p>
+          <div class="x-ok"><span class="no">材料不良（带判断✗）</span><span class="yes">材料 / 设备 / 人 / 方法 ✓</span></div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="num">4</div>
+        <div>
+          <h3>头脑风暴填中小骨：越多越好，不许批评</h3>
+          <p class="say">一根大骨一根大骨地过：这个方向上，什么会导致鱼头问题？把每条原因画成中骨、小骨。<b>中小骨要用价值判断词</b>（如"干燥温度偏低"），并用 5Why 连追问至少3层，挖到<b>能直接下对策</b>为止。</p>
+          <div class="eg">🧠 头脑风暴四原则：<b>不批评</b> · <b>自由畅想</b> · <b>越多越好</b> · <b>可以搭便车</b>（在别人想法上补充）。谁都不许说"这个不可能"——真因往往就死在这一句里。</div>
+          <div class="x-ok" style="margin-top:8px"><span class="no">培训不足（太笼统，挖不下去）</span><span class="yes">成型技术员未对量产前部件进行确认（具体动作，可验证✓）</span></div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="num">5</div>
+        <div>
+          <h3>圈重点要因：圈的是"嫌疑犯"，不是"罪犯"</h3>
+          <p class="say">图上几十条原因不可能全查。用<b>投票</b>或<b>经验+数据</b>圈出 3~5 条最可疑的，做上醒目标记（本案例用 <b>★</b> 标注）。记住：此刻它们只是<b>候选</b>。</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="num">6</div>
+        <div>
+          <h3>真因验证：数据才能定罪</h3>
+          <p class="say">对每条重点要因定一个验证方法：<b>查数据</b>（记录、批次对比）、<b>到现场看</b>（跟班观察）、<b>做试验</b>（改变条件看结果）。验证通过的才是真因，才进入 FMEA / 对策阶段。<b>鱼骨图产生假设，数据才能定罪。</b></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ S5 实战案例 ============ -->
+<section id="s5">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="no" style="background:linear-gradient(145deg,#5eead4,#0d9488)">05</div>
+      <h2>实战案例：LED封装线「欠料」要因分析</h2>
+      <p class="desc">下面是生产现场的原图美化版——内容一条不少，重新排版，★ 标出重点要因（待真因验证）。</p>
+    </div>
+
+    <div class="fb-card">
+      <div class="fb-scroll">
+<svg viewBox="0 0 2240 1500" xmlns="http://www.w3.org/2000/svg" font-family="Microsoft YaHei,PingFang SC,sans-serif">
+<defs>
+ <linearGradient id="gB" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7dd3fc"/><stop offset="1" stop-color="#0ea5e9"/></linearGradient>
+ <linearGradient id="gT" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5eead4"/><stop offset="1" stop-color="#14b8a6"/></linearGradient>
+ <linearGradient id="gI" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#a5b4fc"/><stop offset="1" stop-color="#6366f1"/></linearGradient>
+ <linearGradient id="gS" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#cbd5e1"/><stop offset="1" stop-color="#64748b"/></linearGradient>
+ <linearGradient id="gHead" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#38bdf8"/><stop offset="1" stop-color="#14b8a6"/></linearGradient>
+ <linearGradient id="gKey" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#93c5fd"/><stop offset="1" stop-color="#3b82f6"/></linearGradient>
+ <filter id="ds" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="5" dy="5" stdDeviation="7" flood-color="#1e5a8c" flood-opacity="0.14"/></filter>
+ <filter id="dss" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="3" dy="3" stdDeviation="4" flood-color="#1e5a8c" flood-opacity="0.12"/></filter>
+</defs>
+<rect x="0" y="0" width="2240" height="1500" fill="#f6fafd"/>
+<text x="60" y="62" font-size="26" font-weight="bold" fill="#1e3a5f">欠料（料不良）要因分析图 · 美化版</text>
+<text x="60" y="94" font-size="15" fill="#7b8ba1">冷色重排版 · 内容依据原图全量保留 · ★ = 重点要因（待真因验证）</text>
+<line x1="50" y1="720" x2="1662" y2="720" stroke="#475569" stroke-width="7" stroke-linecap="round"/>
+<polygon points="1662,698 1662,742 1712,720" fill="#475569"/>
+<rect x="1725" y="653" width="475" height="134" rx="38" fill="url(#gHead)" filter="url(#ds)"/>
+<text x="1962" y="712" font-size="48" font-weight="bold" fill="#ffffff" text-anchor="middle">欠　料</text>
+<text x="1962" y="758" font-size="21" fill="#ffffff" opacity="0.95" text-anchor="middle">（ 料 不 良 ）</text>
+<line x1="700" y1="720" x2="380" y2="190" stroke="#475569" stroke-width="5" stroke-linecap="round"/>
+<rect x="300" y="98" width="160" height="56" rx="20" fill="url(#gB)" filter="url(#dss)"/>
+<text x="380" y="136" font-size="25" font-weight="bold" fill="#ffffff" text-anchor="middle">材料</text>
+<line x1="1560" y1="720" x2="1330" y2="190" stroke="#475569" stroke-width="5" stroke-linecap="round"/>
+<rect x="1250" y="98" width="160" height="56" rx="20" fill="url(#gT)" filter="url(#dss)"/>
+<text x="1330" y="136" font-size="25" font-weight="bold" fill="#ffffff" text-anchor="middle">设备</text>
+<line x1="700" y1="720" x2="380" y2="1250" stroke="#475569" stroke-width="5" stroke-linecap="round"/>
+<rect x="300" y="1280" width="160" height="56" rx="20" fill="url(#gI)" filter="url(#dss)"/>
+<text x="380" y="1318" font-size="25" font-weight="bold" fill="#ffffff" text-anchor="middle">人</text>
+<line x1="1560" y1="720" x2="1330" y2="1250" stroke="#475569" stroke-width="5" stroke-linecap="round"/>
+<rect x="1250" y="1280" width="160" height="56" rx="20" fill="url(#gS)" filter="url(#dss)"/>
+<text x="1330" y="1318" font-size="25" font-weight="bold" fill="#ffffff" text-anchor="middle">方法</text>
+<line x1="518" y1="418" x2="700" y2="418" stroke="#94a3b8" stroke-width="2.5"/>
+<circle cx="518" cy="418" r="6" fill="#38bdf8" stroke="#ffffff" stroke-width="2"/>
+<rect x="700" y="398" width="520" height="40" rx="18" fill="#ffffff" fill-opacity="0.95" stroke="#d7e3ee" filter="url(#dss)"/>
+<rect x="712" y="403" width="50" height="26" rx="13" fill="#e0f2fe"/><text x="737" y="420.5" font-size="14" font-weight="bold" fill="#0369a1" text-anchor="middle">性能</text><rect x="770" y="403" width="76" height="26" rx="13" fill="#ffffff" stroke="#cbd5e1"/><text x="808" y="420.5" font-size="14" fill="#475569" text-anchor="middle">流动性差</text><rect x="854" y="403" width="104" height="26" rx="13" fill="#ffffff" stroke="#cbd5e1"/><text x="906" y="420.5" font-size="14" fill="#475569" text-anchor="middle">制剂添加过多</text><rect x="966" y="403" width="98" height="26" rx="13" fill="#ffffff" stroke="#cbd5e1"/><text x="1015" y="420.5" font-size="14" fill="#475569" text-anchor="middle">未密封/氧化</text><line x1="559" y1="487" x2="700" y2="487" stroke="#94a3b8" stroke-width="2.5"/>
+<circle cx="559" cy="487" r="6" fill="#38bdf8" stroke="#ffffff" stroke-width="2"/>
+<rect x="700" y="452" width="520" height="70" rx="18" fill="#ffffff" fill-opacity="0.95" stroke="#d7e3ee" filter="url(#dss)"/>
+<rect x="712" y="457" width="78" height="26" rx="13" fill="#e0f2fe"/><text x="751" y="474.5" font-size="14" font-weight="bold" fill="#0369a1" text-anchor="middle">材料干燥</text><rect x="798" y="457" width="104" height="26" rx="13" fill="#ffffff" stroke="#cbd5e1"/><text x="850" y="474.5" font-size="14" fill="#475569" text-anchor="middle">干燥时间不足</text><rect x="910" y="457" width="90" height="26" rx="13" fill="#ffffff" stroke="#cbd5e1"/><text x="955" y="474.5" font-size="14" fill="#475569" text-anchor="middle">加料不及时</text><rect x="1008" y="457" width="76" height="26" rx="13" fill="#ffffff" stroke="#cbd5e1"/><text x="1046" y="474.5" font-size="14" fill="#475569" text-anchor="middle">设备异常</text><rect x="1092" y="457" width="90" height="26" rx="13" fill="#ffffff" stroke="#cbd5e1"/><text x="1137" y="474.5" font-size="14" fill="#475569" text-anchor="middle">定时器异常</text><rect x="712" y="487" width="76" height="26" rx="13" fill="#ffffff" stroke="#cbd5e1"/><text x="750" y="504.5" font-size="14" fill="#475569" text-anchor="middle">设定错误</text><rect x="796" y="487" width="128" height="26" rx="13" fill="url(#gKey)" filter="url(#dss)"/><text x="860" y="504.5" font-size="14" font-weight="bold" fill="#ffffff" text-anchor="middle">★干燥温度偏低</text><line x1="610" y1="571" x2="700" y2="571" stroke="#94a3b8" stroke-width="2.5"/>
+<circle cx="610" cy="571" r="6" fill="#38bdf8" stroke="#ffffff" stroke-width="2"/>
+<rect x="700" y="536" width="520" height="70" rx="18" fill="#ffffff" fill-opacity="0.95" stroke="#d7e3ee" filter="url(#dss)"/>
+<rect x="712" y="541" width="64" height="26" rx="13" fill="#e0f2fe"/><text x="744" y="558.5" font-size="14" font-weight="bold" fill="#0369a1" text-anchor="middle">混合材</text><rect x="784" y="541" width="86" height="26" rx="13" fill="url(#gKey)" filter="url(#dss)"/><text x="827" y="558.5" font-size="14" font-weight="bold" fill="#ffffff" text-anchor="middle">★未筛选</text><rect x="878" y="541" width="62" height="26" rx="13" fill="#ffffff" stroke="#cbd5e1"/><text x="909" y="558.5" font-size="14" fill="#475569" text-anchor="middle">粉尘多</text><rect x="948" y="541" width="76" height="26" rx="13" fill="#ffffff" stroke="#cbd5e1"/><text x="986" y="558.5" font-size="14" fill="#475569" text-anchor="middle">混入杂物</text><rect x="1032" y="541" width="76" height="26" rx="13" fill="#ffffff" stroke="#cbd5e1"/><text x="1070" y="558.5" font-size="14" fill="#475569" text-anchor="middle">不同材料</text><rect x="712" y="571" width="114" height="26" rx="13" fill="url(#gKey)" filter="url(#dss)"/><text x="769" y="588.5" font-size="14" font-weight="bold" fill="#ffffff" text-anchor="middle">★粉碎机异常</text><rect x="834" y="571" width="62" height="26" rx="13" fill="#ffffff" stroke="#cbd5e1"/><text x="865" y="588.5" font-size="14" fill="#475569" text-anchor="middle">水口料</text><rect x="904" y="571" width="100" height="26" rx="13" fill="url(#gKey)" filter="url(#dss)"/><text x="954" y="588.5" font-size="14" font-weight="bold" fill="#ffffff" text-anchor="middle">★刀片磨损</text><line x1="661" y1="655" x2="700" y2="655" stroke="#94a3b8" stroke-width="2.5"/>
+<circle cx="661" cy="655" r="6" fill="#38bdf8" stroke="#ffffff" stroke-width="2"/>
+<rect x="700" y="620" width="520" height="70" rx="18" fill="#ffffff" fill-opacity="0.95" stroke="#d7e3ee" filter="url(#dss)"/>
+<rect x="712" y="625" width="50" height="26" rx="13" fill="#e0f2fe"/><text x="737" y="642.5" font-size="14" font-weight="bold" fill="#0369a1" text-anchor="middle">材质</text><rect x="770" y="625" width="48" height="26" rx="13" fill="#ffffff" stroke="#cbd5e1"/><text x="794" y="642.5" font-size="14" fill="#475569" text-anchor="middle">吸水</text><rect x="826" y="625" width="48" height="26" rx="13" fill="#ffffff" stroke="#cbd5e1"/><text x="850" y="642.5" font-size="14" fill="#475569" text-anchor="middle">分解</text><rect x="882" y="625" width="90" height="26" rx="13" fill="#ffffff" stroke="#cbd5e1"/><text x="927" y="642.5" font-size="14" fill="#475569" text-anchor="middle">长时间外露</text><rect x="980" y="625" width="90" height="26" rx="13" fill="#ffffff" stroke="#cbd5e1"/><text x="1025" y="642.5" font-size="14" fill="#475569" text-anchor="middle">搅拌时间短</text><rect x="1078" y="625" width="90" height="26" rx="13" fill="#ffffff" stroke="#cbd5e1"/><text x="1123" y="642.5" font-size="14" fill="#475569" text-anchor="middle">混合机异常</text><rect x="712" y="655" width="104" height="26" rx="13" fill="#ffffff" stroke="#cbd5e1"/><text x="764" y="672.5" font-size="14" fill="#475569" text-anchor="middle">混合比例异常</text><line x1="1302" y1="293" x2="1630" y2="293" stroke="#94a3b8" stroke-width="2.5"/>
+<circle cx="1302" cy="293" r="6" fill="#38bdf8" stroke="#ffffff" stroke-width="2"/>
+<rect x="1630" y="258" width="560" height="70" rx="18" fill="#ffffff" fill-opacity="0.95" stroke="#d7e3ee" filter="url(#dss)"/>
+<rect x="1642" y="263" width="64" height="26" rx="13" fill="#ccfbf1"/><text x="1674" y="280.5" font-size="14" font-weight="bold" fill="#0f766e" text-anchor="middle">成形机</text><rect x="1714" y="263" width="100" height="26" rx="13" fill="url(#gKey)" filter="url(#dss)"/><text x="1764" y="280.5" font-size="14" font-weight="bold" fill="#ffffff" text-anchor="middle">★螺杆磨损</text><rect x="1822" y="263" width="62" height="26" rx="13" fill="#ffffff" stroke="#cbd5e1"/><text x="1853" y="280.5" font-size="14" fill="#475569" text-anchor="middle">材质差</text><rect x="1892" y="263" width="98" height="26" rx="13" fill="#ffffff" stroke="#cbd5e1"/><text x="1941" y="280.5" font-size="14" fill="#475569" text-anchor="middle">时间长·磨损</text><rect x="1998" y="263" width="118" height="26" rx="13" fill="#ffffff" stroke="#cbd5e1"/><text x="2057" y="280.5" font-size="14" fill="#475569" text-anchor="middle">使用大吨位机器</text><rect x="1642" y="293" width="76" height="26" rx="13" fill="#ffffff" stroke="#cbd5e1"/><text x="1680" y="310.5" font-size="14" fill="#475569" text-anchor="middle">合模力大</text><rect x="1726" y="293" width="100" height="26" rx="13" fill="url(#gKey)" filter="url(#dss)"/><text x="1776" y="310.5" font-size="14" font-weight="bold" fill="#ffffff" text-anchor="middle">★料筒磨损</text><line x1="1353" y1="377" x2="1630" y2="377" stroke="#94a3b8" stroke-width="2.5"/>
+<circle cx="1353" cy="377" r="6" fill="#38bdf8" stroke="#ffffff" stroke-width="2"/>
+<rect x="1630" y="342" width="560" height="70" rx="18" fill="#ffffff" fill-opacity="0.95" stroke="#d7e3ee" filter="url(#dss)"/>
+<rect x="1642" y="347" width="64" height="26" rx="13" fill="#ccfbf1"/><text x="1674" y="364.5" font-size="14" font-weight="bold" fill="#0f766e" text-anchor="middle">模温机</text><rect x="1714" y="347" width="90" height="26" rx="13" fill="#ffffff" stroke="#cbd5e1"/><text x="1759" y="364.5" font-size="14" fill="#475569" text-anchor="middle">循环水不足</text><rect x="1812" y="347" width="76" height="26" rx="13" fill="#ffffff" stroke="#cbd5e1"/><text x="1850" y="364.5" font-size="14" fill="#475569" text-anchor="middle">温度异常</text><rect x="1896" y="347" width="76" height="26" rx="13" fill="#ffffff" stroke="#cbd5e1"/><text x="1934" y="364.5" font-size="14" fill="#475569" text-anchor="middle">发热异常</text><rect x="1980" y="347" width="76" height="26" rx="13" fill="#ffffff" stroke="#cbd5e1"/><text x="2018" y="364.5" font-size="14" fill="#475569" text-anchor="middle">压力不足</text><rect x="2064" y="347" width="48" height="26" rx="13" fill="#ffffff" stroke="#cbd5e1"/><text x="2088" y="364.5" font-size="14" fill="#475569" text-anchor="middle">机水</text><rect x="1642" y="377" width="76" height="26" rx="13" fill="#ffffff" stroke="#cbd5e1"/><text x="1680" y="394.5" font-size="14" fill="#475569" text-anchor="middle">开关未开</text><rect x="1726" y="377" width="104" height="26" rx="13" fill="#ffffff" stroke="#cbd5e1"/><text x="1778" y="394.5" font-size="14" fill="#475569" text-anchor="middle">冷却系统异常</text><line x1="1431" y1="506" x2="1630" y2="506" stroke="#94a3b8" stroke-width="2.5"/>
+<circle cx="1431" cy="506" r="6" fill="#38bdf8" stroke="#ffffff" stroke-width="2"/>
+<rect x="1630" y="426" width="560" height="160" rx="18" fill="#ffffff" fill-opacity="0.95" stroke="#d7e3ee" filter="url(#dss)"/>
+<rect x="1642" y="431" width="50" height="26" rx="13" fill="#ccfbf1"/><text x="1667" y="448.5" font-size="14" font-weight="bold" fill="#0f766e" text-anchor="middle">金型</text><rect x="1700" y="431" width="76" height="26" rx="13" fill="#ffffff" stroke="#cbd5e1"/><text x="1738" y="448.5" font-size="14" fill="#475569" text-anchor="middle">设计不适</text><rect x="1784" y="431" width="76" height="26" rx="13" fill="#ffffff" stroke="#cbd5e1"/><text x="1822" y="448.5" font-size="14" fill="#475569" text-anchor="middle">进胶口小</text><rect x="1868" y="431" width="76" height="26" rx="13" fill="#ffffff" stroke="#cbd5e1"/><text x="1906" y="448.5" font-size="14" fill="#475569" text-anchor="middle">取数过多</text><rect x="1952" y="431" width="90" height="26" rx="13" fill="#ffffff" stroke="#cbd5e1"/><text x="1997" y="448.5" font-size="14" fill="#475569" text-anchor="middle">逸胶不平衡</text><rect x="2050" y="431" width="104" height="26" rx="13" fill="#ffffff" stroke="#cbd5e1"/><text x="2102" y="448.5" font-size="14" fill="#475569" text-anchor="middle">制品肉厚太薄</text><rect x="1642" y="461" width="76" height="26" rx="13" fill="#ffffff" stroke="#cbd5e1"/><text x="1680" y="478.5" font-size="14" fill="#475569" text-anchor="middle">配件不良</text><rect x="1726" y="461" width="76" height="26" rx="13" fill="#ffffff" stroke="#cbd5e1"/><text x="1764" y="478.5" font-size="14" fill="#475569" text-anchor="middle">尺寸不良</text><rect x="1810" y="461" width="48" height="26" rx="13" fill="#ffffff" stroke="#cbd5e1"/><text x="1834" y="478.5" font-size="14" fill="#475569" text-anchor="middle">破损</text><rect x="1866" y="461" width="48" height="26" rx="13" fill="#ffffff" stroke="#cbd5e1"/><text x="1890" y="478.5" font-size="14" fill="#475569" text-anchor="middle">堵塞</text><rect x="1922" y="461" width="114" height="26" rx="13" fill="url(#gKey)" filter="url(#dss)"/><text x="1979" y="478.5" font-size="14" font-weight="bold" fill="#ffffff" text-anchor="middle">★清扫不及时</text><rect x="2044" y="461" width="90" height="26" rx="13" fill="#ffffff" stroke="#cbd5e1"/><text x="2089" y="478.5" font-size="14" fill="#475569" text-anchor="middle">槽深度不够</text><rect x="1642" y="491" width="76" height="26" rx="13" fill="#ffffff" stroke="#cbd5e1"/><text x="1680" y="508.5" font-size="14" fill="#475569" text-anchor="middle">位子不当</text><rect x="1726" y="491" width="62" height="26" rx="13" fill="#ffffff" stroke="#cbd5e1"/><text x="1757" y="508.5" font-size="14" fill="#475569" text-anchor="middle">温度低</text><rect x="1796" y="491" width="90" height="26" rx="13" fill="#ffffff" stroke="#cbd5e1"/><text x="1841" y="508.5" font-size="14" fill="#475569" text-anchor="middle">炭化物堵塞</text><rect x="1894" y="491" width="114" height="26" rx="13" fill="url(#gKey)" filter="url(#dss)"/><text x="1951" y="508.5" font-size="14" font-weight="bold" fill="#ffffff" text-anchor="middle">★排气槽不良</text><rect x="2016" y="491" width="118" height="26" rx="13" fill="#ffffff" stroke="#cbd5e1"/><text x="2075" y="508.5" font-size="14" fill="#475569" text-anchor="middle">干燥剂过期失效</text><rect x="1642" y="521" width="76" height="26" rx="13" fill="#ffffff" stroke="#cbd5e1"/><text x="1680" y="538.5" font-size="14" fill="#475569" text-anchor="middle">设定错误</text><rect x="1726" y="521" width="76" height="26" rx="13" fill="#ffffff" stroke="#cbd5e1"/><text x="1764" y="538.5" font-size="14" fill="#475569" text-anchor="middle">温度异常</text><rect x="1810" y="521" width="76" height="26" rx="13" fill="#ffffff" stroke="#cbd5e1"/><text x="1848" y="538.5" font-size="14" fill="#475569" text-anchor="middle">温控失效</text><rect x="1894" y="521" width="132" height="26" rx="13" fill="#ffffff" stroke="#cbd5e1"/><text x="1960" y="538.5" font-size="14" fill="#475569" text-anchor="middle">过滤网未定期清扫</text><rect x="2034" y="521" width="90" height="26" rx="13" fill="#ffffff" stroke="#cbd5e1"/><text x="2079" y="538.5" font-size="14" fill="#475569" text-anchor="middle">过滤阀堵塞</text><rect x="1642" y="551" width="146" height="26" rx="13" fill="#ffffff" stroke="#cbd5e1"/><text x="1715" y="568.5" font-size="14" fill="#475569" text-anchor="middle">发热器不能正常发热</text><line x1="1500" y1="620" x2="1630" y2="620" stroke="#94a3b8" stroke-width="2.5"/>
+<circle cx="1500" cy="620" r="6" fill="#38bdf8" stroke="#ffffff" stroke-width="2"/>
+<rect x="1630" y="600" width="560" height="40" rx="18" fill="#ffffff" fill-opacity="0.95" stroke="#d7e3ee" filter="url(#dss)"/>
+<rect x="1642" y="605" width="64" height="26" rx="13" fill="#ccfbf1"/><text x="1674" y="622.5" font-size="14" font-weight="bold" fill="#0f766e" text-anchor="middle">干燥机</text><rect x="1714" y="605" width="76" height="26" rx="13" fill="#ffffff" stroke="#cbd5e1"/><text x="1752" y="622.5" font-size="14" fill="#475569" text-anchor="middle">温度异常</text><rect x="1798" y="605" width="76" height="26" rx="13" fill="#ffffff" stroke="#cbd5e1"/><text x="1836" y="622.5" font-size="14" fill="#475569" text-anchor="middle">温控失效</text><rect x="1882" y="605" width="104" height="26" rx="13" fill="#ffffff" stroke="#cbd5e1"/><text x="1934" y="622.5" font-size="14" fill="#475569" text-anchor="middle">不能正常发热</text><rect x="1994" y="605" width="62" height="26" rx="13" fill="#ffffff" stroke="#cbd5e1"/><text x="2025" y="622.5" font-size="14" fill="#475569" text-anchor="middle">发热器</text><line x1="637" y1="825" x2="700" y2="825" stroke="#94a3b8" stroke-width="2.5"/>
+<circle cx="637" cy="825" r="6" fill="#38bdf8" stroke="#ffffff" stroke-width="2"/>
+<rect x="700" y="790" width="520" height="70" rx="18" fill="#ffffff" fill-opacity="0.95" stroke="#d7e3ee" filter="url(#dss)"/>
+<rect x="712" y="795" width="64" height="26" rx="13" fill="#e0e7ff"/><text x="744" y="812.5" font-size="14" font-weight="bold" fill="#4338ca" text-anchor="middle">作业者</text><rect x="784" y="795" width="104" height="26" rx="13" fill="#ffffff" stroke="#cbd5e1"/><text x="836" y="812.5" font-size="14" fill="#475569" text-anchor="middle">作业手法错误</text><rect x="896" y="795" width="76" height="26" rx="13" fill="#ffffff" stroke="#cbd5e1"/><text x="934" y="812.5" font-size="14" fill="#475569" text-anchor="middle">工作马虎</text><rect x="980" y="795" width="118" height="26" rx="13" fill="#ffffff" stroke="#cbd5e1"/><text x="1039" y="812.5" font-size="14" fill="#475569" text-anchor="middle">不良位置不明确</text><rect x="712" y="825" width="104" height="26" rx="13" fill="#ffffff" stroke="#cbd5e1"/><text x="764" y="842.5" font-size="14" fill="#475569" text-anchor="middle">品质观念不强</text><line x1="595" y1="894" x2="700" y2="894" stroke="#94a3b8" stroke-width="2.5"/>
+<circle cx="595" cy="894" r="6" fill="#38bdf8" stroke="#ffffff" stroke-width="2"/>
+<rect x="700" y="874" width="520" height="40" rx="18" fill="#ffffff" fill-opacity="0.95" stroke="#d7e3ee" filter="url(#dss)"/>
+<rect x="712" y="879" width="46" height="26" rx="13" fill="#e0e7ff"/><text x="735" y="896.5" font-size="14" font-weight="bold" fill="#4338ca" text-anchor="middle">PQC</text><rect x="766" y="879" width="104" height="26" rx="13" fill="#ffffff" stroke="#cbd5e1"/><text x="818" y="896.5" font-size="14" fill="#475569" text-anchor="middle">抽段数量不够</text><rect x="878" y="879" width="104" height="26" rx="13" fill="#ffffff" stroke="#cbd5e1"/><text x="930" y="896.5" font-size="14" fill="#475569" text-anchor="middle">未按标准作业</text><line x1="553" y1="963" x2="700" y2="963" stroke="#94a3b8" stroke-width="2.5"/>
+<circle cx="553" cy="963" r="6" fill="#38bdf8" stroke="#ffffff" stroke-width="2"/>
+<rect x="700" y="928" width="520" height="70" rx="18" fill="#ffffff" fill-opacity="0.95" stroke="#d7e3ee" filter="url(#dss)"/>
+<rect x="712" y="933" width="92" height="26" rx="13" fill="#e0e7ff"/><text x="758" y="950.5" font-size="14" font-weight="bold" fill="#4338ca" text-anchor="middle">成型技术员</text><rect x="812" y="933" width="76" height="26" rx="13" fill="#ffffff" stroke="#cbd5e1"/><text x="850" y="950.5" font-size="14" fill="#475569" text-anchor="middle">技术缺乏</text><rect x="896" y="933" width="76" height="26" rx="13" fill="#ffffff" stroke="#cbd5e1"/><text x="934" y="950.5" font-size="14" fill="#475569" text-anchor="middle">操作失误</text><rect x="980" y="933" width="198" height="26" rx="13" fill="url(#gKey)" filter="url(#dss)"/><text x="1079" y="950.5" font-size="14" font-weight="bold" fill="#ffffff" text-anchor="middle">★未对量产前部件进行确认</text><rect x="712" y="963" width="62" height="26" rx="13" fill="#ffffff" stroke="#cbd5e1"/><text x="743" y="980.5" font-size="14" fill="#475569" text-anchor="middle">未开启</text><rect x="782" y="963" width="142" height="26" rx="13" fill="url(#gKey)" filter="url(#dss)"/><text x="853" y="980.5" font-size="14" font-weight="bold" fill="#ffffff" text-anchor="middle">★未废弃异常部件</text><rect x="932" y="963" width="170" height="26" rx="13" fill="url(#gKey)" filter="url(#dss)"/><text x="1017" y="980.5" font-size="14" font-weight="bold" fill="#ffffff" text-anchor="middle">★未按规定清扫排气槽</text><line x1="512" y1="1032" x2="700" y2="1032" stroke="#94a3b8" stroke-width="2.5"/>
+<circle cx="512" cy="1032" r="6" fill="#38bdf8" stroke="#ffffff" stroke-width="2"/>
+<rect x="700" y="1012" width="520" height="40" rx="18" fill="#ffffff" fill-opacity="0.95" stroke="#d7e3ee" filter="url(#dss)"/>
+<rect x="712" y="1017" width="92" height="26" rx="13" fill="#e0e7ff"/><text x="758" y="1034.5" font-size="14" font-weight="bold" fill="#4338ca" text-anchor="middle">修模技术员</text><rect x="812" y="1017" width="76" height="26" rx="13" fill="#ffffff" stroke="#cbd5e1"/><text x="850" y="1034.5" font-size="14" fill="#475569" text-anchor="middle">经验不足</text><rect x="896" y="1017" width="76" height="26" rx="13" fill="#ffffff" stroke="#cbd5e1"/><text x="934" y="1034.5" font-size="14" fill="#475569" text-anchor="middle">配件装错</text><line x1="1445" y1="910" x2="1630" y2="910" stroke="#94a3b8" stroke-width="2.5"/>
+<circle cx="1445" cy="910" r="6" fill="#38bdf8" stroke="#ffffff" stroke-width="2"/>
+<rect x="1630" y="860" width="560" height="100" rx="18" fill="#ffffff" fill-opacity="0.95" stroke="#d7e3ee" filter="url(#dss)"/>
+<rect x="1642" y="865" width="78" height="26" rx="13" fill="#e2e8f0"/><text x="1681" y="882.5" font-size="14" font-weight="bold" fill="#334155" text-anchor="middle">金型维护</text><rect x="1728" y="865" width="104" height="26" rx="13" fill="#ffffff" stroke="#cbd5e1"/><text x="1780" y="882.5" font-size="14" fill="#475569" text-anchor="middle">未按计划进行</text><rect x="1840" y="865" width="114" height="26" rx="13" fill="url(#gKey)" filter="url(#dss)"/><text x="1897" y="882.5" font-size="14" font-weight="bold" fill="#ffffff" text-anchor="middle">★未按时进行</text><rect x="1962" y="865" width="76" height="26" rx="13" fill="#ffffff" stroke="#cbd5e1"/><text x="2000" y="882.5" font-size="14" fill="#475569" text-anchor="middle">方法错误</text><rect x="2046" y="865" width="76" height="26" rx="13" fill="#ffffff" stroke="#cbd5e1"/><text x="2084" y="882.5" font-size="14" fill="#475569" text-anchor="middle">定期保养</text><rect x="1642" y="895" width="154" height="26" rx="13" fill="#ffffff" stroke="#cbd5e1"/><text x="1719" y="912.5" font-size="14" fill="#475569" text-anchor="middle">项目不全·方法不正确</text><rect x="1804" y="895" width="76" height="26" rx="13" fill="#ffffff" stroke="#cbd5e1"/><text x="1842" y="912.5" font-size="14" fill="#475569" text-anchor="middle">日常保养</text><rect x="1888" y="895" width="90" height="26" rx="13" fill="#ffffff" stroke="#cbd5e1"/><text x="1933" y="912.5" font-size="14" fill="#475569" text-anchor="middle">保养位不全</text><rect x="1986" y="895" width="48" height="26" rx="13" fill="#ffffff" stroke="#cbd5e1"/><text x="2010" y="912.5" font-size="14" fill="#475569" text-anchor="middle">修理</text><rect x="2042" y="895" width="76" height="26" rx="13" fill="#ffffff" stroke="#cbd5e1"/><text x="2080" y="912.5" font-size="14" fill="#475569" text-anchor="middle">配件装错</text><rect x="1642" y="925" width="124" height="26" rx="13" fill="url(#gKey)" filter="url(#dss)"/><text x="1704" y="942.5" font-size="14" font-weight="bold" fill="#ffffff" text-anchor="middle">★未按WGS作业</text><line x1="1376" y1="1024" x2="1630" y2="1024" stroke="#94a3b8" stroke-width="2.5"/>
+<circle cx="1376" cy="1024" r="6" fill="#38bdf8" stroke="#ffffff" stroke-width="2"/>
+<rect x="1630" y="974" width="560" height="100" rx="18" fill="#ffffff" fill-opacity="0.95" stroke="#d7e3ee" filter="url(#dss)"/>
+<rect x="1642" y="979" width="50" height="26" rx="13" fill="#e2e8f0"/><text x="1667" y="996.5" font-size="14" font-weight="bold" fill="#334155" text-anchor="middle">操作</text><rect x="1700" y="979" width="174" height="26" rx="13" fill="#ffffff" stroke="#cbd5e1"/><text x="1787" y="996.5" font-size="14" fill="#475569" text-anchor="middle">开机生产部品未确认品质</text><rect x="1882" y="979" width="156" height="26" rx="13" fill="url(#gKey)" filter="url(#dss)"/><text x="1960" y="996.5" font-size="14" font-weight="bold" fill="#ffffff" text-anchor="middle">★未按规定废弃数量</text><rect x="2046" y="979" width="90" height="26" rx="13" fill="#ffffff" stroke="#cbd5e1"/><text x="2091" y="996.5" font-size="14" fill="#475569" text-anchor="middle">未定期清洗</text><rect x="1642" y="1009" width="146" height="26" rx="13" fill="#ffffff" stroke="#cbd5e1"/><text x="1715" y="1026.5" font-size="14" fill="#475569" text-anchor="middle">料筒热流道清洗干净</text><rect x="1796" y="1009" width="90" height="26" rx="13" fill="#ffffff" stroke="#cbd5e1"/><text x="1841" y="1026.5" font-size="14" fill="#475569" text-anchor="middle">未清洗干净</text><rect x="1894" y="1009" width="142" height="26" rx="13" fill="url(#gKey)" filter="url(#dss)"/><text x="1965" y="1026.5" font-size="14" font-weight="bold" fill="#ffffff" text-anchor="middle">★未废弃异常部品</text><rect x="2044" y="1009" width="62" height="26" rx="13" fill="#ffffff" stroke="#cbd5e1"/><text x="2075" y="1026.5" font-size="14" fill="#475569" text-anchor="middle">未确认</text><rect x="1642" y="1039" width="90" height="26" rx="13" fill="#ffffff" stroke="#cbd5e1"/><text x="1687" y="1056.5" font-size="14" fill="#475569" text-anchor="middle">未按下料槽</text><rect x="1740" y="1039" width="76" height="26" rx="13" fill="#ffffff" stroke="#cbd5e1"/><text x="1778" y="1056.5" font-size="14" fill="#475569" text-anchor="middle">异常处理</text><line x1="1317" y1="1123" x2="1630" y2="1123" stroke="#94a3b8" stroke-width="2.5"/>
+<circle cx="1317" cy="1123" r="6" fill="#38bdf8" stroke="#ffffff" stroke-width="2"/>
+<rect x="1630" y="1088" width="560" height="70" rx="18" fill="#ffffff" fill-opacity="0.95" stroke="#d7e3ee" filter="url(#dss)"/>
+<rect x="1642" y="1093" width="50" height="26" rx="13" fill="#e2e8f0"/><text x="1667" y="1110.5" font-size="14" font-weight="bold" fill="#334155" text-anchor="middle">检查</text><rect x="1700" y="1093" width="76" height="26" rx="13" fill="#ffffff" stroke="#cbd5e1"/><text x="1738" y="1110.5" font-size="14" fill="#475569" text-anchor="middle">出货检查</text><rect x="1784" y="1093" width="62" height="26" rx="13" fill="#ffffff" stroke="#cbd5e1"/><text x="1815" y="1110.5" font-size="14" fill="#475569" text-anchor="middle">未检查</text><rect x="1854" y="1093" width="104" height="26" rx="13" fill="#ffffff" stroke="#cbd5e1"/><text x="1906" y="1110.5" font-size="14" fill="#475569" text-anchor="middle">抽取数量不够</text><rect x="1966" y="1093" width="90" height="26" rx="13" fill="#ffffff" stroke="#cbd5e1"/><text x="2011" y="1110.5" font-size="14" fill="#475569" text-anchor="middle">未全数检查</text><rect x="2064" y="1093" width="48" height="26" rx="13" fill="#ffffff" stroke="#cbd5e1"/><text x="2088" y="1110.5" font-size="14" fill="#475569" text-anchor="middle">漏检</text><rect x="1642" y="1123" width="76" height="26" rx="13" fill="#ffffff" stroke="#cbd5e1"/><text x="1680" y="1140.5" font-size="14" fill="#475569" text-anchor="middle">外观全检</text><line x1="1240" y1="1252" x2="1630" y2="1252" stroke="#94a3b8" stroke-width="2.5"/>
+<circle cx="1240" cy="1252" r="6" fill="#38bdf8" stroke="#ffffff" stroke-width="2"/>
+<rect x="1630" y="1172" width="560" height="160" rx="18" fill="#ffffff" fill-opacity="0.95" stroke="#d7e3ee" filter="url(#dss)"/>
+<rect x="1642" y="1177" width="78" height="26" rx="13" fill="#e2e8f0"/><text x="1681" y="1194.5" font-size="14" font-weight="bold" fill="#334155" text-anchor="middle">成形条件</text><rect x="1728" y="1177" width="126" height="26" rx="13" fill="#ffffff" stroke="#cbd5e1"/><text x="1791" y="1194.5" font-size="14" fill="#475569" text-anchor="middle">温度·溶胶温度低</text><rect x="1862" y="1177" width="154" height="26" rx="13" fill="#ffffff" stroke="#cbd5e1"/><text x="1939" y="1194.5" font-size="14" fill="#475569" text-anchor="middle">温度·热胶位置温度低</text><rect x="2024" y="1177" width="150" height="26" rx="13" fill="url(#gKey)" filter="url(#dss)"/><text x="2099" y="1194.5" font-size="14" font-weight="bold" fill="#ffffff" text-anchor="middle">★温度·金型温度低</text><rect x="1642" y="1207" width="98" height="26" rx="13" fill="#ffffff" stroke="#cbd5e1"/><text x="1691" y="1224.5" font-size="14" fill="#475569" text-anchor="middle">速度·计量快</text><rect x="1748" y="1207" width="150" height="26" rx="13" fill="url(#gKey)" filter="url(#dss)"/><text x="1823" y="1224.5" font-size="14" font-weight="bold" fill="#ffffff" text-anchor="middle">★速度·射出速度快</text><rect x="1906" y="1207" width="112" height="26" rx="13" fill="#ffffff" stroke="#cbd5e1"/><text x="1962" y="1224.5" font-size="14" fill="#475569" text-anchor="middle">压力·背压力小</text><rect x="2026" y="1207" width="126" height="26" rx="13" fill="#ffffff" stroke="#cbd5e1"/><text x="2089" y="1224.5" font-size="14" fill="#475569" text-anchor="middle">压力·射出压力小</text><rect x="1642" y="1237" width="126" height="26" rx="13" fill="#ffffff" stroke="#cbd5e1"/><text x="1705" y="1254.5" font-size="14" fill="#475569" text-anchor="middle">压力·合模压力大</text><rect x="1776" y="1237" width="136" height="26" rx="13" fill="url(#gKey)" filter="url(#dss)"/><text x="1844" y="1254.5" font-size="14" font-weight="bold" fill="#ffffff" text-anchor="middle">★压力·保压力小</text><rect x="1920" y="1237" width="126" height="26" rx="13" fill="#ffffff" stroke="#cbd5e1"/><text x="1983" y="1254.5" font-size="14" fill="#475569" text-anchor="middle">位置·计量位置小</text><rect x="1642" y="1267" width="126" height="26" rx="13" fill="#ffffff" stroke="#cbd5e1"/><text x="1705" y="1284.5" font-size="14" fill="#475569" text-anchor="middle">位置·射出位置小</text><rect x="1776" y="1267" width="178" height="26" rx="13" fill="url(#gKey)" filter="url(#dss)"/><text x="1865" y="1284.5" font-size="14" font-weight="bold" fill="#ffffff" text-anchor="middle">★位置·保压切换位置大</text><rect x="1962" y="1267" width="150" height="26" rx="13" fill="url(#gKey)" filter="url(#dss)"/><text x="2037" y="1284.5" font-size="14" font-weight="bold" fill="#ffffff" text-anchor="middle">★时间·射出时间短</text><rect x="1642" y="1297" width="140" height="26" rx="13" fill="#ffffff" stroke="#cbd5e1"/><text x="1712" y="1314.5" font-size="14" fill="#475569" text-anchor="middle">时间·保压时间不够</text><rect x="60" y="1444" width="30" height="24" rx="12" fill="url(#gKey)"/><text x="75" y="1462" font-size="13" fill="#ffffff" text-anchor="middle" font-weight="bold">★</text><text x="100" y="1462" font-size="15" fill="#46586e">重点要因（待真因验证）</text><rect x="310" y="1444" width="30" height="24" rx="12" fill="#ffffff" stroke="#cbd5e1"/><text x="350" y="1462" font-size="15" fill="#46586e">一般可能原因</text><text x="490" y="1462" font-size="15" fill="#7b8ba1">大类：上=料·机　下=人·法（依据原图布局）</text></svg>
+      </div>
+      <div class="legend">
+        <span><i class="star">★</i> 重点要因（待真因验证）</span>
+        <span><i class="norm"></i> 一般可能原因</span>
+        <span>🗂 内容依据原图整理，个别字词已修正（见下方说明）</span>
+      </div>
+      <p class="fb-tip">👆 图较小可 Ctrl+滚轮 或 双指缩放；下方分类卡片是同一份内容的放大可读版</p>
+    </div>
+
+    <div style="height:22px"></div>
+
+    <div class="grid g2">
+<div class="card"><div class="cat-head"><span class="cat-ico ci-b">材料</span><span style="font-size:13px;color:#7b8ba1">4个中骨 · 22条小骨 · ★4条重点</span></div><div class="grp"><div class="gname">性能</div><div class="tags"><span class="tag-item">流动性差</span><span class="tag-item">制剂添加过多</span><span class="tag-item">未密封/氧化</span></div></div><div class="grp"><div class="gname">材料干燥</div><div class="tags"><span class="tag-item">干燥时间不足</span><span class="tag-item">加料不及时</span><span class="tag-item">设备异常</span><span class="tag-item">定时器异常</span><span class="tag-item">设定错误</span><span class="tag-item key">★干燥温度偏低</span></div></div><div class="grp"><div class="gname">混合材</div><div class="tags"><span class="tag-item key">★未筛选</span><span class="tag-item">粉尘多</span><span class="tag-item">混入杂物</span><span class="tag-item">不同材料</span><span class="tag-item key">★粉碎机异常</span><span class="tag-item">水口料</span><span class="tag-item key">★刀片磨损</span></div></div><div class="grp"><div class="gname">材质</div><div class="tags"><span class="tag-item">吸水</span><span class="tag-item">分解</span><span class="tag-item">长时间外露</span><span class="tag-item">搅拌时间短</span><span class="tag-item">混合机异常</span><span class="tag-item">混合比例异常</span></div></div></div><div class="card"><div class="cat-head"><span class="cat-ico ci-t">设备</span><span style="font-size:13px;color:#7b8ba1">4个中骨 · 39条小骨 · ★4条重点</span></div><div class="grp"><div class="gname">成形机</div><div class="tags"><span class="tag-item key">★螺杆磨损</span><span class="tag-item">材质差</span><span class="tag-item">时间长·磨损</span><span class="tag-item">使用大吨位机器</span><span class="tag-item">合模力大</span><span class="tag-item key">★料筒磨损</span></div></div><div class="grp"><div class="gname">模温机</div><div class="tags"><span class="tag-item">循环水不足</span><span class="tag-item">温度异常</span><span class="tag-item">发热异常</span><span class="tag-item">压力不足</span><span class="tag-item">机水</span><span class="tag-item">开关未开</span><span class="tag-item">冷却系统异常</span></div></div><div class="grp"><div class="gname">金型</div><div class="tags"><span class="tag-item">设计不适</span><span class="tag-item">进胶口小</span><span class="tag-item">取数过多</span><span class="tag-item">逸胶不平衡</span><span class="tag-item">制品肉厚太薄</span><span class="tag-item">配件不良</span><span class="tag-item">尺寸不良</span><span class="tag-item">破损</span><span class="tag-item">堵塞</span><span class="tag-item key">★清扫不及时</span><span class="tag-item">槽深度不够</span><span class="tag-item">位子不当</span><span class="tag-item">温度低</span><span class="tag-item">炭化物堵塞</span><span class="tag-item key">★排气槽不良</span><span class="tag-item">干燥剂过期失效</span><span class="tag-item">设定错误</span><span class="tag-item">温度异常</span><span class="tag-item">温控失效</span><span class="tag-item">过滤网未定期清扫</span><span class="tag-item">过滤阀堵塞</span><span class="tag-item">发热器不能正常发热</span></div></div><div class="grp"><div class="gname">干燥机</div><div class="tags"><span class="tag-item">温度异常</span><span class="tag-item">温控失效</span><span class="tag-item">不能正常发热</span><span class="tag-item">发热器</span></div></div></div><div class="card"><div class="cat-head"><span class="cat-ico ci-i">人</span><span style="font-size:13px;color:#7b8ba1">4个中骨 · 14条小骨 · ★3条重点</span></div><div class="grp"><div class="gname">作业者</div><div class="tags"><span class="tag-item">作业手法错误</span><span class="tag-item">工作马虎</span><span class="tag-item">不良位置不明确</span><span class="tag-item">品质观念不强</span></div></div><div class="grp"><div class="gname">PQC</div><div class="tags"><span class="tag-item">抽段数量不够</span><span class="tag-item">未按标准作业</span></div></div><div class="grp"><div class="gname">成型技术员</div><div class="tags"><span class="tag-item">技术缺乏</span><span class="tag-item">操作失误</span><span class="tag-item key">★未对量产前部件进行确认</span><span class="tag-item">未开启</span><span class="tag-item key">★未废弃异常部件</span><span class="tag-item key">★未按规定清扫排气槽</span></div></div><div class="grp"><div class="gname">修模技术员</div><div class="tags"><span class="tag-item">经验不足</span><span class="tag-item">配件装错</span></div></div></div><div class="card"><div class="cat-head"><span class="cat-ico ci-s">方法</span><span style="font-size:13px;color:#7b8ba1">4个中骨 · 39条小骨 · ★9条重点</span></div><div class="grp"><div class="gname">金型维护</div><div class="tags"><span class="tag-item">未按计划进行</span><span class="tag-item key">★未按时进行</span><span class="tag-item">方法错误</span><span class="tag-item">定期保养</span><span class="tag-item">项目不全·方法不正确</span><span class="tag-item">日常保养</span><span class="tag-item">保养位不全</span><span class="tag-item">修理</span><span class="tag-item">配件装错</span><span class="tag-item key">★未按WGS作业</span></div></div><div class="grp"><div class="gname">操作</div><div class="tags"><span class="tag-item">开机生产部品未确认品质</span><span class="tag-item key">★未按规定废弃数量</span><span class="tag-item">未定期清洗</span><span class="tag-item">料筒热流道清洗干净</span><span class="tag-item">未清洗干净</span><span class="tag-item key">★未废弃异常部品</span><span class="tag-item">未确认</span><span class="tag-item">未按下料槽</span><span class="tag-item">异常处理</span></div></div><div class="grp"><div class="gname">检查</div><div class="tags"><span class="tag-item">出货检查</span><span class="tag-item">未检查</span><span class="tag-item">抽取数量不够</span><span class="tag-item">未全数检查</span><span class="tag-item">漏检</span><span class="tag-item">外观全检</span></div></div><div class="grp"><div class="gname">成形条件</div><div class="tags"><span class="tag-item">温度·溶胶温度低</span><span class="tag-item">温度·热胶位置温度低</span><span class="tag-item key">★温度·金型温度低</span><span class="tag-item">速度·计量快</span><span class="tag-item key">★速度·射出速度快</span><span class="tag-item">压力·背压力小</span><span class="tag-item">压力·射出压力小</span><span class="tag-item">压力·合模压力大</span><span class="tag-item key">★压力·保压力小</span><span class="tag-item">位置·计量位置小</span><span class="tag-item">位置·射出位置小</span><span class="tag-item key">★位置·保压切换位置大</span><span class="tag-item key">★时间·射出时间短</span><span class="tag-item">时间·保压时间不够</span></div></div></div>
+    </div>
+
+    <details>
+      <summary>🛠 本次美化修正说明（点击展开）</summary>
+      <ul>
+        <li>原图条目<b>全部保留</b>，按「大骨→中骨→小骨」重新排版分区，颜色统一为冷色系。</li>
+        <li>疑似错别字已按上下文修正，如「螺杆磨损」「料筒磨损」「抽段数量不够」等；个别字迹不清处按行业惯例补全，请对照原图复核，发现不符随时指出。</li>
+        <li>原图粉色标注项统一改为 <b>★ 蓝色高亮</b>，含义为「重点要因，待真因验证」。</li>
+      </ul>
+    </details>
+
+    <div style="height:26px"></div>
+
+    <div class="grid g3">
+      <div class="mini"><h4><span class="ico b">1️⃣</span>这张图第一步做了什么</h4><p>鱼头定为「欠料（料不良）」→ 按人机料法分四根大骨 → 头脑风暴填出全部中小骨。</p></div>
+      <div class="mini"><h4><span class="ico t">2️⃣</span>★ 是怎么来的</h4><p>团队凭经验+现场数据圈出的重点要因——注意它们还只是<b>嫌疑犯</b>，不是定论。</p></div>
+      <div class="mini"><h4><span class="ico i">3️⃣</span>下一步做什么</h4><p>对每条★定验证方案：查生产/检验数据、跟班现场观察、小批量试验——验证通过才立项对策，并升级进 FMEA。</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ S6 常见错误 ============ -->
+<section id="s6" style="background:rgba(255,255,255,.35)">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="no" style="background:linear-gradient(145deg,#94a3b8,#475569)">06</div>
+      <h2>六个常见错误（避坑）</h2>
+      <p class="desc">每一条都是现场真实踩过的坑。</p>
+    </div>
+    <div class="grid g3">
+      <div class="err">
+        <div class="et"><span class="x">✗</span><h4>把对策写上图</h4></div>
+        <p>图上只能写"原因"，不能写"加强培训""落实巡检"——那是措施，混进去图就废了。</p>
+        <div class="fix">✅ <b>改法：</b>先老老实实写原因，对策等验证完真因后再谈。</div>
+      </div>
+      <div class="err">
+        <div class="et"><span class="x">✗</span><h4>原因太笼统</h4></div>
+        <p>"培训不足""人为疏忽""设备问题"——这些是分类标签，不是原因，没法验证也没法下对策。</p>
+        <div class="fix">✅ <b>改法：</b>追问到具体动作："没有书面换模作业指导书，靠老师傅记忆操作"。</div>
+      </div>
+      <div class="err">
+        <div class="et"><span class="x">✗</span><h4>只挖一层"为什么"</h4></div>
+        <p>"设备故障"就停笔了——故障只是表象，为什么故障？因为没按周期保养。为什么没保养？交接班不看点检表。这才算挖到地方。</p>
+        <div class="fix">✅ <b>改法：</b>每条至少连问 3 层 Why，挖到能动手改为止。</div>
+      </div>
+      <div class="err">
+        <div class="et"><span class="x">✗</span><h4>画完不验证就下结论</h4></div>
+        <p>图往文件夹一塞，圈了重点就直接整改——用"大家觉得"代替"数据证明"，十个有九个改错方向。</p>
+        <div class="fix">✅ <b>改法：</b>每条★配一个验证动作（查数据/现场看/做试验），验证通过才算真因。</div>
+      </div>
+      <div class="err">
+        <div class="et"><span class="x">✗</span><h4>一个图塞多个问题</h4></div>
+        <p>"欠料+外观不良+尺寸超差"挤一张图——鱼刺纠缠成一团乱麻，谁也说不清。</p>
+        <div class="fix">✅ <b>改法：</b>一个鱼头只装一个问题，别贪多。</div>
+      </div>
+      <div class="err">
+        <div class="et"><span class="x">✗</span><h4>只找熟悉的方向 / 缺现场的人</h4></div>
+        <p>工艺工程师只看参数，设备科只看机器——某根大骨空着没人管；坐在会议室里画图，漏掉的真因都在机台上。</p>
+        <div class="fix">✅ <b>改法：</b>每根大骨都要过一遍；必须拉上现场操作工一起头脑风暴。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ S7 自查清单 ============ -->
+<section id="s7">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="no" style="background:linear-gradient(145deg,#38bdf8,#14b8a6)">07</div>
+      <h2>画完自查清单（可点选）</h2>
+      <p class="desc">10 条全勾上，你的图才算合格。可以反复使用：每画一张新图就核对一遍。</p>
+    </div>
+    <div class="ck-card">
+      <div class="ck-count"><span id="ckDone">0</span> / 10 项完成</div>
+      <div class="progress-wrap"><div class="progress" id="ckBar"></div></div>
+      <div id="ckList">
+        <div class="ck-item"><span class="ck-box">✓</span><span>鱼头问题具体、可量化（有时间、有数据、有对象）</span></div>
+        <div class="ck-item"><span class="ck-box">✓</span><span>大骨用中性词（人机料法环测），不带好坏判断</span></div>
+        <div class="ck-item"><span class="ck-box">✓</span><span>中小骨用价值判断词，且挖到能直接下对策</span></div>
+        <div class="ck-item"><span class="ck-box">✓</span><span>每根大骨都讨论过，没有空着的大骨</span></div>
+        <div class="ck-item"><span class="ck-box">✓</span><span>每条原因至少追问了 3 层"为什么"</span></div>
+        <div class="ck-item"><span class="ck-box">✓</span><span>图上只有原因，没有混入对策/措施</span></div>
+        <div class="ck-item"><span class="ck-box">✓</span><span>重点要因已用 ★ 圈出（3~5 条）</span></div>
+        <div class="ck-item"><span class="ck-box">✓</span><span>每条 ★ 都定了验证方法（查数据/现场看/做试验）</span></div>
+        <div class="ck-item"><span class="ck-box">✓</span><span>头脑风暴时有现场操作工参与</span></div>
+        <div class="ck-item"><span class="ck-box">✓</span><span>一个图只分析一个问题</span></div>
+      </div>
+      <div class="ck-actions"><button class="btn teal sm" id="ckReset">🔄 重置清单</button></div>
+    </div>
+
+    <div style="height:26px"></div>
+
+    <div class="sum">
+      <h3 style="margin-bottom:10px">🎯 一页总结</h3>
+      <ul>
+        <li><b>要因图 = 鱼骨图 = 石川图</b>：鱼头写问题，大骨分方向（5M1E），中小骨装原因。</li>
+        <li><b>两种用法</b>：事后找原因（救火），事前做管控清单（防火）——管住要因=管住结果。</li>
+        <li><b>进阶路线</b>：鱼骨图找全 → FMEA 排优先级（官方推荐输入）→ 控制计划落地盯住。</li>
+        <li><b>三个铁律</b>：大骨中性词 · 中小骨挖到能下对策 · ★只是嫌疑犯，数据才能定罪。</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="line"></div>
+  <p>要因图（鱼骨图）制作培训 · 班组长/储备干部版 · 依据 AIAG&amp;VDA FMEA 手册与 QC 七大手法整理</p>
+</footer>
+
+<script>
+const items=document.querySelectorAll('.ck-item');
+const bar=document.getElementById('ckBar'),doneEl=document.getElementById('ckDone');
+function refresh(){const d=document.querySelectorAll('.ck-item.done').length;doneEl.textContent=d;bar.style.width=(d*10)+'%';}
+items.forEach(it=>it.addEventListener('click',()=>{it.classList.toggle('done');refresh();}));
+document.getElementById('ckReset').addEventListener('click',()=>{items.forEach(it=>it.classList.remove('done'));refresh();});
+refresh();
+</script>
+</body>
+</html>

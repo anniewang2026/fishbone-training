@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>要因图（鱼骨图）制作培训 · 班组长版</title>
+<style>
+:root{
+  --ink:#1e3a5f; --body:#46586e; --muted:#7b8ba1;
+  --sky:#38bdf8; --sky-d:#0284c7; --teal:#2dd4bf; --teal-d:#0d9488;
+  --indigo:#818cf8; --indigo-d:#4f46e5; --slate:#64748b;
+  --card-grad:linear-gradient(145deg,#ffffff 0%,#eef6fb 100%);
+  --bg-grad:linear-gradient(135deg,#f0f6fa 0%,#e8f4fb 45%,#e6faf6 100%);
+  --shadow-out:10px 10px 22px rgba(30,90,140,.12), inset 5px 5px 10px rgba(255,255,255,.9), inset -3px -3px 6px rgba(30,90,140,.06);
+  --shadow-out-sm:6px 6px 12px rgba(30,90,140,.10), inset 3px 3px 6px rgba(255,255,255,.85), inset -2px -2px 4px rgba(30,90,140,.05);
+  --shadow-in:inset 4px 4px 8px rgba(30,90,140,.12), inset -4px -4px 8px rgba(255,255,255,.9);
+  --spring:cubic-bezier(.34,1.56,.64,1);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
+body{font-family:"Microsoft YaHei","PingFang SC","Segoe UI",system-ui,sans-serif;background:var(--bg-grad);color:var(--body);line-height:1.75;font-size:16px}
+.wrap{max-width:1120px;margin:0 auto;padding:0 22px}
+h1,h2,h3,h4{color:var(--ink);line-height:1.4}
+p{word-break:break-word}
+
+/* ---------- nav ---------- */
+nav{position:sticky;top:0;z-index:50;background:rgba(240,246,250,.88);backdrop-filter:blur(10px);padding:12px 0;border-bottom:1px solid rgba(120,160,200,.18)}
+.navbar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:space-between}
+.brand{font-weight:800;color:var(--ink);font-size:18px;display:flex;align-items:center;gap:8px}
+.brand .fish{width:38px;height:38px;border-radius:50%;background:linear-gradient(145deg,#7dd3fc,#2dd4bf);display:flex;align-items:center;justify-content:center;font-size:20px;box-shadow:var(--shadow-out-sm)}
+.navlinks{display:flex;gap:8px;flex-wrap:wrap}
+.navlinks a{display:inline-block;padding:7px 16px;border-radius:999px;background:var(--card-grad);color:var(--body);text-decoration:none;font-size:14px;font-weight:600;box-shadow:var(--shadow-out-sm);transition:transform .3s var(--spring),box-shadow .3s}
+.navlinks a:hover{transform:translateY(-2px)}
+.navlinks a:active{transform:scale(1.05,.9);box-shadow:var(--shadow-in)}
+
+/* ---------- hero ---------- */
+.hero{padding:72px 0 56px;text-align:center}
+.hero .tag{display:inline-block;padding:8px 22px;border-radius:999px;background:linear-gradient(145deg,#ccfbf1,#bae6fd);color:#0f766e;font-weight:700;font-size:14px;box-shadow:var(--shadow-out-sm);margin-bottom:22px}
+.hero h1{font-size:clamp(30px,5vw,50px);font-weight:800;letter-spacing:1px}
+.hero h1 .hl{background:linear-gradient(145deg,#0ea5e9,#14b8a6);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.hero .sub{max-width:640px;margin:18px auto 30px;font-size:17px;color:var(--muted)}
+.hero .chips{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:34px}
+.chip{padding:8px 18px;border-radius:999px;background:var(--card-grad);box-shadow:var(--shadow-out-sm);font-size:14px;font-weight:600;color:var(--body)}
+.btn{display:inline-block;padding:14px 38px;border-radius:999px;border:none;cursor:pointer;font-size:17px;font-weight:800;color:#fff;text-decoration:none;background:linear-gradient(180deg,#4cc3f7,#0ea5e9);box-shadow:8px 8px 16px rgba(14,120,180,.25),inset 4px 4px 8px rgba(255,255,255,.45),inset -2px -2px 4px rgba(0,60,110,.15);transition:all .3s var(--spring)}
+.btn:hover{transform:translateY(-3px);box-shadow:12px 14px 26px rgba(14,120,180,.3),inset 4px 4px 8px rgba(255,255,255,.45),inset -2px -2px 4px rgba(0,60,110,.15)}
+.btn:active{transform:scale(1.05,.9);box-shadow:2px 2px 6px rgba(14,120,180,.15),inset 8px 8px 16px rgba(0,60,110,.25),inset -4px -4px 8px rgba(255,255,255,.4)}
+.btn.teal{background:linear-gradient(180deg,#43d6c3,#0d9488);box-shadow:8px 8px 16px rgba(13,148,136,.25),inset 4px 4px 8px rgba(255,255,255,.45),inset -2px -2px 4px rgba(0,90,80,.18)}
+.btn.sm{padding:9px 22px;font-size:14px}
+
+/* ---------- section ---------- */
+section{padding:56px 0}
+.sec-head{text-align:center;margin-bottom:36px}
+.sec-head .no{display:inline-flex;align-items:center;justify-content:center;width:54px;height:54px;border-radius:20px;background:linear-gradient(145deg,#7dd3fc,#38bdf8);color:#fff;font-weight:800;font-size:22px;box-shadow:var(--shadow-out-sm);margin-bottom:14px}
+.sec-head h2{font-size:clamp(24px,3.4vw,34px);font-weight:800}
+.sec-head .desc{color:var(--muted);margin-top:8px;max-width:620px;margin-left:auto;margin-right:auto}
+.card{background:var(--card-grad);border-radius:28px;box-shadow:var(--shadow-out);padding:28px 30px}
+.grid{display:grid;gap:20px}
+.g2{grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+.g3{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+.g6{grid-template-columns:repeat(auto-fit,minmax(160px,1fr))}
+
+/* mini cards */
+.mini{background:var(--card-grad);border-radius:24px;box-shadow:var(--shadow-out-sm);padding:22px 24px;transition:transform .3s var(--spring),box-shadow .3s}
+.mini:hover{transform:translateY(-4px)}
+.mini h4{font-size:17px;margin-bottom:8px;display:flex;align-items:center;gap:8px}
+.mini p{font-size:14.5px}
+.ico{display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:14px;font-size:20px;flex:none}
+.ico.b{background:linear-gradient(145deg,#bae6fd,#7dd3fc)}
+.ico.t{background:linear-gradient(145deg,#99f6e4,#5eead4)}
+.ico.i{background:linear-gradient(145deg,#c7d2fe,#a5b4fc)}
+.ico.s{background:linear-gradient(145deg,#e2e8f0,#cbd5e1)}
+
+/* type cards */
+.type-card{position:relative;overflow:hidden}
+.type-card .fish-dir{font-size:30px;margin-bottom:10px}
+.badge{display:inline-block;padding:3px 14px;border-radius:999px;font-size:12.5px;font-weight:700;margin-bottom:10px}
+.badge.b{background:#e0f2fe;color:#0369a1}.badge.t{background:#ccfbf1;color:#0f766e}.badge.i{background:#e0e7ff;color:#4338ca}.badge.s{background:#e2e8f0;color:#334155}
+.hl-b{color:#0284c7;font-weight:700}.hl-t{color:#0d9488;font-weight:700}.hl-i{color:#4f46e5;font-weight:700}
+
+/* steps */
+.step{display:flex;gap:20px;align-items:flex-start;background:var(--card-grad);border-radius:28px;box-shadow:var(--shadow-out);padding:26px 28px}
+.step .num{flex:none;width:52px;height:52px;border-radius:18px;display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:800;color:#fff;background:linear-gradient(145deg,#38bdf8,#0ea5e9);box-shadow:var(--shadow-out-sm)}
+.step:nth-child(2) .num{background:linear-gradient(145deg,#2dd4bf,#0d9488)}
+.step:nth-child(3) .num{background:linear-gradient(145deg,#818cf8,#6366f1)}
+.step:nth-child(4) .num{background:linear-gradient(145deg,#38bdf8,#0284c7)}
+.step:nth-child(5) .num{background:linear-gradient(145deg,#2dd4bf,#14b8a6)}
+.step:nth-child(6) .num{background:linear-gradient(145deg,#94a3b8,#64748b)}
+.step h3{font-size:19px;margin-bottom:6px}
+.step .say{font-size:15px;margin-bottom:10px}
+.eg{background:rgba(186,230,253,.4);border-radius:16px;box-shadow:var(--shadow-in);padding:12px 18px;font-size:14px}
+.eg b{color:#0369a1}
+.x-ok{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px;font-size:13.5px}
+.x-ok span{padding:4px 12px;border-radius:999px}
+.x-ok .no{background:#fee2e2;color:#b91c1c;text-decoration:line-through}
+.x-ok .yes{background:#dcfce7;color:#15803d}
+
+/* flow (fishbone->fmea) */
+.flow{display:flex;align-items:stretch;gap:0;flex-wrap:wrap;justify-content:center}
+.flow .node{flex:1;min-width:230px;max-width:330px;background:var(--card-grad);border-radius:24px;box-shadow:var(--shadow-out-sm);padding:22px;text-align:center;position:relative;margin:8px}
+.flow .node h4{font-size:17px;margin-bottom:6px}
+.flow .node p{font-size:13.5px}
+.flow .arrow{align-self:center;font-size:26px;color:#94a3b8;font-weight:800;padding:0 2px}
+.src{font-size:13px;color:var(--muted);text-align:center;margin-top:18px}
+
+/* 5M1E */
+.m-tile{text-align:center;padding:24px 14px}
+.m-tile .letter{display:inline-flex;align-items:center;justify-content:center;width:56px;height:56px;border-radius:20px;font-size:24px;font-weight:800;color:#fff;margin-bottom:10px;box-shadow:var(--shadow-out-sm)}
+.m-tile h4{font-size:16.5px;margin-bottom:4px}
+.m-tile p{font-size:13px}
+
+/* fishbone viewer */
+.fb-card{background:var(--card-grad);border-radius:32px;box-shadow:var(--shadow-out);padding:26px 24px}
+.fb-scroll{overflow:auto;border-radius:22px;box-shadow:var(--shadow-in);background:linear-gradient(135deg,#f6fafd,#eef8f6);padding:10px}
+.fb-scroll svg{display:block;min-width:1100px;width:100%;height:auto}
+.fb-tip{text-align:center;font-size:13.5px;color:var(--muted);margin-top:14px}
+.legend{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;margin-top:14px;font-size:13.5px}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.star{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:8px;background:linear-gradient(145deg,#60a5fa,#3b82f6);color:#fff;font-size:12px;font-weight:800}
+.norm{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:8px;background:#fff;border:1.5px solid #cbd5e1}
+
+/* category detail cards */
+.cat-head{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+.cat-ico{padding:8px 22px;border-radius:999px;color:#fff;font-weight:800;font-size:17px;box-shadow:var(--shadow-out-sm)}
+.grp{margin-bottom:12px}
+.grp .gname{font-weight:800;color:var(--ink);font-size:14.5px;margin-bottom:6px}
+.tags{display:flex;flex-wrap:wrap;gap:8px}
+.tag-item{padding:5px 14px;border-radius:999px;background:#fff;border:1.5px solid #d7e3ee;color:var(--body);font-size:13.5px}
+.tag-item.key{background:linear-gradient(145deg,#93c5fd,#60a5fa);border-color:#60a5fa;color:#fff;font-weight:700}
+.ci-b{background:linear-gradient(145deg,#38bdf8,#0284c7)}.ci-t{background:linear-gradient(145deg,#2dd4bf,#0d9488)}.ci-i{background:linear-gradient(145deg,#818cf8,#4f46e5)}.ci-s{background:linear-gradient(145deg,#94a3b8,#475569)}
+
+/* mistakes */
+.err{background:var(--card-grad);border-radius:24px;box-shadow:var(--shadow-out-sm);padding:22px 24px}
+.err .et{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.err .et .x{flex:none;width:34px;height:34px;border-radius:12px;background:linear-gradient(145deg,#fca5a5,#f87171);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:17px}
+.err h4{font-size:16px}
+.err p{font-size:14px}
+.err .fix{margin-top:10px;padding:10px 16px;border-radius:14px;background:rgba(153,246,228,.4);box-shadow:var(--shadow-in);font-size:13.5px}
+.err .fix b{color:#0f766e}
+
+/* checklist */
+.ck-card{background:var(--card-grad);border-radius:32px;box-shadow:var(--shadow-out);padding:34px 34px;max-width:760px;margin:0 auto}
+.progress-wrap{height:26px;border-radius:999px;box-shadow:var(--shadow-in);background:#e3edf5;overflow:hidden;margin:18px 0 24px}
+.progress{height:100%;width:0;border-radius:999px;background:linear-gradient(90deg,#38bdf8,#2dd4bf);transition:width .5s var(--spring)}
+.ck-item{display:flex;align-items:flex-start;gap:14px;padding:13px 16px;border-radius:18px;cursor:pointer;transition:background .2s;margin-bottom:6px}
+.ck-item:hover{background:rgba(186,230,253,.25)}
+.ck-box{flex:none;width:26px;height:26px;border-radius:10px;background:#fff;box-shadow:var(--shadow-out-sm);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;transition:all .3s var(--spring);margin-top:2px}
+.ck-item.done .ck-box{background:linear-gradient(145deg,#2dd4bf,#0d9488);box-shadow:var(--shadow-in)}
+.ck-item.done span{text-decoration:line-through;color:var(--muted)}
+.ck-count{text-align:center;font-weight:800;color:var(--ink);font-size:17px}
+.ck-actions{text-align:center;margin-top:22px}
+
+/* summary */
+.sum{background:linear-gradient(145deg,#e0f2fe,#ccfbf1);border-radius:28px;box-shadow:var(--shadow-out);padding:30px 34px}
+.sum li{margin:8px 0 8px 20px;font-size:15.5px}
+
+footer{padding:44px 0 60px;text-align:center;color:var(--muted);font-size:13.5px}
+footer .line{width:80px;height:6px;border-radius:999px;background:linear-gradient(90deg,#7dd3fc,#5eead4);margin:0 auto 18px}
+
+details{margin-top:18px;background:rgba(226,232,240,.5);border-radius:18px;padding:14px 20px;font-size:13.5px}
+details summary{cursor:pointer;font-weight:700;color:var(--ink)}
+details li{margin:6px 0 6px 20px}
+@media (max-width:640px){
+  .card{padding:22px 18px}.step{flex-direction:column;gap:12px}
+  .ck-card{padding:24px 18px}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap navbar">
+    <div class="brand"><span class="fish">🐟</span>要因图制作培训</div>
+    <div class="navlinks">
+      <a href="#s1">认识要因图</a>
+      <a href="#s2">两种视角与FMEA</a>
+      <a href="#s3">分类框架</a>
+      <a href="#s4">六步画法</a>
+      <a href="#s5">实战案例</a>
+      <a href="#s6">常见错误</a>
+      <a href="#s7">自查清单</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <span class="tag">🏭 班组长 / 储备干部 · 质量工具系列课</span>
+    <h1>要因图（鱼骨图）<span class="hl">制作培训</span></h1>
+    <p class="sub">一条鱼，把问题的原因一根一根找出来、圈出来、管起来——从画图到 FMEA 风险升级，一次讲透。</p>
+    <div class="chips">
+      <span class="chip">⏱ 30分钟学完</span>
+      <span class="chip">🧩 QC七大手法之一</span>
+      <span class="chip">📌 真实案例：LED封装欠料分析</span>
+    </div>
+    <a class="btn" href="#s1">开始学习 ↓</a>
+  </div>
+</header>
+
+<!-- ============ S1 认识要因图 ============ -->
+<section id="s1">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="no">01</div>
+      <h2>认识要因图：它到底是什么</h2>
+      <p class="desc">先把名字和长相搞清楚，后面画图就不迷糊。</p>
+    </div>
+    <div class="card" style="margin-bottom:20px">
+      <h3 style="margin-bottom:10px">💡 一句大白话</h3>
+      <p>把一个问题写在<b>鱼头</b>上，把可能导致这个问题的原因像<b>鱼刺</b>一样一根根画出来——这张图就是<b class="hl-b">要因图</b>。因为长得像鱼骨头，所以也叫<b class="hl-t">鱼骨图</b>；因为日本品质大师<b>石川馨</b>发明了它，又叫<b class="hl-i">石川图</b>；教科书上还叫<b>因果图</b>。四个名字，同一张图。</p>
+    </div>
+    <div class="grid g3">
+      <div class="mini type-card">
+        <div class="fish-dir">🐟⬅</div>
+        <span class="badge s">整理问题型</span>
+        <h4>梳理结构用</h4>
+        <p>各要素之间不是因果关系，而是构成关系。用来把复杂问题<b>分门别类整理清楚</b>，类似思维导图。</p>
+      </div>
+      <div class="mini type-card">
+        <div class="fish-dir">🐟➡（鱼头在右）</div>
+        <span class="badge b">原因型 · 最常用</span>
+        <h4>找原因用</h4>
+        <p>鱼头在右，写"<b>为什么……</b>"。比如"为什么欠料？"。我们这次案例用的就是这种。</p>
+      </div>
+      <div class="mini type-card">
+        <div class="fish-dir">⬅🐠（鱼头在左）</div>
+        <span class="badge t">对策型</span>
+        <h4>想办法用</h4>
+        <p>鱼头在左，写"<b>如何提高/改善……</b>"。把对策当"鱼刺"来梳理，用于改善方案策划。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ S2 两种视角 + FMEA ============ -->
+<section id="s2" style="background:rgba(255,255,255,.35)">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="no" style="background:linear-gradient(145deg,#5eead4,#14b8a6)">02</div>
+      <h2>换个角度看「要因」：从找原因到管重点</h2>
+      <p class="desc">要因图不只是"出了问题才用"——换个视角，它就是你的管控清单，还是 FMEA 的官方输入。</p>
+    </div>
+    <div class="grid g2" style="margin-bottom:26px">
+      <div class="mini">
+        <h4><span class="ico b">🔍</span>视角一：事后找原因（救火）</h4>
+        <p>问题已经发生了，鱼头写<b>问题</b>，要因是"嫌疑犯"——先列全，再圈重点，最后用数据"定罪"。这是最经典的用法。</p>
+      </div>
+      <div class="mini">
+        <h4><span class="ico t">🛡️</span>视角二：事前做管控（防火）</h4>
+        <p>把鱼头换成<b>要保住的好结果</b>（如"欠料率为零"），要因就变成"<b class="hl-t">管住它、结果就稳了</b>"的控制点。<b>管住要因 = 管住结果</b>，这张图就成了你班组的日常管控清单。</p>
+      </div>
+    </div>
+    <div class="flow">
+      <div class="node">
+        <h4>🐟 鱼骨图</h4>
+        <span class="badge b">找全</span>
+        <p>用头脑风暴把可能原因<b>一网打尽</b>，圈出重点要因（候选嫌疑犯）。</p>
+      </div>
+      <div class="arrow">➜</div>
+      <div class="node">
+        <h4>🧮 FMEA</h4>
+        <span class="badge t">排优先级</span>
+        <p>给每个要因评 <b>S 严重度 / O 频度 / D 探测度</b>，高风险项优先整改——把"猜"升级成"算"。</p>
+      </div>
+      <div class="arrow">➜</div>
+      <div class="node">
+        <h4>📋 控制计划 CP</h4>
+        <span class="badge i">落地盯住</span>
+        <p>高风险要因落成日常管控：<b>测什么、怎么测、多久测一次、异常了怎么办</b>。</p>
+      </div>
+    </div>
+    <p class="src">📖 依据：AIAG &amp; VDA《FMEA手册》（第五版）七步法第4步「失效分析」明确推荐用<b>鱼骨图（4M/5M1E）</b>识别过程失效原因；高风险项经第5步风险分析后转入<b>控制计划</b>落地执行（IATF 16949 第 8.5.1.1 条）。</p>
+  </div>
+</section>
+
+<!-- ============ S3 分类框架 ============ -->
+<section id="s3">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="no" style="background:linear-gradient(145deg,#a5b4fc,#6366f1)">03</div>
+      <h2>大骨怎么分：5M1E 框架</h2>
+      <p class="desc">大骨就是"从哪几个大方向找原因"。现场问题首选 5M1E，别自己乱编方向。</p>
+    </div>
+    <div class="grid g6" style="margin-bottom:22px">
+      <div class="mini m-tile"><span class="letter" style="background:linear-gradient(145deg,#818cf8,#6366f1)">人</span><h4>Manpower</h4><p>技能、手法、马虎、培训、品质意识</p></div>
+      <div class="mini m-tile"><span class="letter" style="background:linear-gradient(145deg,#38bdf8,#0284c7)">机</span><h4>Machine</h4><p>设备精度、模具状态、维护保养、故障</p></div>
+      <div class="mini m-tile"><span class="letter" style="background:linear-gradient(145deg,#2dd4bf,#0d9488)">料</span><h4>Material</h4><p>原材料质量、批次差异、来料检验、储存</p></div>
+      <div class="mini m-tile"><span class="letter" style="background:linear-gradient(145deg,#94a3b8,#475569)">法</span><h4>Method</h4><p>工艺参数、操作规程、SOP、检验方法</p></div>
+      <div class="mini m-tile"><span class="letter" style="background:linear-gradient(145deg,#7dd3fc,#0ea5e9)">环</span><h4>Environment</h4><p>温湿度、洁净度、静电、现场环境</p></div>
+      <div class="mini m-tile"><span class="letter" style="background:linear-gradient(145deg,#5eead4,#14b8a6)">测</span><h4>Measurement</h4><p>量具精度、检测标准、校验、判定方法</p></div>
+    </div>
+    <div class="card">
+      <p>📌 <b>选类别的规矩</b>：<b>现场作业问题</b>用「人机料法环（测）」；<b>管理类问题</b>（如离职率高、交付延误）换用「人·事·时·地·物」。类别只是提示思考方向的<b>脚手架</b>——某根大骨实在找不出原因，可以删掉；某条原因放不进任何大骨，可以为它单开一根。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ S4 六步画法 ============ -->
+<section id="s4" style="background:rgba(255,255,255,.35)">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="no" style="background:linear-gradient(145deg,#7dd3fc,#0284c7)">04</div>
+      <h2>绘制六步法（重点）</h2>
+      <p class="desc">跟着做，一张规范的要因图就出来了。每一步都配了欠料案例的示例。</p>
+    </div>
+    <div class="grid" style="gap:16px">
+      <div class="step">
+        <div class="num">1</div>
+        <div>
+          <h3>定鱼头：把问题说具体</h3>
+          <p class="say">鱼头是整张图最重要的一个格子。问题写得越具体，原因找得越准。<b>要有数据、有时间、有对象。</b></p>
+          <div class="x-ok"><span class="no">品质很差</span><span class="no">欠料太多</span><span class="yes">3月LED封装线欠料不良率从2%升到8%</span></div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="num">2</div>
+        <div>
+          <h3>画主骨：一条横线指鱼头</h3>
+          <p class="say">白板/大白纸中间画一条粗横线，右端箭头指向鱼头。这就是"鱼脊梁骨"。</p>
+          <div class="eg">📝 案例写法：鱼头框里写「<b>欠料（料不良）</b>」，主骨横穿图中央。</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="num">3</div>
+        <div>
+          <h3>画大骨：4~6根，约60°斜角</h3>
+          <p class="say">按 5M1E 画出大方向骨。<b>大骨必须用中性词</b>——只说方向，不说好坏。</p>
+          <div class="x-ok"><span class="no">材料不良（带判断✗）</span><span class="yes">材料 / 设备 / 人 / 方法 ✓</span></div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="num">4</div>
+        <div>
+          <h3>头脑风暴填中小骨：越多越好，不许批评</h3>
+          <p class="say">一根大骨一根大骨地过：这个方向上，什么会导致鱼头问题？把每条原因画成中骨、小骨。<b>中小骨要用价值判断词</b>（如"干燥温度偏低"），并用 5Why 连追问至少3层，挖到<b>能直接下对策</b>为止。</p>
+          <div class="eg">🧠 头脑风暴四原则：<b>不批评</b> · <b>自由畅想</b> · <b>越多越好</b> · <b>可以搭便车</b>（在别人想法上补充）。谁都不许说"这个不可能"——真因往往就死在这一句里。</div>
+          <div class="x-ok" style="margin-top:8px"><span class="no">培训不足（太笼统，挖不下去）</span><span class="yes">成型技术员未对量产前部件进行确认（具体动作，可验证✓）</span></div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="num">5</div>
+        <div>
+          <h3>圈重点要因：圈的是"嫌疑犯"，不是"罪犯"</h3>
+          <p class="say">图上几十条原因不可能全查。用<b>投票</b>或<b>经验+数据</b>圈出 3~5 条最可疑的，做上醒目标记（本案例用 <b>★</b> 标注）。记住：此刻它们只是<b>候选</b>。</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="num">6</div>
+        <div>
+          <h3>真因验证：数据才能定罪</h3>
+          <p class="say">对每条重点要因定一个验证方法：<b>查数据</b>（记录、批次对比）、<b>到现场看</b>（跟班观察）、<b>做试验</b>（改变条件看结果）。验证通过的才是真因，才进入 FMEA / 对策阶段。<b>鱼骨图产生假设，数据才能定罪。</b></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ S5 实战案例 ============ -->
+<section id="s5">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="no" style="background:linear-gradient(145deg,#5eead4,#0d9488)">05</div>
+      <h2>实战案例：LED封装线「欠料」要因分析</h2>
+      <p class="desc">下面是生产现场的原图美化版——内容一条不少，重新排版，★ 标出重点要因（待真因验证）。</p>
+    </div>
+
+    <div class="fb-card">
+      <div class="fb-scroll">
+<!--FISHBONE_SVG-->
+      </div>
+      <div class="legend">
+        <span><i class="star">★</i> 重点要因（待真因验证）</span>
+        <span><i class="norm"></i> 一般可能原因</span>
+        <span>🗂 内容依据原图整理，个别字词已修正（见下方说明）</span>
+      </div>
+      <p class="fb-tip">👆 图较小可 Ctrl+滚轮 或 双指缩放；下方分类卡片是同一份内容的放大可读版</p>
+    </div>
+
+    <div style="height:22px"></div>
+
+    <div class="grid g2">
+<!--CATEGORY_CARDS-->
+    </div>
+
+    <details>
+      <summary>🛠 本次美化修正说明（点击展开）</summary>
+      <ul>
+        <li>原图条目<b>全部保留</b>，按「大骨→中骨→小骨」重新排版分区，颜色统一为冷色系。</li>
+        <li>疑似错别字已按上下文修正，如「螺杆磨损」「料筒磨损」「抽段数量不够」等；个别字迹不清处按行业惯例补全，请对照原图复核，发现不符随时指出。</li>
+        <li>原图粉色标注项统一改为 <b>★ 蓝色高亮</b>，含义为「重点要因，待真因验证」。</li>
+      </ul>
+    </details>
+
+    <div style="height:26px"></div>
+
+    <div class="grid g3">
+      <div class="mini"><h4><span class="ico b">1️⃣</span>这张图第一步做了什么</h4><p>鱼头定为「欠料（料不良）」→ 按人机料法分四根大骨 → 头脑风暴填出全部中小骨。</p></div>
+      <div class="mini"><h4><span class="ico t">2️⃣</span>★ 是怎么来的</h4><p>团队凭经验+现场数据圈出的重点要因——注意它们还只是<b>嫌疑犯</b>，不是定论。</p></div>
+      <div class="mini"><h4><span class="ico i">3️⃣</span>下一步做什么</h4><p>对每条★定验证方案：查生产/检验数据、跟班现场观察、小批量试验——验证通过才立项对策，并升级进 FMEA。</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ S6 常见错误 ============ -->
+<section id="s6" style="background:rgba(255,255,255,.35)">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="no" style="background:linear-gradient(145deg,#94a3b8,#475569)">06</div>
+      <h2>六个常见错误（避坑）</h2>
+      <p class="desc">每一条都是现场真实踩过的坑。</p>
+    </div>
+    <div class="grid g3">
+      <div class="err">
+        <div class="et"><span class="x">✗</span><h4>把对策写上图</h4></div>
+        <p>图上只能写"原因"，不能写"加强培训""落实巡检"——那是措施，混进去图就废了。</p>
+        <div class="fix">✅ <b>改法：</b>先老老实实写原因，对策等验证完真因后再谈。</div>
+      </div>
+      <div class="err">
+        <div class="et"><span class="x">✗</span><h4>原因太笼统</h4></div>
+        <p>"培训不足""人为疏忽""设备问题"——这些是分类标签，不是原因，没法验证也没法下对策。</p>
+        <div class="fix">✅ <b>改法：</b>追问到具体动作："没有书面换模作业指导书，靠老师傅记忆操作"。</div>
+      </div>
+      <div class="err">
+        <div class="et"><span class="x">✗</span><h4>只挖一层"为什么"</h4></div>
+        <p>"设备故障"就停笔了——故障只是表象，为什么故障？因为没按周期保养。为什么没保养？交接班不看点检表。这才算挖到地方。</p>
+        <div class="fix">✅ <b>改法：</b>每条至少连问 3 层 Why，挖到能动手改为止。</div>
+      </div>
+      <div class="err">
+        <div class="et"><span class="x">✗</span><h4>画完不验证就下结论</h4></div>
+        <p>图往文件夹一塞，圈了重点就直接整改——用"大家觉得"代替"数据证明"，十个有九个改错方向。</p>
+        <div class="fix">✅ <b>改法：</b>每条★配一个验证动作（查数据/现场看/做试验），验证通过才算真因。</div>
+      </div>
+      <div class="err">
+        <div class="et"><span class="x">✗</span><h4>一个图塞多个问题</h4></div>
+        <p>"欠料+外观不良+尺寸超差"挤一张图——鱼刺纠缠成一团乱麻，谁也说不清。</p>
+        <div class="fix">✅ <b>改法：</b>一个鱼头只装一个问题，别贪多。</div>
+      </div>
+      <div class="err">
+        <div class="et"><span class="x">✗</span><h4>只找熟悉的方向 / 缺现场的人</h4></div>
+        <p>工艺工程师只看参数，设备科只看机器——某根大骨空着没人管；坐在会议室里画图，漏掉的真因都在机台上。</p>
+        <div class="fix">✅ <b>改法：</b>每根大骨都要过一遍；必须拉上现场操作工一起头脑风暴。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ S7 自查清单 ============ -->
+<section id="s7">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="no" style="background:linear-gradient(145deg,#38bdf8,#14b8a6)">07</div>
+      <h2>画完自查清单（可点选）</h2>
+      <p class="desc">10 条全勾上，你的图才算合格。可以反复使用：每画一张新图就核对一遍。</p>
+    </div>
+    <div class="ck-card">
+      <div class="ck-count"><span id="ckDone">0</span> / 10 项完成</div>
+      <div class="progress-wrap"><div class="progress" id="ckBar"></div></div>
+      <div id="ckList">
+        <div class="ck-item"><span class="ck-box">✓</span><span>鱼头问题具体、可量化（有时间、有数据、有对象）</span></div>
+        <div class="ck-item"><span class="ck-box">✓</span><span>大骨用中性词（人机料法环测），不带好坏判断</span></div>
+        <div class="ck-item"><span class="ck-box">✓</span><span>中小骨用价值判断词，且挖到能直接下对策</span></div>
+        <div class="ck-item"><span class="ck-box">✓</span><span>每根大骨都讨论过，没有空着的大骨</span></div>
+        <div class="ck-item"><span class="ck-box">✓</span><span>每条原因至少追问了 3 层"为什么"</span></div>
+        <div class="ck-item"><span class="ck-box">✓</span><span>图上只有原因，没有混入对策/措施</span></div>
+        <div class="ck-item"><span class="ck-box">✓</span><span>重点要因已用 ★ 圈出（3~5 条）</span></div>
+        <div class="ck-item"><span class="ck-box">✓</span><span>每条 ★ 都定了验证方法（查数据/现场看/做试验）</span></div>
+        <div class="ck-item"><span class="ck-box">✓</span><span>头脑风暴时有现场操作工参与</span></div>
+        <div class="ck-item"><span class="ck-box">✓</span><span>一个图只分析一个问题</span></div>
+      </div>
+      <div class="ck-actions"><button class="btn teal sm" id="ckReset">🔄 重置清单</button></div>
+    </div>
+
+    <div style="height:26px"></div>
+
+    <div class="sum">
+      <h3 style="margin-bottom:10px">🎯 一页总结</h3>
+      <ul>
+        <li><b>要因图 = 鱼骨图 = 石川图</b>：鱼头写问题，大骨分方向（5M1E），中小骨装原因。</li>
+        <li><b>两种用法</b>：事后找原因（救火），事前做管控清单（防火）——管住要因=管住结果。</li>
+        <li><b>进阶路线</b>：鱼骨图找全 → FMEA 排优先级（官方推荐输入）→ 控制计划落地盯住。</li>
+        <li><b>三个铁律</b>：大骨中性词 · 中小骨挖到能下对策 · ★只是嫌疑犯，数据才能定罪。</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="line"></div>
+  <p>要因图（鱼骨图）制作培训 · 班组长/储备干部版 · 依据 AIAG&amp;VDA FMEA 手册与 QC 七大手法整理</p>
+</footer>
+
+<script>
+const items=document.querySelectorAll('.ck-item');
+const bar=document.getElementById('ckBar'),doneEl=document.getElementById('ckDone');
+function refresh(){const d=document.querySelectorAll('.ck-item.done').length;doneEl.textContent=d;bar.style.width=(d*10)+'%';}
+items.forEach(it=>it.addEventListener('click',()=>{it.classList.toggle('done');refresh();}));
+document.getElementById('ckReset').addEventListener('click',()=>{items.forEach(it=>it.classList.remove('done'));refresh();});
+refresh();
+</script>
+</body>
+</html>
