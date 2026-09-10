@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mermaid 鱼骨图 · 一键打开</title>
+<style>
+  :root{--ink:#1e3a5f;--sub:#5b7085;--line:#d6e2ee;--bg:#f4f8fc;--acc:#2f6fb5}
+  *{box-sizing:border-box}
+  body{margin:0;padding:32px 20px 60px;background:var(--bg);color:var(--ink);
+       font:15px/1.75 -apple-system,"Segoe UI","Microsoft YaHei",sans-serif}
+  .wrap{max-width:920px;margin:0 auto}
+  h1{font-size:24px;margin:0 0 6px}
+  .lead{color:var(--sub);margin:0 0 28px}
+  .card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:20px 22px;margin-bottom:20px}
+  .card h2{font-size:17px;margin:0 0 4px;display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+  .card h2 em{font-style:normal;font-size:13px;font-weight:400;color:var(--sub)}
+  .btn{display:inline-block;margin:12px 0 14px;padding:11px 22px;border-radius:9px;
+       background:linear-gradient(135deg,#2f6fb5,#3f8fd8);color:#fff;text-decoration:none;font-weight:600}
+  .btn:hover{filter:brightness(1.07)}
+  textarea{width:100%;height:200px;padding:12px 14px;border:1px solid var(--line);border-radius:9px;
+           font:13px/1.6 Consolas,"Courier New",monospace;resize:vertical;background:#fbfdff;color:#243b53}
+  .tail{height:340px}
+  .tip{background:#fff;border:1px solid var(--line);border-left:4px solid var(--acc);
+       border-radius:10px;padding:16px 20px;color:#33475e}
+  .tip b{color:var(--ink)}
+  .tip ol{margin:8px 0 0;padding-left:22px}
+  .tip code{background:#eef4fb;padding:1px 6px;border-radius:4px;font-size:13px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>注塑件缺料（短射） · 鱼骨图 Mermaid 版</h1>
+  <p class="lead">点按钮 → 浏览器打开 mermaid.live，代码已经填好，右边立刻就是鱼骨图。改文字，图会实时跟着变。</p>
+
+  <div class="card">
+    <h2>① 总览版 <em>22 行 · 结构清晰 · 讲课时用这个</em></h2>
+    <a class="btn" href="https://mermaid.live/edit#pako:eNp9kkFuwyAQRa9isW4lIGBwtu0BWnXLZoChsRo7lWtUVVHu3sFyUrtJywr9efOHP-LIwiEi21as_di1b_AJ9x5HcH1Fx-U6oHVZWy1cVphql03aAOm6aVxOiVPVGIzEBK4mpbn0Gs1nclKu1KzRSOoXqFdETIZqqnhP9LLGJdUsT_Ha00Zpz7Ot90geDTdLbjGPejaw8gBJGWuUzV81LQzNNmAovxVarQgp6AU61XLZXXbmV04q6VBUUTw41zc8jPXlbsuWjExlE9r-cE_PD2tDxMvjbzaVZfsSKsT1OBsm-tfyl1ExqeIK_0Stzx9jSagQ56g9u6tYh0MHbSyf7OjYuMMOHds6FjFB3o-OnQoFeTy8fPWBsHHISEp-jzDiYwuvA3SzfPoGI8a9zA" target="_blank" rel="noopener">在 mermaid.live 打开 →</a>
+    <textarea readonly spellcheck="false">ishikawa-beta
+    注塑件缺料（短射）
+    材料
+        材料干燥
+        混合材
+        性能
+        材质
+    设备
+        干燥机
+        模温机
+        模具空腔
+        成形机
+    人
+        作业者
+        成型技术员
+        PQC
+        修模技术员
+    方法
+        检查
+        模具维护
+        成形条件
+        操作
+</textarea>
+  </div>
+
+  <div class="card">
+    <h2>② 完整版 <em>142 行 · 102 条小骨 + 18 条小小骨全在 · 图会比较挤</em></h2>
+    <a class="btn" href="https://mermaid.live/edit#pako:eNqdWE1vJCcQ_SurOScS3x97TaRcE-0hl7kADVkrsTdyPIqi1f73UAW06YHGTnywRlBAUfXqvaK_XsKXLV4-frg8_PX54Xf3t_vexxd3ffqQ_643FaK53qSR9HoTManrTSfu8ri09npLieRZreOWbQIROGL3tVqSaokjw-hNRs3yehrlq0Wx6mayLZxrZRLgA8lnmc3z44q6ylvX7KVS4HkiDHbjZjiBud2Psqvkoa2-szXexzxviV7tWK3QByuphZGYljeLDKPgwF8iUvYkiXiI1pbgTAFxxsjd7aaDgR0Chbta6u7n63qq4DQt4GSm7GClWfZZe-mz54QM8zU-goR5VntftDERrAAl57FSgQuIeOQQKz1GiRECvgrd_NIJMKgN4FFxmQ5RIizbGZK28f6CYq5Ns5JbjONpHDLAID45Yr6hw6SgT-KKEZM-KEQ-He-HZ3GqRuybjY1oFNzUqExwjRE61EH2CX5rziaRyzPGRj74JAiggIVw3Avrd46birs3ctnb-g2qNBk_rjjU0dNJRcBZi4rBHE0iVDKlNE2wP6dwQ2Gmlu-q0kNlnt8crRR3-vzU3bcYRUNxQw-yFfqsYsmN8m-vloZL5OQRx1qMlcQ3qBuCHA2cOIlJZVWon5xBxett-7U9ih2j-91n-UoO2IS71Or8jLXfG-fDHRZWiDpm_fJERPNYabgzAa7UfM8QjNxbUY-VrSEfAbgil0-a-9VilfcEHnM672moFHPlMN7R5nlmYTaJggKE6SUzWSq2ptU1CkyNqAhY0z6ZlZU2kL0j2zZUbh4RoxqLZxZcWlUNiRBdY9TAmJZgpyEChRWoahzqQ1rIhJFmzNdpHXTV9Ka2K4uo3xJtOKwrLB3uk9UZZjyweLVKconpo57XqBK3VW0oary6CbegSYGK5ukiW1gfRfEsyX41LBntDphkFHCeFJvXr9EeeUmoud4OWjbV1F5hin6d7yUSzkvcy6JyCvhd4l31Z-CuXXNKjWHd4-rBE-jxchfBlvxd-sWdQSF6_hA3kWSAUQp4JESOt3idV0x4yNsml73gBppW1lmn8n-jRrx0Ga8R0UnFNq4UiRBbNapBqSXMkLEB2Ckl-YpcPkOFBg5VzBDkQOA1IUfd6-bLe0DEUXmUCFu7XVHHqdIi0yoGeK0MzKHrmzF0ZeVoC9_uKwpC-jjh3U96tmSBJQNEM2Lmmdju-KfwlhGhRha4-cQbxQmgiyqNURa7rnccNFTxvtPPv_yw2lYZfHLQoA7wGtLht6M8tOuNRAb7xLiL-BuJ7sXEmNDAfE88EU6zzoRReMEjb2sp9HAzAU-ePP1ocghbvbKqUTqf_w8xOcCDAg2UFYvdE0l1_t57bMxruZW9DlZ3LUEEelRsDa7SGEhG2QGaK9wg-Z7b9q2nSNuG_viROPfMrVpliY05Nozne2URgjJRcSeuFunXMyqhYQM6I7Ru95kUU_U_8VsqQguizmP660-f5iV4r6eqfSk57womHbiKXrVOad0_9Fpf7IvWv2dV37nPOhNL8P104mOBYSmjzvKmqJq-ycoXoVLOa_tDt_DGTuuX6wEo-B4Yvx7Nir97O8xuTuDN3L8vxm539PRd9n0H09sPfcx4s7OdD13CG3ns-4kzH49ngiApDlg_rD34e9D-6SurKLaWdFfhXn_r96hX5e17mRVRdvrbdwmdAJz0BMNLfKOrPnLSay_WFQ9f5-sXjSzr5F0dTntX9jGaf8F7V6-Sq8C32xy7kT1D-4nSAp4LNV6--3B5jM-P7mGD78Vfr5eXz_ExXi8fr5ctJnf74-V6-QZW7vby5dM_TyGbvTzfYh65_bm5l_jjg_vt2T3W4W__Akrn4H4" target="_blank" rel="noopener">在 mermaid.live 打开 →</a>
+    <textarea readonly spellcheck="false" class="tail">ishikawa-beta
+    注塑件缺料（短射）
+    材料
+        材料干燥
+            干燥时间不足
+                定时器异常
+            加料不及时
+            设备异常
+            设定错误
+            干燥温度偏低
+        混合材
+            粉尘多
+            混入杂物
+            未筛选
+            不同材料
+            粉碎机异常
+            水口长
+            刀片筛网磨损
+        性能
+            流动性差
+            制剂添加过多
+            未密封
+            氧化
+        材质
+            吸水
+                长时间外露
+            分解
+            搅拌时间短
+            混合机异常
+            混合比例异常
+    设备
+        干燥机
+            干燥剂
+                过期失效
+                设定错误
+            温度异常
+            温控失效
+            过滤网未定期清扫
+            过滤网堵塞
+            坏
+            发热器
+                不能正常发热
+        模温机
+            循环水不足
+            温度异常
+            发热异常
+            压力不足
+            机水
+            开关未开
+            冷却系统异常
+        模具空腔
+            设计不适
+            取数过多
+            配件不良
+            尺寸不良
+            破损
+            进胶口小
+            进胶不平衡
+            部品肉厚太薄
+            堵塞
+            清扫不及时
+            槽深度不够
+            位子不当
+            温度低
+            炭化物堵塞
+            排气槽不良
+            热流道不顺
+        成形机
+            螺杆磨损
+            材质差
+            时间长磨损
+            使用大吨位机器
+            合模力大
+            料筒
+            温控器坏
+    人
+        作业者
+            作业手法错误
+            工作马虎
+            不良位置不明确
+            品质观念不强
+        成型技术员
+            技术缺乏
+            操作失误
+            未打开升水
+            未废弃开机不良品
+            未对量产前部品进行确认
+            未按照规定清扫排气槽
+        PQC
+            未按标准作业
+            抽取数量不够
+        修模技术员
+            配件装错
+            经验不足
+    方法
+        检查
+            出货检查
+            未检查
+            抽取数量不够
+            未全数检查
+            漏检
+            外观全检
+        模具维护
+            未按计划进行
+            未按时进行
+            定期保养
+            方法错误
+            日常保养
+            项目不全方法不正确
+            保养位子不全
+            配件装错
+            修理
+            未按WGS作业
+        成形条件
+            温度
+                溶胶温度低
+                热胶道温度低
+                模温低
+            速度
+                计量速度慢
+                射出速度慢
+            时间
+                射出时间短
+                保压时间不够
+            压力
+                背压力小
+                射出压力小
+                合模压力大
+                保压力小
+            位置
+                计量位置小
+                保压切换位置大
+        操作
+            开机生产部品未确认品质
+            未按规定废弃数量
+            未定期清洗
+            料筒热流道清洗
+            未清洗干净
+            未废弃异常部品
+            未确认
+            未按下料槽
+            异常处理
+</textarea>
+  </div>
+
+  <div class="tip">
+    <b>如果按钮打不开，用复制的办法（一定行）：</b>
+    <ol>
+      <li>浏览器打开 <code>mermaid.live</code></li>
+      <li>点左边代码框 → <code>Ctrl+A</code> 全选 → <code>Delete</code> 删掉里面的示例</li>
+      <li>回到本页，在对应文本框里点一下 → <code>Ctrl+A</code> → <code>Ctrl+C</code></li>
+      <li>粘到 mermaid.live 的代码框（<code>Ctrl+V</code>），右边立刻出图</li>
+    </ol>
+    <p style="margin:10px 0 0"><b>导出图片：</b>mermaid.live 左上角 <code>Actions</code> → <code>Download PNG</code> 或 <code>Download SVG</code>。</p>
+  </div>
+</div>
+</body>
+</html>
