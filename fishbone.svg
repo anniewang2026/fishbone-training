@@ -1,360 +1,362 @@
-<svg viewBox="0 0 3660 1900" xmlns="http://www.w3.org/2000/svg" font-family="Microsoft YaHei,PingFang SC,sans-serif" id="fishboneSvg">
+<svg viewBox="0 0 4320 2696" xmlns="http://www.w3.org/2000/svg" font-family="Microsoft YaHei,PingFang SC,sans-serif" id="fishboneSvg">
 <defs>
- <linearGradient id="gB" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7dd3fc"/><stop offset="1" stop-color="#0ea5e9"/></linearGradient>
- <linearGradient id="gT" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5eead4"/><stop offset="1" stop-color="#14b8a6"/></linearGradient>
- <linearGradient id="gI" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#a5b4fc"/><stop offset="1" stop-color="#6366f1"/></linearGradient>
- <linearGradient id="gS" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#94a3b8"/><stop offset="1" stop-color="#475569"/></linearGradient>
- <linearGradient id="gHead" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#38bdf8"/><stop offset="1" stop-color="#14b8a6"/></linearGradient>
- <linearGradient id="gKey" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#93c5fd"/><stop offset="1" stop-color="#3b82f6"/></linearGradient>
+<linearGradient id="gB" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7dd3fc"/><stop offset="1" stop-color="#0ea5e9"/></linearGradient>
+<linearGradient id="gT" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5eead4"/><stop offset="1" stop-color="#14b8a6"/></linearGradient>
+<linearGradient id="gI" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#a5b4fc"/><stop offset="1" stop-color="#6366f1"/></linearGradient>
+<linearGradient id="gS" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#94a3b8"/><stop offset="1" stop-color="#475569"/></linearGradient>
+<linearGradient id="gHead" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#38bdf8"/><stop offset="1" stop-color="#14b8a6"/></linearGradient>
+<linearGradient id="gKey" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#93c5fd"/><stop offset="1" stop-color="#3b82f6"/></linearGradient>
 </defs>
-<rect x="0" y="0" width="3660" height="1900" fill="#f8fbfd"/>
-<text x="60" y="70" font-size="30" font-weight="bold" fill="#1e3a5f">欠料（料不良）要因分析图</text>
-<text x="60" y="104" font-size="16" fill="#7b8ba1">标准鱼骨图 ｜ 大骨 → 中骨 → 小骨 → 小小骨 ｜ 蓝色高亮 ★ = 重点要因（待真因验证）</text>
-<line x1="40" y1="980" x2="3277" y2="980" stroke="#475569" stroke-width="8" stroke-linecap="round"/>
-<polygon points="3277,956 3277,1004 3307,980" fill="#475569"/>
-<rect x="3309" y="880" width="330" height="200" rx="40" fill="url(#gHead)"/>
-<text x="3474" y="984" font-size="52" font-weight="bold" fill="#ffffff" text-anchor="middle">欠　料</text>
-<text x="3474" y="1032" font-size="22" fill="#ffffff" opacity="0.95" text-anchor="middle">（ 料 不 良 ）</text>
-<line x1="1600" y1="980" x2="1288" y2="439" stroke="#475569" stroke-width="6" stroke-linecap="round"/>
-<rect x="1196" y="345" width="184" height="60" rx="22" fill="url(#gB)"/>
-<text x="1288" y="386" font-size="30" font-weight="bold" fill="#ffffff" text-anchor="middle">材料</text>
-<line x1="809" y1="557" x2="1356" y2="557" stroke="#64748b" stroke-width="3.5"/>
-<circle cx="1356" cy="557" r="6" fill="#38bdf8"/>
-<rect x="809" y="538" width="54" height="38" rx="16" fill="#e0f2fe" stroke="#0369a1" stroke-opacity="0.35"/>
-<text x="836" y="564" font-size="19" font-weight="bold" fill="#0369a1" text-anchor="middle">性能</text>
-<line x1="941" y1="557" x2="941" y2="537" stroke="#94a3b8" stroke-width="2"/>
-<text x="941" y="529" font-size="16" fill="#334155" text-anchor="middle">流动性差</text>
-<line x1="1053" y1="557" x2="1053" y2="537" stroke="#94a3b8" stroke-width="2"/>
-<text x="1053" y="529" font-size="16" fill="#334155" text-anchor="middle">制剂添加过多</text>
-<line x1="1157" y1="557" x2="1157" y2="537" stroke="#94a3b8" stroke-width="2"/>
-<text x="1157" y="529" font-size="16" fill="#334155" text-anchor="middle">未密封</text>
-<line x1="1229" y1="557" x2="1229" y2="537" stroke="#94a3b8" stroke-width="2"/>
-<text x="1229" y="529" font-size="16" fill="#334155" text-anchor="middle">氧化</text>
-<line x1="624" y1="669" x2="1421" y2="669" stroke="#64748b" stroke-width="3.5"/>
-<circle cx="1421" cy="669" r="6" fill="#38bdf8"/>
-<rect x="624" y="650" width="54" height="38" rx="16" fill="#e0f2fe" stroke="#0369a1" stroke-opacity="0.35"/>
-<text x="651" y="676" font-size="19" font-weight="bold" fill="#0369a1" text-anchor="middle">材质</text>
-<line x1="740" y1="669" x2="740" y2="649" stroke="#94a3b8" stroke-width="2"/>
-<text x="740" y="641" font-size="16" fill="#334155" text-anchor="middle">吸水</text>
-<line x1="804" y1="669" x2="804" y2="615" stroke="#94a3b8" stroke-width="2"/>
-<text x="804" y="641" font-size="16" fill="#334155" text-anchor="middle">分解</text>
-<line x1="804" y1="615" x2="902" y2="615" stroke="#94a3b8" stroke-width="1.6"/>
-<text x="816" y="608" font-size="14" fill="#475569" text-anchor="start">长时间外露</text>
-<line x1="1030" y1="669" x2="1030" y2="649" stroke="#94a3b8" stroke-width="2"/>
-<text x="1030" y="641" font-size="16" fill="#334155" text-anchor="middle">搅拌时间短</text>
-<line x1="1142" y1="669" x2="1142" y2="649" stroke="#94a3b8" stroke-width="2"/>
-<text x="1142" y="641" font-size="16" fill="#334155" text-anchor="middle">混合机异常</text>
-<line x1="1262" y1="669" x2="1262" y2="649" stroke="#94a3b8" stroke-width="2"/>
-<text x="1262" y="641" font-size="16" fill="#334155" text-anchor="middle">混合比例异常</text>
-<line x1="567" y1="781" x2="1485" y2="781" stroke="#64748b" stroke-width="3.5"/>
-<circle cx="1485" cy="781" r="6" fill="#38bdf8"/>
-<rect x="567" y="762" width="86" height="38" rx="16" fill="#e0f2fe" stroke="#0369a1" stroke-opacity="0.35"/>
-<text x="610" y="788" font-size="19" font-weight="bold" fill="#0369a1" text-anchor="middle">材料干燥</text>
-<line x1="747" y1="781" x2="747" y2="727" stroke="#94a3b8" stroke-width="2"/>
-<text x="747" y="753" font-size="16" fill="#334155" text-anchor="middle">干燥时间不足</text>
-<line x1="747" y1="727" x2="845" y2="727" stroke="#94a3b8" stroke-width="1.6"/>
-<text x="759" y="720" font-size="14" fill="#475569" text-anchor="start">定时器异常</text>
-<line x1="1005" y1="781" x2="1005" y2="761" stroke="#94a3b8" stroke-width="2"/>
-<text x="1005" y="753" font-size="16" fill="#334155" text-anchor="middle">加料不及时</text>
-<line x1="1109" y1="781" x2="1109" y2="761" stroke="#94a3b8" stroke-width="2"/>
-<text x="1109" y="753" font-size="16" fill="#334155" text-anchor="middle">设备异常</text>
-<line x1="1205" y1="781" x2="1205" y2="761" stroke="#94a3b8" stroke-width="2"/>
-<text x="1205" y="753" font-size="16" fill="#334155" text-anchor="middle">设定错误</text>
-<line x1="1322" y1="781" x2="1322" y2="761" stroke="#94a3b8" stroke-width="2"/>
-<rect x="1259" y="734" width="125" height="27" rx="13" fill="url(#gKey)"/>
-<text x="1322" y="755" font-size="16" font-weight="bold" fill="#ffffff" text-anchor="middle">★干燥温度偏低</text>
-<line x1="656" y1="893" x2="1550" y2="893" stroke="#64748b" stroke-width="3.5"/>
-<circle cx="1550" cy="893" r="6" fill="#38bdf8"/>
-<rect x="656" y="874" width="70" height="38" rx="16" fill="#e0f2fe" stroke="#0369a1" stroke-opacity="0.35"/>
-<text x="691" y="900" font-size="19" font-weight="bold" fill="#0369a1" text-anchor="middle">混合材</text>
-<line x1="796" y1="893" x2="796" y2="873" stroke="#94a3b8" stroke-width="2"/>
-<text x="796" y="865" font-size="16" fill="#334155" text-anchor="middle">粉尘多</text>
-<line x1="881" y1="893" x2="881" y2="873" stroke="#94a3b8" stroke-width="2"/>
-<rect x="842" y="846" width="77" height="27" rx="13" fill="url(#gKey)"/>
-<text x="881" y="867" font-size="16" font-weight="bold" fill="#ffffff" text-anchor="middle">★未筛选</text>
-<line x1="973" y1="893" x2="973" y2="873" stroke="#94a3b8" stroke-width="2"/>
-<text x="973" y="865" font-size="16" fill="#334155" text-anchor="middle">混入杂物</text>
-<line x1="1069" y1="893" x2="1069" y2="873" stroke="#94a3b8" stroke-width="2"/>
-<text x="1069" y="865" font-size="16" fill="#334155" text-anchor="middle">不同材料</text>
-<line x1="1178" y1="893" x2="1178" y2="873" stroke="#94a3b8" stroke-width="2"/>
-<rect x="1123" y="846" width="109" height="27" rx="13" fill="url(#gKey)"/>
-<text x="1178" y="867" font-size="16" font-weight="bold" fill="#ffffff" text-anchor="middle">★粉碎机异常</text>
-<line x1="1278" y1="893" x2="1278" y2="873" stroke="#94a3b8" stroke-width="2"/>
-<text x="1278" y="865" font-size="16" fill="#334155" text-anchor="middle">水口料</text>
-<line x1="1387" y1="893" x2="1387" y2="873" stroke="#94a3b8" stroke-width="2"/>
-<rect x="1324" y="846" width="125" height="27" rx="13" fill="url(#gKey)"/>
-<text x="1387" y="867" font-size="16" font-weight="bold" fill="#ffffff" text-anchor="middle">★刀片筛网磨损</text>
-<line x1="2950" y1="980" x2="2587" y2="352" stroke="#475569" stroke-width="6" stroke-linecap="round"/>
-<rect x="2495" y="258" width="184" height="60" rx="22" fill="url(#gT)"/>
-<text x="2587" y="299" font-size="30" font-weight="bold" fill="#ffffff" text-anchor="middle">设备</text>
-<line x1="1854" y1="475" x2="2659" y2="475" stroke="#64748b" stroke-width="3.5"/>
-<circle cx="2659" cy="475" r="6" fill="#38bdf8"/>
-<rect x="1854" y="456" width="70" height="38" rx="16" fill="#ccfbf1" stroke="#0f766e" stroke-opacity="0.35"/>
-<text x="1889" y="482" font-size="19" font-weight="bold" fill="#0f766e" text-anchor="middle">成形机</text>
-<line x1="2006" y1="475" x2="2006" y2="455" stroke="#94a3b8" stroke-width="2"/>
-<rect x="1960" y="428" width="93" height="27" rx="13" fill="url(#gKey)"/>
-<text x="2006" y="449" font-size="16" font-weight="bold" fill="#ffffff" text-anchor="middle">★螺杆磨损</text>
-<line x1="2099" y1="475" x2="2099" y2="455" stroke="#94a3b8" stroke-width="2"/>
-<text x="2099" y="447" font-size="16" fill="#334155" text-anchor="middle">材质差</text>
-<line x1="2195" y1="475" x2="2195" y2="455" stroke="#94a3b8" stroke-width="2"/>
-<text x="2195" y="447" font-size="16" fill="#334155" text-anchor="middle">时间长磨损</text>
-<line x1="2323" y1="475" x2="2323" y2="455" stroke="#94a3b8" stroke-width="2"/>
-<text x="2323" y="447" font-size="16" fill="#334155" text-anchor="middle">使用大吨位机器</text>
-<line x1="2443" y1="475" x2="2443" y2="455" stroke="#94a3b8" stroke-width="2"/>
-<text x="2443" y="447" font-size="16" fill="#334155" text-anchor="middle">合模力大</text>
-<line x1="2527" y1="475" x2="2527" y2="455" stroke="#94a3b8" stroke-width="2"/>
-<rect x="2497" y="428" width="61" height="27" rx="13" fill="url(#gKey)"/>
-<text x="2527" y="449" font-size="16" font-weight="bold" fill="#ffffff" text-anchor="middle">★料筒</text>
-<line x1="1840" y1="587" x2="2723" y2="587" stroke="#64748b" stroke-width="3.5"/>
-<circle cx="2723" cy="587" r="6" fill="#38bdf8"/>
-<rect x="1840" y="568" width="70" height="38" rx="16" fill="#ccfbf1" stroke="#0f766e" stroke-opacity="0.35"/>
-<text x="1875" y="594" font-size="19" font-weight="bold" fill="#0f766e" text-anchor="middle">模温机</text>
-<line x1="1996" y1="587" x2="1996" y2="567" stroke="#94a3b8" stroke-width="2"/>
-<text x="1996" y="559" font-size="16" fill="#334155" text-anchor="middle">循环水不足</text>
-<line x1="2100" y1="587" x2="2100" y2="567" stroke="#94a3b8" stroke-width="2"/>
-<text x="2100" y="559" font-size="16" fill="#334155" text-anchor="middle">温度异常</text>
-<line x1="2196" y1="587" x2="2196" y2="567" stroke="#94a3b8" stroke-width="2"/>
-<text x="2196" y="559" font-size="16" fill="#334155" text-anchor="middle">发热异常</text>
-<line x1="2292" y1="587" x2="2292" y2="567" stroke="#94a3b8" stroke-width="2"/>
-<text x="2292" y="559" font-size="16" fill="#334155" text-anchor="middle">压力不足</text>
-<line x1="2372" y1="587" x2="2372" y2="567" stroke="#94a3b8" stroke-width="2"/>
-<text x="2372" y="559" font-size="16" fill="#334155" text-anchor="middle">机水</text>
-<line x1="2452" y1="587" x2="2452" y2="567" stroke="#94a3b8" stroke-width="2"/>
-<text x="2452" y="559" font-size="16" fill="#334155" text-anchor="middle">开关未开</text>
-<line x1="2564" y1="587" x2="2564" y2="567" stroke="#94a3b8" stroke-width="2"/>
-<text x="2564" y="559" font-size="16" fill="#334155" text-anchor="middle">冷却系统异常</text>
-<line x1="1679" y1="767" x2="2827" y2="767" stroke="#64748b" stroke-width="3.5"/>
-<circle cx="2827" cy="767" r="6" fill="#38bdf8"/>
-<rect x="1679" y="748" width="54" height="38" rx="16" fill="#ccfbf1" stroke="#0f766e" stroke-opacity="0.35"/>
-<text x="1706" y="774" font-size="19" font-weight="bold" fill="#0f766e" text-anchor="middle">金型</text>
-<line x1="1811" y1="767" x2="1811" y2="747" stroke="#94a3b8" stroke-width="2"/>
-<text x="1811" y="739" font-size="16" fill="#334155" text-anchor="middle">设计不适</text>
-<line x1="1907" y1="767" x2="1907" y2="747" stroke="#94a3b8" stroke-width="2"/>
-<text x="1907" y="739" font-size="16" fill="#334155" text-anchor="middle">进胶口小</text>
-<line x1="2003" y1="767" x2="2003" y2="747" stroke="#94a3b8" stroke-width="2"/>
-<text x="2003" y="739" font-size="16" fill="#334155" text-anchor="middle">取数过多</text>
-<line x1="2107" y1="767" x2="2107" y2="747" stroke="#94a3b8" stroke-width="2"/>
-<text x="2107" y="739" font-size="16" fill="#334155" text-anchor="middle">逸胶不平衡</text>
-<line x1="2227" y1="767" x2="2227" y2="747" stroke="#94a3b8" stroke-width="2"/>
-<text x="2227" y="739" font-size="16" fill="#334155" text-anchor="middle">制品肉厚太薄</text>
-<line x1="2339" y1="767" x2="2339" y2="747" stroke="#94a3b8" stroke-width="2"/>
-<text x="2339" y="739" font-size="16" fill="#334155" text-anchor="middle">配件不良</text>
-<line x1="2435" y1="767" x2="2435" y2="747" stroke="#94a3b8" stroke-width="2"/>
-<text x="2435" y="739" font-size="16" fill="#334155" text-anchor="middle">尺寸不良</text>
-<line x1="2515" y1="767" x2="2515" y2="747" stroke="#94a3b8" stroke-width="2"/>
-<text x="2515" y="739" font-size="16" fill="#334155" text-anchor="middle">破损</text>
-<line x1="2579" y1="767" x2="2579" y2="747" stroke="#94a3b8" stroke-width="2"/>
-<text x="2579" y="739" font-size="16" fill="#334155" text-anchor="middle">堵塞</text>
-<line x1="2672" y1="767" x2="2672" y2="747" stroke="#94a3b8" stroke-width="2"/>
-<rect x="2617" y="720" width="109" height="27" rx="13" fill="url(#gKey)"/>
-<text x="2672" y="741" font-size="16" font-weight="bold" fill="#ffffff" text-anchor="middle">★清扫不及时</text>
-<line x1="1819" y1="767" x2="1819" y2="713" stroke="#94a3b8" stroke-width="2"/>
-<text x="1819" y="705" font-size="16" fill="#334155" text-anchor="middle">槽深度不够</text>
-<line x1="1923" y1="767" x2="1923" y2="713" stroke="#94a3b8" stroke-width="2"/>
-<text x="1923" y="705" font-size="16" fill="#334155" text-anchor="middle">位子不当</text>
-<line x1="2011" y1="767" x2="2011" y2="713" stroke="#94a3b8" stroke-width="2"/>
-<text x="2011" y="705" font-size="16" fill="#334155" text-anchor="middle">温度低</text>
-<line x1="2107" y1="767" x2="2107" y2="713" stroke="#94a3b8" stroke-width="2"/>
-<text x="2107" y="705" font-size="16" fill="#334155" text-anchor="middle">炭化物堵塞</text>
-<line x1="2224" y1="767" x2="2224" y2="713" stroke="#94a3b8" stroke-width="2"/>
-<rect x="2169" y="686" width="109" height="27" rx="13" fill="url(#gKey)"/>
-<text x="2224" y="707" font-size="16" font-weight="bold" fill="#ffffff" text-anchor="middle">★排气槽不良</text>
-<line x1="2324" y1="767" x2="2324" y2="652" stroke="#94a3b8" stroke-width="2"/>
-<text x="2324" y="705" font-size="16" fill="#334155" text-anchor="middle">干燥剂</text>
-<line x1="2324" y1="679" x2="2406" y2="679" stroke="#94a3b8" stroke-width="1.6"/>
-<text x="2336" y="672" font-size="14" fill="#475569" text-anchor="start">过期失效</text>
-<line x1="2324" y1="652" x2="2406" y2="652" stroke="#94a3b8" stroke-width="1.6"/>
-<text x="2336" y="645" font-size="14" fill="#475569" text-anchor="start">设定错误</text>
-<line x1="2534" y1="767" x2="2534" y2="713" stroke="#94a3b8" stroke-width="2"/>
-<text x="2534" y="705" font-size="16" fill="#334155" text-anchor="middle">温度异常</text>
-<line x1="2630" y1="767" x2="2630" y2="713" stroke="#94a3b8" stroke-width="2"/>
-<text x="2630" y="705" font-size="16" fill="#334155" text-anchor="middle">温控失效</text>
-<line x1="1843" y1="767" x2="1843" y2="679" stroke="#94a3b8" stroke-width="2"/>
-<text x="1843" y="671" font-size="16" fill="#334155" text-anchor="middle">过滤网未定期清扫</text>
-<line x1="1979" y1="767" x2="1979" y2="679" stroke="#94a3b8" stroke-width="2"/>
-<text x="1979" y="671" font-size="16" fill="#334155" text-anchor="middle">过滤网堵塞</text>
-<line x1="2059" y1="767" x2="2059" y2="679" stroke="#94a3b8" stroke-width="2"/>
-<text x="2059" y="671" font-size="16" fill="#334155" text-anchor="middle">坏</text>
-<line x1="2123" y1="767" x2="2123" y2="645" stroke="#94a3b8" stroke-width="2"/>
-<text x="2123" y="671" font-size="16" fill="#334155" text-anchor="middle">发热器</text>
-<line x1="2123" y1="645" x2="2237" y2="645" stroke="#94a3b8" stroke-width="1.6"/>
-<text x="2135" y="638" font-size="14" fill="#475569" text-anchor="start">不能正常发热</text>
-<line x1="2313" y1="879" x2="2892" y2="879" stroke="#64748b" stroke-width="3.5"/>
-<circle cx="2892" cy="879" r="6" fill="#38bdf8"/>
-<rect x="2313" y="860" width="70" height="38" rx="16" fill="#ccfbf1" stroke="#0f766e" stroke-opacity="0.35"/>
-<text x="2348" y="886" font-size="19" font-weight="bold" fill="#0f766e" text-anchor="middle">干燥机</text>
-<line x1="2469" y1="879" x2="2469" y2="859" stroke="#94a3b8" stroke-width="2"/>
-<text x="2469" y="851" font-size="16" fill="#334155" text-anchor="middle">热流道不顺</text>
-<line x1="2573" y1="879" x2="2573" y2="859" stroke="#94a3b8" stroke-width="2"/>
-<text x="2573" y="851" font-size="16" fill="#334155" text-anchor="middle">温度异常</text>
-<line x1="2669" y1="879" x2="2669" y2="859" stroke="#94a3b8" stroke-width="2"/>
-<text x="2669" y="851" font-size="16" fill="#334155" text-anchor="middle">温控失效</text>
-<line x1="2757" y1="879" x2="2757" y2="859" stroke="#94a3b8" stroke-width="2"/>
-<text x="2757" y="851" font-size="16" fill="#334155" text-anchor="middle">发热器</text>
-<line x1="1600" y1="980" x2="1288" y2="1521" stroke="#475569" stroke-width="6" stroke-linecap="round"/>
-<rect x="1196" y="1555" width="184" height="60" rx="22" fill="url(#gI)"/>
-<text x="1288" y="1596" font-size="30" font-weight="bold" fill="#ffffff" text-anchor="middle">人</text>
-<line x1="665" y1="1403" x2="1356" y2="1403" stroke="#64748b" stroke-width="3.5"/>
-<circle cx="1356" cy="1403" r="6" fill="#38bdf8"/>
-<rect x="665" y="1384" width="70" height="38" rx="16" fill="#e0e7ff" stroke="#4338ca" stroke-opacity="0.35"/>
-<text x="700" y="1410" font-size="19" font-weight="bold" fill="#4338ca" text-anchor="middle">作业者</text>
-<line x1="829" y1="1403" x2="829" y2="1423" stroke="#94a3b8" stroke-width="2"/>
-<text x="829" y="1443" font-size="16" fill="#334155" text-anchor="middle">作业手法错误</text>
-<line x1="941" y1="1403" x2="941" y2="1423" stroke="#94a3b8" stroke-width="2"/>
-<text x="941" y="1443" font-size="16" fill="#334155" text-anchor="middle">工作马虎</text>
-<line x1="1061" y1="1403" x2="1061" y2="1423" stroke="#94a3b8" stroke-width="2"/>
-<text x="1061" y="1443" font-size="16" fill="#334155" text-anchor="middle">不良位置不明确</text>
-<line x1="1197" y1="1403" x2="1197" y2="1423" stroke="#94a3b8" stroke-width="2"/>
-<text x="1197" y="1443" font-size="16" fill="#334155" text-anchor="middle">品质观念不强</text>
-<line x1="982" y1="1291" x2="1421" y2="1291" stroke="#64748b" stroke-width="3.5"/>
-<circle cx="1421" cy="1291" r="6" fill="#38bdf8"/>
-<rect x="982" y="1272" width="49" height="38" rx="16" fill="#e0e7ff" stroke="#4338ca" stroke-opacity="0.35"/>
-<text x="1006" y="1298" font-size="19" font-weight="bold" fill="#4338ca" text-anchor="middle">PQC</text>
-<line x1="1129" y1="1291" x2="1129" y2="1311" stroke="#94a3b8" stroke-width="2"/>
-<rect x="1067" y="1311" width="125" height="27" rx="13" fill="url(#gKey)"/>
-<text x="1129" y="1332" font-size="16" font-weight="bold" fill="#ffffff" text-anchor="middle">★抽段数量不够</text>
-<line x1="1262" y1="1291" x2="1262" y2="1311" stroke="#94a3b8" stroke-width="2"/>
-<text x="1262" y="1331" font-size="16" fill="#334155" text-anchor="middle">未按标准作业</text>
-<line x1="584" y1="1179" x2="1485" y2="1179" stroke="#64748b" stroke-width="3.5"/>
-<circle cx="1485" cy="1179" r="6" fill="#38bdf8"/>
-<rect x="584" y="1160" width="102" height="38" rx="16" fill="#e0e7ff" stroke="#4338ca" stroke-opacity="0.35"/>
-<text x="635" y="1186" font-size="19" font-weight="bold" fill="#4338ca" text-anchor="middle">成型技术员</text>
-<line x1="764" y1="1179" x2="764" y2="1199" stroke="#94a3b8" stroke-width="2"/>
-<text x="764" y="1219" font-size="16" fill="#334155" text-anchor="middle">技术缺乏</text>
-<line x1="860" y1="1179" x2="860" y2="1199" stroke="#94a3b8" stroke-width="2"/>
-<text x="860" y="1219" font-size="16" fill="#334155" text-anchor="middle">操作失误</text>
-<line x1="964" y1="1179" x2="964" y2="1199" stroke="#94a3b8" stroke-width="2"/>
-<text x="964" y="1219" font-size="16" fill="#334155" text-anchor="middle">未打开升水</text>
-<line x1="1129" y1="1179" x2="1129" y2="1199" stroke="#94a3b8" stroke-width="2"/>
-<rect x="1026" y="1199" width="205" height="27" rx="13" fill="url(#gKey)"/>
-<text x="1129" y="1220" font-size="16" font-weight="bold" fill="#ffffff" text-anchor="middle">★未对量产前部品进行确认</text>
-<line x1="1314" y1="1179" x2="1314" y2="1199" stroke="#94a3b8" stroke-width="2"/>
-<rect x="1243" y="1199" width="141" height="27" rx="13" fill="url(#gKey)"/>
-<text x="1314" y="1220" font-size="16" font-weight="bold" fill="#ffffff" text-anchor="middle">★未废弃开不良品</text>
-<line x1="1131" y1="1067" x2="1550" y2="1067" stroke="#64748b" stroke-width="3.5"/>
-<circle cx="1550" cy="1067" r="6" fill="#38bdf8"/>
-<rect x="1131" y="1048" width="102" height="38" rx="16" fill="#e0e7ff" stroke="#4338ca" stroke-opacity="0.35"/>
-<text x="1182" y="1074" font-size="19" font-weight="bold" fill="#4338ca" text-anchor="middle">修模技术员</text>
-<line x1="1311" y1="1067" x2="1311" y2="1087" stroke="#94a3b8" stroke-width="2"/>
-<text x="1311" y="1107" font-size="16" fill="#334155" text-anchor="middle">配件装错</text>
-<line x1="1407" y1="1067" x2="1407" y2="1087" stroke="#94a3b8" stroke-width="2"/>
-<text x="1407" y="1107" font-size="16" fill="#334155" text-anchor="middle">经验不足</text>
-<line x1="2950" y1="980" x2="2527" y2="1712" stroke="#475569" stroke-width="6" stroke-linecap="round"/>
-<rect x="2435" y="1746" width="184" height="60" rx="22" fill="url(#gS)"/>
-<text x="2527" y="1787" font-size="30" font-weight="bold" fill="#ffffff" text-anchor="middle">方法</text>
-<line x1="1426" y1="1548" x2="2622" y2="1548" stroke="#64748b" stroke-width="3.5"/>
-<circle cx="2622" cy="1548" r="6" fill="#38bdf8"/>
-<rect x="1426" y="1529" width="86" height="38" rx="16" fill="#e2e8f0" stroke="#334155" stroke-opacity="0.35"/>
-<text x="1469" y="1555" font-size="19" font-weight="bold" fill="#334155" text-anchor="middle">金型维护</text>
-<line x1="1606" y1="1548" x2="1606" y2="1568" stroke="#94a3b8" stroke-width="2"/>
-<text x="1606" y="1588" font-size="16" fill="#334155" text-anchor="middle">未按计划进行</text>
-<line x1="1718" y1="1548" x2="1718" y2="1568" stroke="#94a3b8" stroke-width="2"/>
-<text x="1718" y="1588" font-size="16" fill="#334155" text-anchor="middle">定期保养</text>
-<line x1="1827" y1="1548" x2="1827" y2="1568" stroke="#94a3b8" stroke-width="2"/>
-<rect x="1772" y="1568" width="109" height="27" rx="13" fill="url(#gKey)"/>
-<text x="1827" y="1589" font-size="16" font-weight="bold" fill="#ffffff" text-anchor="middle">★未按时进行</text>
-<line x1="1935" y1="1548" x2="1935" y2="1568" stroke="#94a3b8" stroke-width="2"/>
-<text x="1935" y="1588" font-size="16" fill="#334155" text-anchor="middle">方法错误</text>
-<line x1="2071" y1="1548" x2="2071" y2="1568" stroke="#94a3b8" stroke-width="2"/>
-<text x="2071" y="1588" font-size="16" fill="#334155" text-anchor="middle">项目不全方法不正确</text>
-<line x1="2207" y1="1548" x2="2207" y2="1568" stroke="#94a3b8" stroke-width="2"/>
-<text x="2207" y="1588" font-size="16" fill="#334155" text-anchor="middle">日常保养</text>
-<line x1="2311" y1="1548" x2="2311" y2="1568" stroke="#94a3b8" stroke-width="2"/>
-<text x="2311" y="1588" font-size="16" fill="#334155" text-anchor="middle">保养位不全</text>
-<line x1="2415" y1="1548" x2="2415" y2="1568" stroke="#94a3b8" stroke-width="2"/>
-<text x="2415" y="1588" font-size="16" fill="#334155" text-anchor="middle">配件装错</text>
-<line x1="2495" y1="1548" x2="2495" y2="1568" stroke="#94a3b8" stroke-width="2"/>
-<text x="2495" y="1588" font-size="16" fill="#334155" text-anchor="middle">修理</text>
-<line x1="1608" y1="1548" x2="1608" y2="1602" stroke="#94a3b8" stroke-width="2"/>
-<rect x="1548" y="1602" width="120" height="27" rx="13" fill="url(#gKey)"/>
-<text x="1608" y="1623" font-size="16" font-weight="bold" fill="#ffffff" text-anchor="middle">★未按WGS作业</text>
-<line x1="1517" y1="1402" x2="2706" y2="1402" stroke="#64748b" stroke-width="3.5"/>
-<circle cx="2706" cy="1402" r="6" fill="#38bdf8"/>
-<rect x="1517" y="1383" width="54" height="38" rx="16" fill="#e2e8f0" stroke="#334155" stroke-opacity="0.35"/>
-<text x="1544" y="1409" font-size="19" font-weight="bold" fill="#334155" text-anchor="middle">操作</text>
-<line x1="1705" y1="1402" x2="1705" y2="1422" stroke="#94a3b8" stroke-width="2"/>
-<text x="1705" y="1442" font-size="16" fill="#334155" text-anchor="middle">开机生产部品未确认品质</text>
-<line x1="1894" y1="1402" x2="1894" y2="1422" stroke="#94a3b8" stroke-width="2"/>
-<rect x="1815" y="1422" width="157" height="27" rx="13" fill="url(#gKey)"/>
-<text x="1894" y="1443" font-size="16" font-weight="bold" fill="#ffffff" text-anchor="middle">★未按规定废弃数量</text>
-<line x1="2034" y1="1402" x2="2034" y2="1422" stroke="#94a3b8" stroke-width="2"/>
-<text x="2034" y="1442" font-size="16" fill="#334155" text-anchor="middle">未定期清洗</text>
-<line x1="2178" y1="1402" x2="2178" y2="1422" stroke="#94a3b8" stroke-width="2"/>
-<text x="2178" y="1442" font-size="16" fill="#334155" text-anchor="middle">料筒热流道清洗干净</text>
-<line x1="2322" y1="1402" x2="2322" y2="1422" stroke="#94a3b8" stroke-width="2"/>
-<text x="2322" y="1442" font-size="16" fill="#334155" text-anchor="middle">未清洗干净</text>
-<line x1="2455" y1="1402" x2="2455" y2="1422" stroke="#94a3b8" stroke-width="2"/>
-<rect x="2384" y="1422" width="141" height="27" rx="13" fill="url(#gKey)"/>
-<text x="2455" y="1443" font-size="16" font-weight="bold" fill="#ffffff" text-anchor="middle">★未废弃异常部品</text>
-<line x1="2571" y1="1402" x2="2571" y2="1422" stroke="#94a3b8" stroke-width="2"/>
-<text x="2571" y="1442" font-size="16" fill="#334155" text-anchor="middle">未确认</text>
-<line x1="1657" y1="1402" x2="1657" y2="1456" stroke="#94a3b8" stroke-width="2"/>
-<text x="1657" y="1476" font-size="16" fill="#334155" text-anchor="middle">未按下料槽</text>
-<line x1="1761" y1="1402" x2="1761" y2="1456" stroke="#94a3b8" stroke-width="2"/>
-<text x="1761" y="1476" font-size="16" fill="#334155" text-anchor="middle">异常处理</text>
-<line x1="2016" y1="1290" x2="2771" y2="1290" stroke="#64748b" stroke-width="3.5"/>
-<circle cx="2771" cy="1290" r="6" fill="#38bdf8"/>
-<rect x="2016" y="1271" width="54" height="38" rx="16" fill="#e2e8f0" stroke="#334155" stroke-opacity="0.35"/>
-<text x="2043" y="1297" font-size="19" font-weight="bold" fill="#334155" text-anchor="middle">检查</text>
-<line x1="2148" y1="1290" x2="2148" y2="1310" stroke="#94a3b8" stroke-width="2"/>
-<text x="2148" y="1330" font-size="16" fill="#334155" text-anchor="middle">出货检查</text>
-<line x1="2236" y1="1290" x2="2236" y2="1310" stroke="#94a3b8" stroke-width="2"/>
-<text x="2236" y="1330" font-size="16" fill="#334155" text-anchor="middle">未检查</text>
-<line x1="2340" y1="1290" x2="2340" y2="1310" stroke="#94a3b8" stroke-width="2"/>
-<text x="2340" y="1330" font-size="16" fill="#334155" text-anchor="middle">抽取数量不够</text>
-<line x1="2460" y1="1290" x2="2460" y2="1310" stroke="#94a3b8" stroke-width="2"/>
-<text x="2460" y="1330" font-size="16" fill="#334155" text-anchor="middle">未全数检查</text>
-<line x1="2548" y1="1290" x2="2548" y2="1310" stroke="#94a3b8" stroke-width="2"/>
-<text x="2548" y="1330" font-size="16" fill="#334155" text-anchor="middle">漏检</text>
-<line x1="2628" y1="1290" x2="2628" y2="1310" stroke="#94a3b8" stroke-width="2"/>
-<text x="2628" y="1330" font-size="16" fill="#334155" text-anchor="middle">外观全检</text>
-<line x1="1796" y1="1097" x2="2882" y2="1097" stroke="#64748b" stroke-width="3.5"/>
-<circle cx="2882" cy="1097" r="6" fill="#38bdf8"/>
-<rect x="1796" y="1078" width="86" height="38" rx="16" fill="#e2e8f0" stroke="#334155" stroke-opacity="0.35"/>
-<text x="1839" y="1104" font-size="19" font-weight="bold" fill="#334155" text-anchor="middle">成形条件</text>
-<line x1="1948" y1="1097" x2="1948" y2="1205" stroke="#94a3b8" stroke-width="2"/>
-<rect x="1918" y="1117" width="61" height="27" rx="13" fill="url(#gKey)"/>
-<text x="1948" y="1138" font-size="16" font-weight="bold" fill="#ffffff" text-anchor="middle">★温度</text>
-<line x1="1948" y1="1151" x2="2046" y2="1151" stroke="#94a3b8" stroke-width="1.6"/>
-<text x="1960" y="1168" font-size="14" fill="#475569" text-anchor="start">溶胶温度低</text>
-<line x1="1948" y1="1178" x2="2062" y2="1178" stroke="#94a3b8" stroke-width="1.6"/>
-<text x="1960" y="1195" font-size="14" fill="#475569" text-anchor="start">热胶道温度低</text>
-<line x1="1948" y1="1205" x2="2046" y2="1205" stroke="#94a3b8" stroke-width="1.6"/>
-<text x="1960" y="1222" font-size="14" fill="#475569" text-anchor="start">金型温度低</text>
-<line x1="2175" y1="1097" x2="2175" y2="1178" stroke="#94a3b8" stroke-width="2"/>
-<rect x="2144" y="1117" width="61" height="27" rx="13" fill="url(#gKey)"/>
-<text x="2175" y="1138" font-size="16" font-weight="bold" fill="#ffffff" text-anchor="middle">★速度</text>
-<line x1="2175" y1="1151" x2="2273" y2="1151" stroke="#94a3b8" stroke-width="1.6"/>
-<text x="2187" y="1168" font-size="14" fill="#475569" text-anchor="start">计量速度慢</text>
-<line x1="2175" y1="1178" x2="2273" y2="1178" stroke="#94a3b8" stroke-width="1.6"/>
-<text x="2187" y="1195" font-size="14" fill="#475569" text-anchor="start">射出速度慢</text>
-<line x1="2386" y1="1097" x2="2386" y2="1178" stroke="#94a3b8" stroke-width="2"/>
-<rect x="2355" y="1117" width="61" height="27" rx="13" fill="url(#gKey)"/>
-<text x="2386" y="1138" font-size="16" font-weight="bold" fill="#ffffff" text-anchor="middle">★时间</text>
-<line x1="2386" y1="1151" x2="2484" y2="1151" stroke="#94a3b8" stroke-width="1.6"/>
-<text x="2398" y="1168" font-size="14" fill="#475569" text-anchor="start">射出时间短</text>
-<line x1="2386" y1="1178" x2="2500" y2="1178" stroke="#94a3b8" stroke-width="1.6"/>
-<text x="2398" y="1195" font-size="14" fill="#475569" text-anchor="start">保压时间不够</text>
-<line x1="2613" y1="1097" x2="2613" y2="1232" stroke="#94a3b8" stroke-width="2"/>
-<rect x="2582" y="1117" width="61" height="27" rx="13" fill="url(#gKey)"/>
-<text x="2613" y="1138" font-size="16" font-weight="bold" fill="#ffffff" text-anchor="middle">★压力</text>
-<line x1="2613" y1="1151" x2="2695" y2="1151" stroke="#94a3b8" stroke-width="1.6"/>
-<text x="2625" y="1168" font-size="14" fill="#475569" text-anchor="start">背压力小</text>
-<line x1="2613" y1="1178" x2="2711" y2="1178" stroke="#94a3b8" stroke-width="1.6"/>
-<text x="2625" y="1195" font-size="14" fill="#475569" text-anchor="start">射出压力小</text>
-<line x1="2613" y1="1205" x2="2711" y2="1205" stroke="#94a3b8" stroke-width="1.6"/>
-<text x="2625" y="1222" font-size="14" fill="#475569" text-anchor="start">合模压力大</text>
-<line x1="2613" y1="1232" x2="2695" y2="1232" stroke="#94a3b8" stroke-width="1.6"/>
-<text x="2625" y="1249" font-size="14" fill="#475569" text-anchor="start">保压力小</text>
-<line x1="1948" y1="1097" x2="1948" y2="1212" stroke="#94a3b8" stroke-width="2"/>
-<rect x="1918" y="1151" width="61" height="27" rx="13" fill="url(#gKey)"/>
-<text x="1948" y="1172" font-size="16" font-weight="bold" fill="#ffffff" text-anchor="middle">★位置</text>
-<line x1="1948" y1="1185" x2="2046" y2="1185" stroke="#94a3b8" stroke-width="1.6"/>
-<text x="1960" y="1202" font-size="14" fill="#475569" text-anchor="start">计量位置小</text>
-<line x1="1948" y1="1212" x2="2078" y2="1212" stroke="#94a3b8" stroke-width="1.6"/>
-<text x="1960" y="1229" font-size="14" fill="#475569" text-anchor="start">保压切换位置大</text>
-<rect x="60" y="1839" width="34" height="27" rx="13" fill="url(#gKey)"/><text x="77" y="1860" font-size="15" font-weight="bold" fill="#ffffff" text-anchor="middle">★</text>
-<text x="106" y="1860" font-size="16" fill="#46586e">重点要因（待真因验证）</text>
-<text x="430" y="1860" font-size="16" fill="#7b8ba1">绘制法：鱼头 → 脊骨 → 大骨(60°) → 中骨(水平) → 小骨(短刺) → 小小骨(嵌套)</text>
-<text x="3080" y="1860" font-size="16" fill="#7b8ba1">4 大骨 · 16 中骨 · 103 小骨 · ★20 重点要因</text>
+<rect x="0" y="0" width="4320" height="2696" fill="#f8fbfd"/>
+<g transform="translate(814,1377)">
+<text x="60" y="-1323" font-size="31" font-weight="bold" fill="#1e3a5f">欠料（料不良）要因分析图</text>
+<text x="60" y="-1289" font-size="16" fill="#7b8ba1">标准鱼骨图 ｜ 大骨与脊骨成 60° ｜ 大骨 → 中骨(水平线) → 小骨(短刺) → 小小骨 ｜ ★=重点要因（待真因验证）</text>
+<line x1="0" y1="0" x2="-580" y2="-1004" stroke="#3f5061" stroke-width="7" stroke-linecap="round"/>
+<polygon points="0,0 -42,-40 -14,-56" fill="#3f5061"/>
+<rect x="-695" y="-1105" width="152" height="66" rx="22" fill="url(#gB)"/>
+<text x="-619" y="-1061" font-size="30" fill="#ffffff" text-anchor="middle" font-weight="bold">材料</text>
+<line x1="-695" y1="-128" x2="-74" y2="-128" stroke="#64748b" stroke-width="3.4" stroke-linecap="butt"/>
+<polygon points="-74,-128 -89,-136 -89,-120" fill="#64748b"/>
+<rect x="-695" y="-149" width="92" height="42" rx="18" fill="#e0f2fe" stroke="#0369a1" stroke-opacity="0.4"/>
+<text x="-649" y="-121" font-size="17" fill="#0369a1" text-anchor="middle" font-weight="bold">材料干燥</text>
+<line x1="-521" y1="-128" x2="-521" y2="-168" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<text x="-521" y="-168" font-size="15" fill="#2f4256" text-anchor="middle" font-weight="normal">干燥时间不足</text>
+<line x1="-521" y1="-204" x2="-434" y2="-204" stroke="#94a3b8" stroke-width="1.6" stroke-linecap="butt"/>
+<text x="-510" y="-210" font-size="13" fill="#4a5c72" text-anchor="start" font-weight="normal">定时器异常</text>
+<line x1="-378" y1="-128" x2="-378" y2="-168" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<text x="-378" y="-168" font-size="15" fill="#2f4256" text-anchor="middle" font-weight="normal">加料不及时</text>
+<line x1="-268" y1="-128" x2="-268" y2="-168" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<text x="-268" y="-168" font-size="15" fill="#2f4256" text-anchor="middle" font-weight="normal">设备异常</text>
+<line x1="-536" y1="-128" x2="-536" y2="-88" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<text x="-536" y="-88" font-size="15" fill="#2f4256" text-anchor="middle" font-weight="normal">设定错误</text>
+<line x1="-415" y1="-128" x2="-415" y2="-88" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<rect x="-475" y="-109" width="120" height="28" rx="14" fill="url(#gKey)"/>
+<text x="-415" y="-87" font-size="15" fill="#ffffff" text-anchor="middle" font-weight="bold">★干燥温度偏低</text>
+<line x1="404" y1="-350" x2="-202" y2="-350" stroke="#64748b" stroke-width="3.4" stroke-linecap="butt"/>
+<polygon points="-202,-350 -187,-358 -187,-342" fill="#64748b"/>
+<rect x="329" y="-371" width="75" height="42" rx="18" fill="#e0f2fe" stroke="#0369a1" stroke-opacity="0.4"/>
+<text x="367" y="-343" font-size="17" fill="#0369a1" text-anchor="middle" font-weight="bold">混合材</text>
+<line x1="-143" y1="-350" x2="-143" y2="-390" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<text x="-143" y="-390" font-size="15" fill="#2f4256" text-anchor="middle" font-weight="normal">粉尘多</text>
+<line x1="-48" y1="-350" x2="-48" y2="-390" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<text x="-48" y="-390" font-size="15" fill="#2f4256" text-anchor="middle" font-weight="normal">混入杂物</text>
+<line x1="50" y1="-350" x2="50" y2="-390" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<rect x="13" y="-411" width="75" height="28" rx="14" fill="url(#gKey)"/>
+<text x="50" y="-389" font-size="15" fill="#ffffff" text-anchor="middle" font-weight="bold">★未筛选</text>
+<line x1="149" y1="-350" x2="149" y2="-390" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<text x="149" y="-390" font-size="15" fill="#2f4256" text-anchor="middle" font-weight="normal">不同材料</text>
+<line x1="-124" y1="-350" x2="-124" y2="-310" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<rect x="-176" y="-331" width="105" height="28" rx="14" fill="url(#gKey)"/>
+<text x="-124" y="-309" font-size="15" fill="#ffffff" text-anchor="middle" font-weight="bold">★粉碎机异常</text>
+<line x1="-18" y1="-350" x2="-18" y2="-310" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<text x="-18" y="-310" font-size="15" fill="#2f4256" text-anchor="middle" font-weight="normal">水口长</text>
+<line x1="96" y1="-350" x2="96" y2="-310" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<rect x="36" y="-331" width="120" height="28" rx="14" fill="url(#gKey)"/>
+<text x="96" y="-309" font-size="15" fill="#ffffff" text-anchor="middle" font-weight="bold">★刀片筛网磨损</text>
+<line x1="-754" y1="-548" x2="-316" y2="-548" stroke="#64748b" stroke-width="3.4" stroke-linecap="butt"/>
+<polygon points="-316,-548 -331,-556 -331,-540" fill="#64748b"/>
+<rect x="-754" y="-569" width="58" height="42" rx="18" fill="#e0f2fe" stroke="#0369a1" stroke-opacity="0.4"/>
+<text x="-725" y="-541" font-size="17" fill="#0369a1" text-anchor="middle" font-weight="bold">性能</text>
+<line x1="-629" y1="-548" x2="-629" y2="-588" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<text x="-629" y="-588" font-size="15" fill="#2f4256" text-anchor="middle" font-weight="normal">流动性差</text>
+<line x1="-512" y1="-548" x2="-512" y2="-588" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<text x="-512" y="-588" font-size="15" fill="#2f4256" text-anchor="middle" font-weight="normal">制剂添加过多</text>
+<line x1="-636" y1="-548" x2="-636" y2="-508" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<text x="-636" y="-508" font-size="15" fill="#2f4256" text-anchor="middle" font-weight="normal">未密封</text>
+<line x1="-557" y1="-548" x2="-557" y2="-508" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<text x="-557" y="-508" font-size="15" fill="#2f4256" text-anchor="middle" font-weight="normal">氧化</text>
+<line x1="83" y1="-746" x2="-431" y2="-746" stroke="#64748b" stroke-width="3.4" stroke-linecap="butt"/>
+<polygon points="-431,-746 -416,-754 -416,-738" fill="#64748b"/>
+<rect x="25" y="-767" width="58" height="42" rx="18" fill="#e0f2fe" stroke="#0369a1" stroke-opacity="0.4"/>
+<text x="54" y="-739" font-size="17" fill="#0369a1" text-anchor="middle" font-weight="bold">材质</text>
+<line x1="-379" y1="-746" x2="-379" y2="-786" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<text x="-379" y="-786" font-size="15" fill="#2f4256" text-anchor="middle" font-weight="normal">吸水</text>
+<line x1="-379" y1="-822" x2="-292" y2="-822" stroke="#94a3b8" stroke-width="1.6" stroke-linecap="butt"/>
+<text x="-368" y="-828" font-size="13" fill="#4a5c72" text-anchor="start" font-weight="normal">长时间外露</text>
+<line x1="-258" y1="-746" x2="-258" y2="-786" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<text x="-258" y="-786" font-size="15" fill="#2f4256" text-anchor="middle" font-weight="normal">分解</text>
+<line x1="-163" y1="-746" x2="-163" y2="-786" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<text x="-163" y="-786" font-size="15" fill="#2f4256" text-anchor="middle" font-weight="normal">搅拌时间短</text>
+<line x1="-356" y1="-746" x2="-356" y2="-706" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<text x="-356" y="-706" font-size="15" fill="#2f4256" text-anchor="middle" font-weight="normal">混合机异常</text>
+<line x1="-232" y1="-746" x2="-232" y2="-706" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<text x="-232" y="-706" font-size="15" fill="#2f4256" text-anchor="middle" font-weight="normal">混合比例异常</text>
+<line x1="2267" y1="0" x2="1621" y2="-1120" stroke="#3f5061" stroke-width="7" stroke-linecap="round"/>
+<polygon points="2267,0 2225,-40 2253,-56" fill="#3f5061"/>
+<rect x="1505" y="-1221" width="152" height="66" rx="22" fill="url(#gT)"/>
+<text x="1581" y="-1177" font-size="30" fill="#ffffff" text-anchor="middle" font-weight="bold">设备</text>
+<line x1="2895" y1="-152" x2="2179" y2="-152" stroke="#64748b" stroke-width="3.4" stroke-linecap="butt"/>
+<polygon points="2179,-152 2194,-160 2194,-144" fill="#64748b"/>
+<rect x="2820" y="-173" width="75" height="42" rx="18" fill="#ccfbf1" stroke="#0f766e" stroke-opacity="0.4"/>
+<text x="2858" y="-145" font-size="17" fill="#0f766e" text-anchor="middle" font-weight="bold">干燥机</text>
+<line x1="2239" y1="-152" x2="2239" y2="-192" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<text x="2239" y="-192" font-size="15" fill="#2f4256" text-anchor="middle" font-weight="normal">干燥剂</text>
+<line x1="2239" y1="-228" x2="2313" y2="-228" stroke="#94a3b8" stroke-width="1.6" stroke-linecap="butt"/>
+<text x="2250" y="-234" font-size="13" fill="#4a5c72" text-anchor="start" font-weight="normal">过期失效</text>
+<line x1="2239" y1="-252" x2="2313" y2="-252" stroke="#94a3b8" stroke-width="1.6" stroke-linecap="butt"/>
+<text x="2250" y="-258" font-size="13" fill="#4a5c72" text-anchor="start" font-weight="normal">设定错误</text>
+<line x1="2362" y1="-152" x2="2362" y2="-192" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<text x="2362" y="-192" font-size="15" fill="#2f4256" text-anchor="middle" font-weight="normal">温度异常</text>
+<line x1="2464" y1="-152" x2="2464" y2="-192" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<text x="2464" y="-192" font-size="15" fill="#2f4256" text-anchor="middle" font-weight="normal">温控失效</text>
+<line x1="2596" y1="-152" x2="2596" y2="-192" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<text x="2596" y="-192" font-size="15" fill="#2f4256" text-anchor="middle" font-weight="normal">过滤网未定期清扫</text>
+<line x1="2254" y1="-152" x2="2254" y2="-112" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<text x="2254" y="-112" font-size="15" fill="#2f4256" text-anchor="middle" font-weight="normal">过滤网堵塞</text>
+<line x1="2341" y1="-152" x2="2341" y2="-112" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<text x="2341" y="-112" font-size="15" fill="#2f4256" text-anchor="middle" font-weight="normal">坏</text>
+<line x1="2413" y1="-152" x2="2413" y2="-112" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<text x="2413" y="-112" font-size="15" fill="#2f4256" text-anchor="middle" font-weight="normal">发热器</text>
+<line x1="2413" y1="-76" x2="2513" y2="-76" stroke="#94a3b8" stroke-width="1.6" stroke-linecap="butt"/>
+<text x="2424" y="-61" font-size="13" fill="#4a5c72" text-anchor="start" font-weight="normal">不能正常发热</text>
+<line x1="1380" y1="-422" x2="2023" y2="-422" stroke="#64748b" stroke-width="3.4" stroke-linecap="butt"/>
+<polygon points="2023,-422 2008,-430 2008,-414" fill="#64748b"/>
+<rect x="1380" y="-443" width="75" height="42" rx="18" fill="#ccfbf1" stroke="#0f766e" stroke-opacity="0.4"/>
+<text x="1418" y="-415" font-size="17" fill="#0f766e" text-anchor="middle" font-weight="bold">模温机</text>
+<line x1="1530" y1="-422" x2="1530" y2="-462" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<text x="1530" y="-462" font-size="15" fill="#2f4256" text-anchor="middle" font-weight="normal">循环水不足</text>
+<line x1="1639" y1="-422" x2="1639" y2="-462" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<text x="1639" y="-462" font-size="15" fill="#2f4256" text-anchor="middle" font-weight="normal">温度异常</text>
+<line x1="1741" y1="-422" x2="1741" y2="-462" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<text x="1741" y="-462" font-size="15" fill="#2f4256" text-anchor="middle" font-weight="normal">发热异常</text>
+<line x1="1843" y1="-422" x2="1843" y2="-462" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<text x="1843" y="-462" font-size="15" fill="#2f4256" text-anchor="middle" font-weight="normal">压力不足</text>
+<line x1="1507" y1="-422" x2="1507" y2="-382" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<text x="1507" y="-382" font-size="15" fill="#2f4256" text-anchor="middle" font-weight="normal">机水</text>
+<line x1="1594" y1="-422" x2="1594" y2="-382" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<text x="1594" y="-382" font-size="15" fill="#2f4256" text-anchor="middle" font-weight="normal">开关未开</text>
+<line x1="1711" y1="-422" x2="1711" y2="-382" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<text x="1711" y="-382" font-size="15" fill="#2f4256" text-anchor="middle" font-weight="normal">冷却系统异常</text>
+<line x1="2986" y1="-620" x2="1909" y2="-620" stroke="#64748b" stroke-width="3.4" stroke-linecap="butt"/>
+<polygon points="1909,-620 1924,-628 1924,-612" fill="#64748b"/>
+<rect x="2928" y="-641" width="58" height="42" rx="18" fill="#ccfbf1" stroke="#0f766e" stroke-opacity="0.4"/>
+<text x="2957" y="-613" font-size="17" fill="#0f766e" text-anchor="middle" font-weight="bold">金型</text>
+<line x1="1976" y1="-620" x2="1976" y2="-660" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<text x="1976" y="-660" font-size="15" fill="#2f4256" text-anchor="middle" font-weight="normal">设计不适</text>
+<line x1="2078" y1="-620" x2="2078" y2="-660" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<text x="2078" y="-660" font-size="15" fill="#2f4256" text-anchor="middle" font-weight="normal">取数过多</text>
+<line x1="2180" y1="-620" x2="2180" y2="-660" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<text x="2180" y="-660" font-size="15" fill="#2f4256" text-anchor="middle" font-weight="normal">配件不良</text>
+<line x1="2282" y1="-620" x2="2282" y2="-660" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<text x="2282" y="-660" font-size="15" fill="#2f4256" text-anchor="middle" font-weight="normal">尺寸不良</text>
+<line x1="2369" y1="-620" x2="2369" y2="-660" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<text x="2369" y="-660" font-size="15" fill="#2f4256" text-anchor="middle" font-weight="normal">破损</text>
+<line x1="2456" y1="-620" x2="2456" y2="-660" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<text x="2456" y="-660" font-size="15" fill="#2f4256" text-anchor="middle" font-weight="normal">进胶口小</text>
+<line x1="2558" y1="-620" x2="2558" y2="-694" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<text x="2558" y="-694" font-size="15" fill="#2f4256" text-anchor="middle" font-weight="normal">进胶不平衡</text>
+<line x1="2682" y1="-620" x2="2682" y2="-694" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<text x="2682" y="-694" font-size="15" fill="#2f4256" text-anchor="middle" font-weight="normal">部品肉厚太薄</text>
+<line x1="1961" y1="-620" x2="1961" y2="-580" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<text x="1961" y="-580" font-size="15" fill="#2f4256" text-anchor="middle" font-weight="normal">堵塞</text>
+<line x1="2060" y1="-620" x2="2060" y2="-580" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<rect x="2007" y="-601" width="105" height="28" rx="14" fill="url(#gKey)"/>
+<text x="2060" y="-579" font-size="15" fill="#ffffff" text-anchor="middle" font-weight="bold">★清扫不及时</text>
+<line x1="2180" y1="-620" x2="2180" y2="-580" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<text x="2180" y="-580" font-size="15" fill="#2f4256" text-anchor="middle" font-weight="normal">槽深度不够</text>
+<line x1="2290" y1="-620" x2="2290" y2="-580" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<text x="2290" y="-580" font-size="15" fill="#2f4256" text-anchor="middle" font-weight="normal">位子不当</text>
+<line x1="2384" y1="-620" x2="2384" y2="-580" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<text x="2384" y="-580" font-size="15" fill="#2f4256" text-anchor="middle" font-weight="normal">温度低</text>
+<line x1="2486" y1="-620" x2="2486" y2="-580" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<text x="2486" y="-580" font-size="15" fill="#2f4256" text-anchor="middle" font-weight="normal">炭化物堵塞</text>
+<line x1="2599" y1="-620" x2="2599" y2="-546" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<rect x="2547" y="-567" width="105" height="28" rx="14" fill="url(#gKey)"/>
+<text x="2599" y="-545" font-size="15" fill="#ffffff" text-anchor="middle" font-weight="bold">★排气槽不良</text>
+<line x1="2720" y1="-620" x2="2720" y2="-546" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<text x="2720" y="-546" font-size="15" fill="#2f4256" text-anchor="middle" font-weight="normal">热流道不顺</text>
+<line x1="1074" y1="-886" x2="1756" y2="-886" stroke="#64748b" stroke-width="3.4" stroke-linecap="butt"/>
+<polygon points="1756,-886 1741,-894 1741,-878" fill="#64748b"/>
+<rect x="1074" y="-907" width="75" height="42" rx="18" fill="#ccfbf1" stroke="#0f766e" stroke-opacity="0.4"/>
+<text x="1112" y="-879" font-size="17" fill="#0f766e" text-anchor="middle" font-weight="bold">成形机</text>
+<line x1="1220" y1="-886" x2="1220" y2="-926" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<rect x="1175" y="-947" width="90" height="28" rx="14" fill="url(#gKey)"/>
+<text x="1220" y="-925" font-size="15" fill="#ffffff" text-anchor="middle" font-weight="bold">★螺杆磨损</text>
+<line x1="1319" y1="-886" x2="1319" y2="-926" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<text x="1319" y="-926" font-size="15" fill="#2f4256" text-anchor="middle" font-weight="normal">材质差</text>
+<line x1="1421" y1="-886" x2="1421" y2="-926" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<text x="1421" y="-926" font-size="15" fill="#2f4256" text-anchor="middle" font-weight="normal">时间长磨损</text>
+<line x1="1553" y1="-886" x2="1553" y2="-926" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<text x="1553" y="-926" font-size="15" fill="#2f4256" text-anchor="middle" font-weight="normal">使用大吨位机器</text>
+<line x1="1216" y1="-886" x2="1216" y2="-846" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<text x="1216" y="-846" font-size="15" fill="#2f4256" text-anchor="middle" font-weight="normal">合模力大</text>
+<line x1="1326" y1="-886" x2="1326" y2="-846" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<text x="1326" y="-846" font-size="15" fill="#2f4256" text-anchor="middle" font-weight="normal">时间长磨损</text>
+<line x1="1424" y1="-886" x2="1424" y2="-846" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<rect x="1394" y="-867" width="60" height="28" rx="14" fill="url(#gKey)"/>
+<text x="1424" y="-845" font-size="15" fill="#ffffff" text-anchor="middle" font-weight="bold">★料筒</text>
+<line x1="1515" y1="-886" x2="1515" y2="-846" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<text x="1515" y="-846" font-size="15" fill="#2f4256" text-anchor="middle" font-weight="normal">温控器坏</text>
+<line x1="0" y1="0" x2="-552" y2="956" stroke="#3f5061" stroke-width="7" stroke-linecap="round"/>
+<polygon points="0,0 -14,56 -42,40" fill="#3f5061"/>
+<rect x="-667" y="991" width="152" height="66" rx="22" fill="url(#gI)"/>
+<text x="-591" y="1035" font-size="30" fill="#ffffff" text-anchor="middle" font-weight="bold">人</text>
+<line x1="-573" y1="128" x2="-74" y2="128" stroke="#64748b" stroke-width="3.4" stroke-linecap="butt"/>
+<polygon points="-74,128 -89,120 -89,136" fill="#64748b"/>
+<rect x="-573" y="107" width="75" height="42" rx="18" fill="#e0e7ff" stroke="#4338ca" stroke-opacity="0.4"/>
+<text x="-536" y="135" font-size="17" fill="#4338ca" text-anchor="middle" font-weight="bold">作业者</text>
+<line x1="-416" y1="128" x2="-416" y2="168" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<text x="-416" y="168" font-size="15" fill="#2f4256" text-anchor="middle" font-weight="normal">作业手法错误</text>
+<line x1="-299" y1="128" x2="-299" y2="168" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<text x="-299" y="168" font-size="15" fill="#2f4256" text-anchor="middle" font-weight="normal">工作马虎</text>
+<line x1="-409" y1="128" x2="-409" y2="88" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<text x="-409" y="88" font-size="15" fill="#2f4256" text-anchor="middle" font-weight="normal">不良位置不明确</text>
+<line x1="-269" y1="128" x2="-269" y2="88" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<text x="-269" y="88" font-size="15" fill="#2f4256" text-anchor="middle" font-weight="normal">品质观念不强</text>
+<line x1="651" y1="326" x2="-188" y2="326" stroke="#64748b" stroke-width="3.4" stroke-linecap="butt"/>
+<polygon points="-188,326 -173,318 -173,334" fill="#64748b"/>
+<rect x="542" y="305" width="109" height="42" rx="18" fill="#e0e7ff" stroke="#4338ca" stroke-opacity="0.4"/>
+<text x="596" y="333" font-size="17" fill="#4338ca" text-anchor="middle" font-weight="bold">成型技术员</text>
+<line x1="-121" y1="326" x2="-121" y2="366" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<text x="-121" y="366" font-size="15" fill="#2f4256" text-anchor="middle" font-weight="normal">技术缺乏</text>
+<line x1="-19" y1="326" x2="-19" y2="366" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<text x="-19" y="366" font-size="15" fill="#2f4256" text-anchor="middle" font-weight="normal">操作失误</text>
+<line x1="90" y1="326" x2="90" y2="366" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<text x="90" y="366" font-size="15" fill="#2f4256" text-anchor="middle" font-weight="normal">未打开升水</text>
+<line x1="-87" y1="326" x2="-87" y2="286" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<rect x="-162" y="265" width="150" height="28" rx="14" fill="url(#gKey)"/>
+<text x="-87" y="287" font-size="15" fill="#ffffff" text-anchor="middle" font-weight="bold">★未废弃开机不良品</text>
+<line x1="105" y1="326" x2="105" y2="286" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<rect x="8" y="265" width="195" height="28" rx="14" fill="url(#gKey)"/>
+<text x="105" y="287" font-size="15" fill="#ffffff" text-anchor="middle" font-weight="bold">★未对量产前部品进行确认</text>
+<line x1="312" y1="326" x2="312" y2="286" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<rect x="222" y="265" width="180" height="28" rx="14" fill="url(#gKey)"/>
+<text x="312" y="287" font-size="15" fill="#ffffff" text-anchor="middle" font-weight="bold">★未按照规定清扫排气槽</text>
+<line x1="-630" y1="524" x2="-303" y2="524" stroke="#64748b" stroke-width="3.4" stroke-linecap="butt"/>
+<polygon points="-303,524 -318,516 -318,532" fill="#64748b"/>
+<rect x="-630" y="503" width="51" height="42" rx="18" fill="#e0e7ff" stroke="#4338ca" stroke-opacity="0.4"/>
+<text x="-605" y="531" font-size="17" fill="#4338ca" text-anchor="middle" font-weight="bold">PQC</text>
+<line x1="-498" y1="524" x2="-498" y2="564" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<text x="-498" y="564" font-size="15" fill="#2f4256" text-anchor="middle" font-weight="normal">未按标准作业</text>
+<line x1="-498" y1="524" x2="-498" y2="484" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<text x="-498" y="484" font-size="15" fill="#2f4256" text-anchor="middle" font-weight="normal">抽取数量不够</text>
+<line x1="-61" y1="722" x2="-417" y2="722" stroke="#64748b" stroke-width="3.4" stroke-linecap="butt"/>
+<polygon points="-417,722 -402,714 -402,730" fill="#64748b"/>
+<rect x="-170" y="701" width="109" height="42" rx="18" fill="#e0e7ff" stroke="#4338ca" stroke-opacity="0.4"/>
+<text x="-115" y="729" font-size="17" fill="#4338ca" text-anchor="middle" font-weight="bold">修模技术员</text>
+<line x1="-350" y1="722" x2="-350" y2="762" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<text x="-350" y="762" font-size="15" fill="#2f4256" text-anchor="middle" font-weight="normal">配件装错</text>
+<line x1="-350" y1="722" x2="-350" y2="682" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<text x="-350" y="682" font-size="15" fill="#2f4256" text-anchor="middle" font-weight="normal">经验不足</text>
+<line x1="2267" y1="0" x2="1599" y2="1158" stroke="#3f5061" stroke-width="7" stroke-linecap="round"/>
+<polygon points="2267,0 2253,56 2225,40" fill="#3f5061"/>
+<rect x="1483" y="1193" width="152" height="66" rx="22" fill="url(#gS)"/>
+<text x="1559" y="1237" font-size="30" fill="#ffffff" text-anchor="middle" font-weight="bold">方法</text>
+<line x1="2718" y1="128" x2="2193" y2="128" stroke="#64748b" stroke-width="3.4" stroke-linecap="butt"/>
+<polygon points="2193,128 2208,120 2208,136" fill="#64748b"/>
+<rect x="2660" y="107" width="58" height="42" rx="18" fill="#e2e8f0" stroke="#334155" stroke-opacity="0.4"/>
+<text x="2689" y="135" font-size="17" fill="#334155" text-anchor="middle" font-weight="bold">检查</text>
+<line x1="2260" y1="128" x2="2260" y2="168" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<text x="2260" y="168" font-size="15" fill="#2f4256" text-anchor="middle" font-weight="normal">出货检查</text>
+<line x1="2355" y1="128" x2="2355" y2="168" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<text x="2355" y="168" font-size="15" fill="#2f4256" text-anchor="middle" font-weight="normal">未检查</text>
+<line x1="2464" y1="128" x2="2464" y2="168" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<text x="2464" y="168" font-size="15" fill="#2f4256" text-anchor="middle" font-weight="normal">抽取数量不够</text>
+<line x1="2268" y1="128" x2="2268" y2="88" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<text x="2268" y="88" font-size="15" fill="#2f4256" text-anchor="middle" font-weight="normal">未全数检查</text>
+<line x1="2362" y1="128" x2="2362" y2="88" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<text x="2362" y="88" font-size="15" fill="#2f4256" text-anchor="middle" font-weight="normal">漏检</text>
+<line x1="2449" y1="128" x2="2449" y2="88" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<text x="2449" y="88" font-size="15" fill="#2f4256" text-anchor="middle" font-weight="normal">外观全检</text>
+<line x1="1225" y1="326" x2="2079" y2="326" stroke="#64748b" stroke-width="3.4" stroke-linecap="butt"/>
+<polygon points="2079,326 2064,318 2064,334" fill="#64748b"/>
+<rect x="1225" y="305" width="92" height="42" rx="18" fill="#e2e8f0" stroke="#334155" stroke-opacity="0.4"/>
+<text x="1271" y="333" font-size="17" fill="#334155" text-anchor="middle" font-weight="bold">金型维护</text>
+<line x1="1399" y1="326" x2="1399" y2="366" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<text x="1399" y="366" font-size="15" fill="#2f4256" text-anchor="middle" font-weight="normal">未按计划进行</text>
+<line x1="1528" y1="326" x2="1528" y2="366" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<rect x="1475" y="345" width="105" height="28" rx="14" fill="url(#gKey)"/>
+<text x="1528" y="367" font-size="15" fill="#ffffff" text-anchor="middle" font-weight="bold">★未按时进行</text>
+<line x1="1641" y1="326" x2="1641" y2="366" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<text x="1641" y="366" font-size="15" fill="#2f4256" text-anchor="middle" font-weight="normal">定期保养</text>
+<line x1="1743" y1="326" x2="1743" y2="366" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<text x="1743" y="366" font-size="15" fill="#2f4256" text-anchor="middle" font-weight="normal">方法错误</text>
+<line x1="1845" y1="326" x2="1845" y2="366" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<text x="1845" y="366" font-size="15" fill="#2f4256" text-anchor="middle" font-weight="normal">日常保养</text>
+<line x1="1422" y1="326" x2="1422" y2="286" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<text x="1422" y="286" font-size="15" fill="#2f4256" text-anchor="middle" font-weight="normal">项目不全方法不正确</text>
+<line x1="1576" y1="326" x2="1576" y2="286" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<text x="1576" y="286" font-size="15" fill="#2f4256" text-anchor="middle" font-weight="normal">保养位子不全</text>
+<line x1="1693" y1="326" x2="1693" y2="286" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<text x="1693" y="286" font-size="15" fill="#2f4256" text-anchor="middle" font-weight="normal">配件装错</text>
+<line x1="1780" y1="326" x2="1780" y2="286" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<text x="1780" y="286" font-size="15" fill="#2f4256" text-anchor="middle" font-weight="normal">修理</text>
+<line x1="1883" y1="326" x2="1883" y2="286" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<rect x="1826" y="265" width="113" height="28" rx="14" fill="url(#gKey)"/>
+<text x="1883" y="287" font-size="15" fill="#ffffff" text-anchor="middle" font-weight="bold">★未按WGS作业</text>
+<line x1="2658" y1="524" x2="1965" y2="524" stroke="#64748b" stroke-width="3.4" stroke-linecap="butt"/>
+<polygon points="1965,524 1980,516 1980,532" fill="#64748b"/>
+<rect x="2566" y="503" width="92" height="42" rx="18" fill="#e2e8f0" stroke="#334155" stroke-opacity="0.4"/>
+<text x="2612" y="531" font-size="17" fill="#334155" text-anchor="middle" font-weight="bold">成形条件</text>
+<line x1="2021" y1="524" x2="2021" y2="564" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<rect x="1991" y="543" width="60" height="28" rx="14" fill="url(#gKey)"/>
+<text x="2021" y="565" font-size="15" fill="#ffffff" text-anchor="middle" font-weight="bold">★温度</text>
+<line x1="2021" y1="600" x2="2108" y2="600" stroke="#94a3b8" stroke-width="1.6" stroke-linecap="butt"/>
+<text x="2032" y="615" font-size="13" fill="#4a5c72" text-anchor="start" font-weight="normal">溶胶温度低</text>
+<line x1="2021" y1="624" x2="2121" y2="624" stroke="#94a3b8" stroke-width="1.6" stroke-linecap="butt"/>
+<text x="2032" y="639" font-size="13" fill="#4a5c72" text-anchor="start" font-weight="normal">热胶道温度低</text>
+<line x1="2021" y1="648" x2="2108" y2="648" stroke="#94a3b8" stroke-width="1.6" stroke-linecap="butt"/>
+<text x="2032" y="663" font-size="13" fill="#4a5c72" text-anchor="start" font-weight="normal">金型温度低</text>
+<line x1="2158" y1="524" x2="2158" y2="564" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<rect x="2129" y="543" width="60" height="28" rx="14" fill="url(#gKey)"/>
+<text x="2158" y="565" font-size="15" fill="#ffffff" text-anchor="middle" font-weight="bold">★速度</text>
+<line x1="2158" y1="600" x2="2245" y2="600" stroke="#94a3b8" stroke-width="1.6" stroke-linecap="butt"/>
+<text x="2169" y="615" font-size="13" fill="#4a5c72" text-anchor="start" font-weight="normal">计量速度慢</text>
+<line x1="2158" y1="624" x2="2245" y2="624" stroke="#94a3b8" stroke-width="1.6" stroke-linecap="butt"/>
+<text x="2169" y="639" font-size="13" fill="#4a5c72" text-anchor="start" font-weight="normal">射出速度慢</text>
+<line x1="2283" y1="524" x2="2283" y2="564" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<rect x="2253" y="543" width="60" height="28" rx="14" fill="url(#gKey)"/>
+<text x="2283" y="565" font-size="15" fill="#ffffff" text-anchor="middle" font-weight="bold">★时间</text>
+<line x1="2283" y1="600" x2="2370" y2="600" stroke="#94a3b8" stroke-width="1.6" stroke-linecap="butt"/>
+<text x="2294" y="615" font-size="13" fill="#4a5c72" text-anchor="start" font-weight="normal">射出时间短</text>
+<line x1="2283" y1="624" x2="2383" y2="624" stroke="#94a3b8" stroke-width="1.6" stroke-linecap="butt"/>
+<text x="2294" y="639" font-size="13" fill="#4a5c72" text-anchor="start" font-weight="normal">保压时间不够</text>
+<line x1="2021" y1="524" x2="2021" y2="484" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<rect x="1991" y="463" width="60" height="28" rx="14" fill="url(#gKey)"/>
+<text x="2021" y="485" font-size="15" fill="#ffffff" text-anchor="middle" font-weight="bold">★压力</text>
+<line x1="2021" y1="448" x2="2095" y2="448" stroke="#94a3b8" stroke-width="1.6" stroke-linecap="butt"/>
+<text x="2032" y="442" font-size="13" fill="#4a5c72" text-anchor="start" font-weight="normal">背压力小</text>
+<line x1="2021" y1="424" x2="2108" y2="424" stroke="#94a3b8" stroke-width="1.6" stroke-linecap="butt"/>
+<text x="2032" y="418" font-size="13" fill="#4a5c72" text-anchor="start" font-weight="normal">射出压力小</text>
+<line x1="2021" y1="400" x2="2108" y2="400" stroke="#94a3b8" stroke-width="1.6" stroke-linecap="butt"/>
+<text x="2032" y="394" font-size="13" fill="#4a5c72" text-anchor="start" font-weight="normal">合模压力大</text>
+<line x1="2021" y1="376" x2="2095" y2="376" stroke="#94a3b8" stroke-width="1.6" stroke-linecap="butt"/>
+<text x="2032" y="370" font-size="13" fill="#4a5c72" text-anchor="start" font-weight="normal">保压力小</text>
+<line x1="2145" y1="524" x2="2145" y2="484" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<rect x="2116" y="463" width="60" height="28" rx="14" fill="url(#gKey)"/>
+<text x="2145" y="485" font-size="15" fill="#ffffff" text-anchor="middle" font-weight="bold">★位置</text>
+<line x1="2145" y1="448" x2="2232" y2="448" stroke="#94a3b8" stroke-width="1.6" stroke-linecap="butt"/>
+<text x="2156" y="442" font-size="13" fill="#4a5c72" text-anchor="start" font-weight="normal">计量位置小</text>
+<line x1="2145" y1="424" x2="2258" y2="424" stroke="#94a3b8" stroke-width="1.6" stroke-linecap="butt"/>
+<text x="2156" y="418" font-size="13" fill="#4a5c72" text-anchor="start" font-weight="normal">保压切换位置大</text>
+<line x1="781" y1="890" x2="1753" y2="890" stroke="#64748b" stroke-width="3.4" stroke-linecap="butt"/>
+<polygon points="1753,890 1738,882 1738,898" fill="#64748b"/>
+<rect x="781" y="869" width="58" height="42" rx="18" fill="#e2e8f0" stroke="#334155" stroke-opacity="0.4"/>
+<text x="810" y="897" font-size="17" fill="#334155" text-anchor="middle" font-weight="bold">操作</text>
+<line x1="958" y1="890" x2="958" y2="930" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<text x="958" y="930" font-size="15" fill="#2f4256" text-anchor="middle" font-weight="normal">开机生产部品未确认品质</text>
+<line x1="1146" y1="890" x2="1146" y2="930" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<rect x="1072" y="909" width="150" height="28" rx="14" fill="url(#gKey)"/>
+<text x="1146" y="931" font-size="15" fill="#ffffff" text-anchor="middle" font-weight="bold">★未按规定废弃数量</text>
+<line x1="1290" y1="890" x2="1290" y2="930" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<text x="1290" y="930" font-size="15" fill="#2f4256" text-anchor="middle" font-weight="normal">未定期清洗</text>
+<line x1="1414" y1="890" x2="1414" y2="964" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<text x="1414" y="964" font-size="15" fill="#2f4256" text-anchor="middle" font-weight="normal">料筒热流道清洗</text>
+<line x1="1546" y1="890" x2="1546" y2="964" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<text x="1546" y="964" font-size="15" fill="#2f4256" text-anchor="middle" font-weight="normal">未清洗干净</text>
+<line x1="932" y1="890" x2="932" y2="850" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<rect x="865" y="829" width="135" height="28" rx="14" fill="url(#gKey)"/>
+<text x="932" y="851" font-size="15" fill="#ffffff" text-anchor="middle" font-weight="bold">★未废弃异常部品</text>
+<line x1="1053" y1="890" x2="1053" y2="850" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<text x="1053" y="850" font-size="15" fill="#2f4256" text-anchor="middle" font-weight="normal">未确认</text>
+<line x1="1155" y1="890" x2="1155" y2="850" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<text x="1155" y="850" font-size="15" fill="#2f4256" text-anchor="middle" font-weight="normal">未按下料槽</text>
+<line x1="1264" y1="890" x2="1264" y2="850" stroke="#94a3b8" stroke-width="2" stroke-linecap="butt"/>
+<text x="1264" y="850" font-size="15" fill="#2f4256" text-anchor="middle" font-weight="normal">异常处理</text>
+<line x1="-738" y1="0" x2="3060" y2="0" stroke="#3f5061" stroke-width="9" stroke-linecap="round"/>
+<polygon points="3106,0 3060,-27 3060,27" fill="#3f5061"/>
+<rect x="3128" y="-108" width="296" height="216" rx="46" fill="url(#gHead)"/>
+<text x="3276" y="8" font-size="50" fill="#ffffff" text-anchor="middle" font-weight="bold">欠　料</text>
+<text x="3276" y="56" font-size="22" fill="#ffffff" text-anchor="middle" font-weight="normal">（ 料 不 良 ）</text>
+</g>
 </svg>
