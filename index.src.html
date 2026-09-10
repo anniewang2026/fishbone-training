@@ -112,7 +112,11 @@ section{padding:56px 0}
 /* fishbone viewer */
 .fb-card{background:var(--card-grad);border-radius:32px;box-shadow:var(--shadow-out);padding:26px 24px}
 .fb-scroll{overflow:auto;border-radius:22px;box-shadow:var(--shadow-in);background:linear-gradient(135deg,#f6fafd,#eef8f6);padding:10px}
-.fb-scroll svg{display:block;min-width:1100px;width:100%;height:auto}
+.fb-scroll svg{display:block;min-width:1900px;width:100%;height:auto}
+.fb-tools{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:16px}
+.fb-btn{padding:8px 20px;border-radius:999px;border:none;cursor:pointer;font-size:14px;font-weight:700;color:#0f4c81;background:var(--card-grad);box-shadow:var(--shadow-out-sm);transition:all .3s var(--spring)}
+.fb-btn:hover{transform:translateY(-2px)}
+.fb-btn:active{transform:scale(1.05,.9);box-shadow:var(--shadow-in)}
 .fb-tip{text-align:center;font-size:13.5px;color:var(--muted);margin-top:14px}
 .legend{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;margin-top:14px;font-size:13.5px}
 .legend span{display:inline-flex;align-items:center;gap:6px}
@@ -127,6 +131,8 @@ section{padding:56px 0}
 .tags{display:flex;flex-wrap:wrap;gap:8px}
 .tag-item{padding:5px 14px;border-radius:999px;background:#fff;border:1.5px solid #d7e3ee;color:var(--body);font-size:13.5px}
 .tag-item.key{background:linear-gradient(145deg,#93c5fd,#60a5fa);border-color:#60a5fa;color:#fff;font-weight:700}
+.tag-kid{padding:4px 12px;border-radius:999px;background:rgba(226,232,240,.55);color:#5b6b80;font-size:12.5px}
+.tag-kid::before{content:"";}
 .ci-b{background:linear-gradient(145deg,#38bdf8,#0284c7)}.ci-t{background:linear-gradient(145deg,#2dd4bf,#0d9488)}.ci-i{background:linear-gradient(145deg,#818cf8,#4f46e5)}.ci-s{background:linear-gradient(145deg,#94a3b8,#475569)}
 
 /* mistakes */
@@ -361,19 +367,24 @@ details li{margin:6px 0 6px 20px}
     <div class="sec-head">
       <div class="no" style="background:linear-gradient(145deg,#5eead4,#0d9488)">05</div>
       <h2>实战案例：LED封装线「欠料」要因分析</h2>
-      <p class="desc">下面是生产现场的原图美化版——内容一条不少，重新排版，★ 标出重点要因（待真因验证）。</p>
+      <p class="desc">按标准鱼骨图绘制法重绘现场原图：鱼头 → 脊骨 → 大骨(60°) → 中骨(水平线) → 小骨(短刺) → 小小骨，内容一条不少，★ 标出重点要因。</p>
     </div>
 
     <div class="fb-card">
-      <div class="fb-scroll">
+      <div class="fb-scroll" id="fbScroll">
 <!--FISHBONE_SVG-->
+      </div>
+      <div class="fb-tools">
+        <button class="fb-btn" id="fbOut">🔍 缩小</button>
+        <button class="fb-btn" id="fbFit">↔ 适应宽度</button>
+        <button class="fb-btn" id="fbIn">🔍 放大</button>
       </div>
       <div class="legend">
         <span><i class="star">★</i> 重点要因（待真因验证）</span>
-        <span><i class="norm"></i> 一般可能原因</span>
+        <span>🏗 三级结构：大骨→中骨→小骨（+小小骨嵌套）</span>
         <span>🗂 内容依据原图整理，个别字词已修正（见下方说明）</span>
       </div>
-      <p class="fb-tip">👆 图较小可 Ctrl+滚轮 或 双指缩放；下方分类卡片是同一份内容的放大可读版</p>
+      <p class="fb-tip">👆 图较密，可用上方按钮放大查看，或按住 Ctrl 滚轮缩放</p>
     </div>
 
     <div style="height:22px"></div>
@@ -383,18 +394,19 @@ details li{margin:6px 0 6px 20px}
     </div>
 
     <details>
-      <summary>🛠 本次美化修正说明（点击展开）</summary>
+      <summary>🛠 本次重绘修正说明（点击展开）</summary>
       <ul>
-        <li>原图条目<b>全部保留</b>，按「大骨→中骨→小骨」重新排版分区，颜色统一为冷色系。</li>
-        <li>疑似错别字已按上下文修正，如「螺杆磨损」「料筒磨损」「抽段数量不够」等；个别字迹不清处按行业惯例补全，请对照原图复核，发现不符随时指出。</li>
-        <li>原图粉色标注项统一改为 <b>★ 蓝色高亮</b>，含义为「重点要因，待真因验证」。</li>
+        <li><b>绘制法</b>：按标准鱼骨图重绘——鱼头在右，脊骨水平，大骨 60° 斜线（材料/设备在上，人/方法在下），中骨为水平线且线端标注中骨名，小骨为垂直短刺，第四级「小小骨」以嵌套短线表示（如 干燥时间不足→定时器异常、成形条件→温度→溶胶温度低）。</li>
+        <li><b>内容</b>：原图 4 大骨 / 16 中骨 / 103 条小骨全部保留，未增删。</li>
+        <li><b>字词修正</b>：射出速度<b>慢</b>（原误读为"快"）、计量速度慢、未密封 / 氧化拆为两条、刀片筛网磨损、未废弃开不良品、未打开升水、料筒（原图字迹不清按行业惯例写为"料筒"）。</li>
+        <li><b>标注</b>：原图粉色项统一改为 <b>★ 蓝色高亮</b>，含义为「重点要因，待真因验证」，含成形条件下的温度 / 速度 / 时间 / 压力 / 位置 五个分组。</li>
       </ul>
     </details>
 
     <div style="height:26px"></div>
 
     <div class="grid g3">
-      <div class="mini"><h4><span class="ico b">1️⃣</span>这张图第一步做了什么</h4><p>鱼头定为「欠料（料不良）」→ 按人机料法分四根大骨 → 头脑风暴填出全部中小骨。</p></div>
+      <div class="mini"><h4><span class="ico b">1️⃣</span>这张图怎么画出来的</h4><p>鱼头定为「欠料（料不良）」→ 按 5M1E 分四根大骨（材料/设备/人/方法）→ 每根大骨拆中骨 → 头脑风暴填小骨，形成 4-16-103 的层级。</p></div>
       <div class="mini"><h4><span class="ico t">2️⃣</span>★ 是怎么来的</h4><p>团队凭经验+现场数据圈出的重点要因——注意它们还只是<b>嫌疑犯</b>，不是定论。</p></div>
       <div class="mini"><h4><span class="ico i">3️⃣</span>下一步做什么</h4><p>对每条★定验证方案：查生产/检验数据、跟班现场观察、小批量试验——验证通过才立项对策，并升级进 FMEA。</p></div>
     </div>
@@ -496,6 +508,22 @@ function refresh(){const d=document.querySelectorAll('.ck-item.done').length;don
 items.forEach(it=>it.addEventListener('click',()=>{it.classList.toggle('done');refresh();}));
 document.getElementById('ckReset').addEventListener('click',()=>{items.forEach(it=>it.classList.remove('done'));refresh();});
 refresh();
+
+/* 鱼骨图缩放 */
+(function(){
+  const svg=document.querySelector('#fbScroll svg');
+  if(!svg)return;
+  const steps=[100,130,170,220,290,380];
+  let i=2;
+  function apply(){
+    svg.style.minWidth='0';
+    svg.style.width=steps[i]+'%';
+  }
+  document.getElementById('fbIn').addEventListener('click',()=>{i=Math.min(i+1,steps.length-1);apply();});
+  document.getElementById('fbOut').addEventListener('click',()=>{i=Math.max(i-1,0);apply();});
+  document.getElementById('fbFit').addEventListener('click',()=>{svg.style.width='100%';svg.style.minWidth='1900px';i=2;});
+  apply();
+})();
 </script>
 </body>
 </html>
