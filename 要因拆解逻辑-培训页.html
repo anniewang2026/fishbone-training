@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>注塑品质不良 · 要因拆解逻辑</title>
+<style>
+  :root{--ink:#1e3a5f;--sub:#5b7085;--line:#d6e2ee;--bg:#f4f8fc;--acc:#2f6fb5;--acc2:#3f8fd8;--warn:#c0392b}
+  *{box-sizing:border-box}
+  body{margin:0;padding:0 20px 72px;background:var(--bg);color:#243b53;
+       font:15px/1.8 -apple-system,"Segoe UI","Microsoft YaHei",sans-serif}
+  .wrap{max-width:1000px;margin:0 auto}
+  header{background:linear-gradient(135deg,#1e3a5f,#2f6fb5);color:#fff;border-radius:0 0 18px 18px;
+         margin:0 -20px 26px;padding:30px 34px 26px}
+  header h1{margin:0 0 8px;font-size:26px;letter-spacing:.5px}
+  header p{margin:0;opacity:.92;font-size:14px}
+  .flow{display:flex;flex-wrap:wrap;align-items:stretch;gap:10px;margin:0 0 26px}
+  .fstep{flex:1 1 168px;background:#fff;border:1px solid var(--line);border-radius:12px;
+         padding:12px 14px;box-shadow:0 1px 3px rgba(30,58,95,.06)}
+  .fstep b{display:block;font-size:15px;color:var(--acc);margin-bottom:3px}
+  .fstep span{font-size:12.5px;color:var(--sub);line-height:1.55}
+  .far{align-self:center;color:var(--acc);font-size:19px;font-weight:700}
+  .floop{flex:0 0 100%;text-align:center;color:var(--sub);font-size:13px;margin-top:-2px}
+  .content{background:#fff;border:1px solid var(--line);border-radius:14px;padding:6px 30px 30px}
+  h1,h2,h3{color:var(--ink);line-height:1.4}
+  .content h2{font-size:20px;margin:32px 0 12px;padding-left:12px;border-left:5px solid var(--acc)}
+  .content h3{font-size:16.5px;margin:26px 0 10px;color:#2c5686}
+  .content h1{font-size:23px;margin:22px 0 10px}
+  blockquote{margin:12px 0;padding:11px 16px;background:#eff6fd;border-left:4px solid var(--acc);
+             border-radius:8px;color:#33475e;font-size:14px}
+  table{width:100%;border-collapse:collapse;margin:12px 0 18px;font-size:13.5px;background:#fff}
+  th,td{border:1px solid var(--line);padding:7px 11px;text-align:left;vertical-align:top}
+  th{background:#eaf2fa;color:var(--ink);font-weight:600;white-space:nowrap}
+  tbody tr:nth-child(even){background:#fbfdff}
+  td:empty{background:#f7fafd}
+  code{background:#eef4fb;color:#2c5686;padding:1px 6px;border-radius:4px;
+       font:12.5px Consolas,"Courier New",monospace}
+  pre{background:#1e3a5f;color:#dbe8f7;padding:16px 18px;border-radius:10px;overflow-x:auto;
+      font:13px/1.65 Consolas,"Courier New",monospace;margin:12px 0 18px}
+  hr{border:0;border-top:1px dashed var(--line);margin:30px 0}
+  ol{padding-left:24px}
+  li{margin:5px 0}
+  .gen{color:var(--sub);font-size:12.5px;text-align:center;margin-top:26px}
+  strong{color:#17324f}
+  @media print{
+    body{background:#fff;padding:0}
+    header{background:#fff;color:var(--ink);border-bottom:2px solid var(--acc);border-radius:0}
+    .flow{display:none}
+    .content{border:0;padding:0}
+    pre{background:#f4f8fc;color:#243b53;border:1px solid var(--line)}
+    table{font-size:11.5px}
+    .content h2{page-break-after:avoid}
+    table,pre{page-break-inside:avoid}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>注塑品质不良 · 要因拆解逻辑</h1>
+    <p>一次要因 → 二次要因 → 三次要因 → 四次要因　｜　每一层都做同样四步</p>
+  </header>
+
+  <div class="flow">
+    <div class="fstep"><b>① 定格</b><span>锁定上一级的<u>某一条</u>要因<br>一次只推一条</span></div>
+    <div class="far">→</div>
+    <div class="fstep"><b>② 建假说</b><span>「它在机制上怎么会导致问题？」<br>用 原理 · 原则 · 机制</span></div>
+    <div class="far">→</div>
+    <div class="fstep"><b>③ 筛选</b><span>可观测 · 可测量<br>可对策 · 不重复</span></div>
+    <div class="far">→</div>
+    <div class="fstep"><b>④ 定级</b><span>留下的成为下一级要因<br>回到 ①</span></div>
+    <div class="floop">↺　同一套动作，往下重复做　↺</div>
+  </div>
+
+  <div class="content">
+<h1>注塑品质不良 · 要因拆解逻辑</h1>
+<blockquote><strong>一句话</strong>：把「为什么会发生这个问题」一层层往下问，每一步都要讲得出道理，<br>一直问到「<strong>能直接动手改</strong>」或「<strong>能取样验证</strong>」为止。</blockquote>
+<hr>
+<h2>一、四个层级，对应鱼骨图的哪个部位</h2>
+<table><thead><tr><th>层级（本文叫法）</th><th>鱼骨图上的位置</th><th>通俗理解</th><th>本次数量</th></tr></thead><tbody><tr><td><strong>问题</strong></td><td>鱼头（最右侧方框）</td><td>要解决的现象</td><td>1</td></tr><tr><td><strong>一次要因</strong></td><td><strong>大骨</strong>（60° 斜线）</td><td>从哪几个大门类去找原因</td><td><strong>4</strong></td></tr><tr><td><strong>二次要因</strong></td><td><strong>中骨</strong>（水平线）</td><td>门类里的具体环节</td><td><strong>16</strong></td></tr><tr><td><strong>三次要因</strong></td><td><strong>小骨</strong></td><td>这个环节为什么会出问题</td><td><strong>102</strong></td></tr><tr><td><strong>四次要因</strong></td><td><strong>小小骨</strong></td><td>再往下追一层</td><td><strong>18</strong></td></tr></tbody></table>
+<p>合计 <strong>140 条要因</strong>。</p>
+<blockquote>一次要因的顺序按俗称「<strong>人机料法</strong>」；鱼骨图上为排版把四根大骨分列在主骨上下两侧，<br><strong>图形的排列顺序与这里的先后无关</strong>。</blockquote>
+<hr>
+<h2>二、每一层都做同样的四步（核心方法）</h2>
+<table><thead><tr><th>步骤</th><th>要做什么</th><th>关键要求</th></tr></thead><tbody><tr><td><strong>① 定格</strong></td><td>锁定上一级的<strong>某一条</strong>要因</td><td>一次只推一条，不要混着推</td></tr><tr><td><strong>② 建假说</strong></td><td>问「它在机制上怎么会导致这个问题？」</td><td><strong>先求全、不求准</strong>，宁多勿漏</td></tr><tr><td><strong>③ 筛选</strong></td><td>用四条判定过一遍</td><td>见下方 2.2</td></tr><tr><td><strong>④ 定级</strong></td><td>留下的即成为下一级要因，回到 ①</td><td>一层一层往下，<strong>不跳级</strong></td></tr></tbody></table>
+<h3>2.1 怎么「建假说」——三个角度</h3>
+<table><thead><tr><th>角度</th><th>通俗解释</th><th>例子</th></tr></thead><tbody><tr><td><strong>原理</strong></td><td>物理／化学规律</td><td>材料吸水后高温下会水解 → 分子链断裂 → 流动性变差</td></tr><tr><td><strong>原则</strong></td><td>工程／管理上的通用要求</td><td>干燥必须同时满足时间、温度、风量三个条件</td></tr><tr><td><strong>机制</strong></td><td>设备／流程是怎么运作的</td><td>干燥机靠加热器＋风机＋定时器协同工作，任何一环失效都会导致干燥不足</td></tr></tbody></table>
+<p><strong>实操办法</strong>：拿一个要因，沿「<strong>它由什么构成</strong>／<strong>它靠什么工作</strong>／<strong>它要满足什么要求</strong>」</p>
+<p>三个方向各问一遍，问出来的就是候选假说。</p>
+<h3>2.2 怎么「筛选」——四条判定</h3>
+<table><thead><tr><th>判定</th><th>说明</th><th>不合格的例子</th></tr></thead><tbody><tr><td><strong>可观测</strong></td><td>现场能看见、能问出来、能追溯</td><td>「员工心情不好」——看不见也追不到源头</td></tr><tr><td><strong>可测量</strong></td><td>有数据，或能取样验证</td><td>「塑料不好」——太笼统，无从取样</td></tr><tr><td><strong>可对策</strong></td><td>能落到具体动作上</td><td>「行业不景气」——落不到现场动作</td></tr><tr><td><strong>不重复</strong></td><td>不与同级其他条目重复，也不跨级重复</td><td>「温度低」与「溶胶温度低」不同层出现</td></tr></tbody></table>
+<h3>2.3 拆到哪一层停</h3>
+<p>拆到「<strong>能直接采取对策</strong>」或「<strong>能直接取样验证</strong>」为止。再往下就是<strong>对策</strong>，不属于要因分析。</p>
+<blockquote>例：「材料干燥 → 干燥时间不足 → <strong>定时器异常</strong>」到此为止（可直接校验／更换定时器）；<br>再往下问「定时器为什么会异常」，已经变成设备维修课题，不画进这张图。</blockquote>
+<hr>
+<h2>三、走一遍完整链路</h2>
+<pre>问题：注塑品质不良
+  └ 一次要因：料（材料）          ← 「材料怎么会导致不良？」
+      └ 二次要因：材料干燥         ← 机制：塑料必须先干燥到规定含水率
+          └ 三次要因：干燥时间不足 ← 「干燥时间怎么会不足？」
+              └ 四次要因：定时器异常    ← 停止追问，可直接校验／更换
+          └ 三次要因：干燥温度偏低 ← ★ 重点怀疑</pre>
+<p>换一条链路：</p>
+<pre>  └ 一次要因：法（方法）
+      └ 二次要因：成形条件
+          └ 三次要因：温度
+              └ 四次要因：溶胶温度低 ／ 热胶道温度低 ／ 模温低</pre>
+<p><strong>同一个二次要因下面，条目数不必相等</strong> —— 有的环节只有 1~2 条，有的十几条。</p>
+<p>以<strong>机制上的完整性</strong>为准，不为凑数硬加。</p>
+<hr>
+<h2>四、全部要因清单</h2>
+<h3>一次要因 ①　人</h3>
+<blockquote><strong>拆解思路</strong>：从<strong>岗位动作</strong>切。人会「不会做」和「没照做」两种失误，加上检查环节「没查出来」，所以按角色分 —— 作业者、成型技术员、PQC、修模技术员，各自的动作不同，能造成的缺失也不同。</blockquote>
+<table><thead><tr><th>二次要因</th><th>三次要因</th><th>四次要因</th></tr></thead><tbody><tr><td><strong>作业者</strong></td><td>作业手法错误</td><td>—</td></tr><tr><td></td><td>工作马虎</td><td>—</td></tr><tr><td></td><td>不良位置不明确</td><td>—</td></tr><tr><td></td><td>品质观念不强</td><td>—</td></tr><tr><td><strong>成型技术员</strong></td><td>技术缺乏</td><td>—</td></tr><tr><td></td><td>操作失误</td><td>—</td></tr><tr><td></td><td>未打开升水</td><td>—</td></tr><tr><td></td><td>★未废弃开机不良品</td><td>—</td></tr><tr><td></td><td>★未对量产前部品进行确认</td><td>—</td></tr><tr><td></td><td>★未按照规定清扫排气槽</td><td>—</td></tr><tr><td><strong>PQC</strong></td><td>未按标准作业</td><td>—</td></tr><tr><td></td><td>抽取数量不够</td><td>—</td></tr><tr><td><strong>修模技术员</strong></td><td>配件装错</td><td>—</td></tr><tr><td></td><td>经验不足</td><td>—</td></tr></tbody></table>
+<p><strong>本支小计</strong>：二次 4 个 · 三次 14 条 · 四次 0 条</p>
+<h3>一次要因 ②　机（设备）</h3>
+<blockquote><strong>拆解思路</strong>：从<strong>作用于塑料的物理量</strong>切：温度、压力、时间、洁净度。产线上真正决定熔体状态的就是四台设备 —— 干燥机（去水分）、模温机（控模温）、模具空腔（成形空间与排气）、成形机（塑化与加压）。</blockquote>
+<table><thead><tr><th>二次要因</th><th>三次要因</th><th>四次要因</th></tr></thead><tbody><tr><td><strong>干燥机</strong></td><td>干燥剂</td><td>过期失效、设定错误</td></tr><tr><td></td><td>温度异常</td><td>—</td></tr><tr><td></td><td>温控失效</td><td>—</td></tr><tr><td></td><td>过滤网未定期清扫</td><td>—</td></tr><tr><td></td><td>过滤网堵塞</td><td>—</td></tr><tr><td></td><td>坏</td><td>—</td></tr><tr><td></td><td>发热器</td><td>不能正常发热</td></tr><tr><td><strong>模温机</strong></td><td>循环水不足</td><td>—</td></tr><tr><td></td><td>温度异常</td><td>—</td></tr><tr><td></td><td>发热异常</td><td>—</td></tr><tr><td></td><td>压力不足</td><td>—</td></tr><tr><td></td><td>机水</td><td>—</td></tr><tr><td></td><td>开关未开</td><td>—</td></tr><tr><td></td><td>冷却系统异常</td><td>—</td></tr><tr><td><strong>模具空腔</strong></td><td>设计不适</td><td>—</td></tr><tr><td></td><td>取数过多</td><td>—</td></tr><tr><td></td><td>配件不良</td><td>—</td></tr><tr><td></td><td>尺寸不良</td><td>—</td></tr><tr><td></td><td>破损</td><td>—</td></tr><tr><td></td><td>进胶口小</td><td>—</td></tr><tr><td></td><td>进胶不平衡</td><td>—</td></tr><tr><td></td><td>部品肉厚太薄</td><td>—</td></tr><tr><td></td><td>堵塞</td><td>—</td></tr><tr><td></td><td>★清扫不及时</td><td>—</td></tr><tr><td></td><td>槽深度不够</td><td>—</td></tr><tr><td></td><td>位子不当</td><td>—</td></tr><tr><td></td><td>温度低</td><td>—</td></tr><tr><td></td><td>炭化物堵塞</td><td>—</td></tr><tr><td></td><td>★排气槽不良</td><td>—</td></tr><tr><td></td><td>热流道不顺</td><td>—</td></tr><tr><td><strong>成形机</strong></td><td>★螺杆磨损</td><td>—</td></tr><tr><td></td><td>材质差</td><td>—</td></tr><tr><td></td><td>时间长磨损</td><td>—</td></tr><tr><td></td><td>使用大吨位机器</td><td>—</td></tr><tr><td></td><td>合模力大</td><td>—</td></tr><tr><td></td><td>★料筒</td><td>—</td></tr><tr><td></td><td>温控器坏</td><td>—</td></tr></tbody></table>
+<p><strong>本支小计</strong>：二次 4 个 · 三次 37 条 · 四次 3 条</p>
+<h3>一次要因 ③　料（材料）</h3>
+<blockquote><strong>拆解思路</strong>：从<strong>合格熔体的四个前提</strong>切：本身没变质、含水率够低、成分够匀、流动能力够。四条缺任何一条，熔体都填不好型腔，所以按「材质 / 干燥 / 混合材 / 性能」四个条件分。</blockquote>
+<table><thead><tr><th>二次要因</th><th>三次要因</th><th>四次要因</th></tr></thead><tbody><tr><td><strong>材料干燥</strong></td><td>干燥时间不足</td><td>定时器异常</td></tr><tr><td></td><td>加料不及时</td><td>—</td></tr><tr><td></td><td>设备异常</td><td>—</td></tr><tr><td></td><td>设定错误</td><td>—</td></tr><tr><td></td><td>★干燥温度偏低</td><td>—</td></tr><tr><td><strong>混合材</strong></td><td>粉尘多</td><td>—</td></tr><tr><td></td><td>混入杂物</td><td>—</td></tr><tr><td></td><td>★未筛选</td><td>—</td></tr><tr><td></td><td>不同材料</td><td>—</td></tr><tr><td></td><td>★粉碎机异常</td><td>—</td></tr><tr><td></td><td>水口长</td><td>—</td></tr><tr><td></td><td>★刀片筛网磨损</td><td>—</td></tr><tr><td><strong>性能</strong></td><td>流动性差</td><td>—</td></tr><tr><td></td><td>制剂添加过多</td><td>—</td></tr><tr><td></td><td>未密封</td><td>—</td></tr><tr><td></td><td>氧化</td><td>—</td></tr><tr><td><strong>材质</strong></td><td>吸水</td><td>长时间外露</td></tr><tr><td></td><td>分解</td><td>—</td></tr><tr><td></td><td>搅拌时间短</td><td>—</td></tr><tr><td></td><td>混合机异常</td><td>—</td></tr><tr><td></td><td>混合比例异常</td><td>—</td></tr></tbody></table>
+<p><strong>本支小计</strong>：二次 4 个 · 三次 21 条 · 四次 2 条</p>
+<h3>一次要因 ④　法（方法）</h3>
+<blockquote><strong>拆解思路</strong>：从<strong>控制链条</strong>切：参数设得对不对（成形条件）、现场照没照做（操作）、模具养没养到位（模具维护）、把关严不严（检查）。</blockquote>
+<table><thead><tr><th>二次要因</th><th>三次要因</th><th>四次要因</th></tr></thead><tbody><tr><td><strong>检查</strong></td><td>出货检查</td><td>—</td></tr><tr><td></td><td>未检查</td><td>—</td></tr><tr><td></td><td>抽取数量不够</td><td>—</td></tr><tr><td></td><td>未全数检查</td><td>—</td></tr><tr><td></td><td>漏检</td><td>—</td></tr><tr><td></td><td>外观全检</td><td>—</td></tr><tr><td><strong>模具维护</strong></td><td>未按计划进行</td><td>—</td></tr><tr><td></td><td>★未按时进行</td><td>—</td></tr><tr><td></td><td>定期保养</td><td>—</td></tr><tr><td></td><td>方法错误</td><td>—</td></tr><tr><td></td><td>日常保养</td><td>—</td></tr><tr><td></td><td>项目不全方法不正确</td><td>—</td></tr><tr><td></td><td>保养位子不全</td><td>—</td></tr><tr><td></td><td>配件装错</td><td>—</td></tr><tr><td></td><td>修理</td><td>—</td></tr><tr><td></td><td>★未按WGS作业</td><td>—</td></tr><tr><td><strong>成形条件</strong></td><td>★温度</td><td>溶胶温度低、热胶道温度低、模温低</td></tr><tr><td></td><td>★速度</td><td>计量速度慢、射出速度慢</td></tr><tr><td></td><td>★时间</td><td>射出时间短、保压时间不够</td></tr><tr><td></td><td>★压力</td><td>背压力小、射出压力小、合模压力大、保压力小</td></tr><tr><td></td><td>★位置</td><td>计量位置小、保压切换位置大</td></tr><tr><td><strong>操作</strong></td><td>开机生产部品未确认品质</td><td>—</td></tr><tr><td></td><td>★未按规定废弃数量</td><td>—</td></tr><tr><td></td><td>未定期清洗</td><td>—</td></tr><tr><td></td><td>料筒热流道清洗</td><td>—</td></tr><tr><td></td><td>未清洗干净</td><td>—</td></tr><tr><td></td><td>★未废弃异常部品</td><td>—</td></tr><tr><td></td><td>未确认</td><td>—</td></tr><tr><td></td><td>未按下料槽</td><td>—</td></tr><tr><td></td><td>异常处理</td><td>—</td></tr></tbody></table>
+<p><strong>本支小计</strong>：二次 4 个 · 三次 30 条 · 四次 13 条</p>
+<hr>
+<h2>五、标注说明</h2>
+<table><thead><tr><th>标记</th><th>含义</th></tr></thead><tbody><tr><td><strong>★</strong></td><td><strong>重点要因</strong> —— 假说阶段认为最可能、需优先验证的条目（共 20 条）</td></tr></tbody></table>
+<p>★ 只是<strong>怀疑优先级</strong>，不是「已确认的真因」。真因必须靠现场数据／试验验证后才能定。</p>
+<hr>
+<h2>六、适用范围说明</h2>
+<ol><li>本清单以「<strong>注塑件缺料（短射）</strong>」这一最典型的不良为切入点收集， 条目在机制层面<strong>同样适用于其他注塑不良</strong>（缩水、飞边、烧焦、尺寸超差等）。</li><li>若要覆盖<strong>全部不良类型</strong>，按本文第二节的四步循环继续补即可 —— 方法不变，只是「建假说」时换一个现象去问。</li><li><strong>层级归属一律以现有鱼骨图为准</strong>（数据来自原图 1:1 提取），本文只做语言与结构的整理，未增删条目。</li></ol>
+<hr>
+<p class="gen">本文件由 <code>gen_reasoning.py</code> 从 <code>gen_fishbone.py</code> 的数据源自动生成，改数据后重跑即可同步。</p>
+  </div>
+</div>
+</body>
+</html>
